@@ -358,23 +358,23 @@
                         <form class="form-horizontal form-label-left">
 
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Room's client name <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-name">Room name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="room-client-name" class="form-control col-md-7 col-xs-12">
+                              <input type="text" id="room-name" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Room's HPE name <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-location">Room location <span></span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="room-hpe-name" name="room-name" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" id="room-hpe-name" name="room-location" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
-                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Room's location</label>
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Room floor</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input id="room-location" class="form-control col-md-7 col-xs-12" type="text" name="room-location">
+                              <input id="room-floor" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" value="0">
                             </div>
                           </div>
                           <div class="form-group">
@@ -382,7 +382,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12">
                               <div id="gender" class="btn-group" data-toggle="buttons">
                                 <label class="btn btn-default" data-toggle-class="btn-secondary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="measure" value="centimeters"> &nbsp; s &nbsp;
+                                  <input type="radio" name="measure" value="meters"> &nbsp; Meters &nbsp;
                                 </label>
                                 <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                                   <input type="radio" name="measure" value="tiles"> Tiles
