@@ -1,0 +1,5 @@
+cmd /c "mysql -uroot < .\baseDBCreation.sql"
+cmd /c "mysql -uroot < .\securityDBCreation.sql"
+cmd /c "mysql -uroot < .\projectDBCreation.sql"
+cmd /c "mysql -uroot < .\projectSettingsDBCreation.sql"
+cmd /c "mysql -uroot < .\mappingDBCreation.sql"

@@ -1,0 +1,1 @@
+cmd /c "mysql -uroot < .\Delete_Database.sql"
