@@ -1,5 +1,9 @@
-<?php 
+<!--<?php 
     include('/NetMapp/production/header.html');
+?>-->
+
+<?php 
+     echo "PHP has been installed successfully!";
 ?>
 
 <!--<html>
