@@ -9,8 +9,10 @@
 
     <title>NetMapp - Network Mapping Application </title>
 
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- validator fv.css -->
+    <link rel="stylesheet" href="../vendors/validator/fv.css" type="text/css" />
+	<!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"-->
     <!-- Font Awesome -->
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -20,6 +22,7 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+	
   </head>
 
   <body class="login">
@@ -30,16 +33,22 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form action="index.php" method="post">
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="text" class="form-control" name="user_name" placeholder="Username" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" class="form-control" name="user_password" placeholder="Password" required="" />
               </div>
+              <div id="login-err" hidden class="alert alert-danger alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Invalid Username/Email or Password</strong>
+                  </div>
+
               <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
+                <input type="submit" class="btn btn-default submit" name="login" value="Log in"/>
                 <a class="reset_pass" href="#">Lost your password?</a>
               </div>
 
@@ -47,7 +56,7 @@
 
               <div class="separator">
                 <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create a new room Account </a>
+                  <a href="#signup" class="to_register"> Create an Account </a>
                 </p>
 
                 <div class="clearfix"></div>
@@ -63,20 +72,53 @@
         </div>
 
         <div id="register" class="animate form registration_form">
-          <section class="login_content">
-            <form>
-              <h1>Create a new room Account</h1>
-              <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
-              </div>
-              <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
-              </div>
-              <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
+		 <section class="login_content">
+          <!--section class="login_content"-->
+            <form class="form-horizontal" action="login.php" method="post" novalidate>
+              <h1>Create an Account</h1>
+				  <div class="item form-group">  
+					  <label class="register_label">
+							<input id="user_name" name="user_name" type="text" data-validate-pattern="alphanumeric" placeholder="Username" required="required" />
+					  </label>
+					  <div class='valtooltip help'>
+							<span>?</span>
+							<div class='content'>
+								<b></b>
+								<p>only characters and digits allowed</p>
+							</div>
+					  </div>
+				  </div>
+				  <div class="item form-group">
+					  <label class="register_label">
+						<input id="user_email" name="user_email" type="email" placeholder="Email" required="required" />
+					  </label>
+					  <div class='valtooltip help'>
+							<span>?</span>
+							<div class='content'>
+								<b></b>
+								<p>Enter a valid email address</p>
+							</div>
+					  </div>
+				  </div>
+				  <div class="item form-group">
+					  <label class="register_label">
+						<input name="user_password_new" type="password" data-validate-strong-password="enforce" placeholder="Password" required="required" />
+					  </label>
+					  <div class='valtooltip help'>
+							<span>?</span>
+							<div class='content'>
+								<b></b>
+								<p>password must contain atleast 8 character, with atleast one of each of the following: <br>-Uppercase-letter <br>-lowercase-letter <br>-digit <br>-special character (!,@,#,$,&,*)</p>
+							</div>
+					  </div>
+				  </div>
+				  <div class="item form-group">
+					  <label class="register_label">
+						<input name="user_password_repeat" type="password" data-validate-linked='user_password_new' placeholder="Repeat password" required="required" />
+					  </label>
+				  </div>
+              <div class="item form-group">
+                <button id="send" type="submit" class="btn btn-default submit" name="register">Register</button>
               </div>
 
               <div class="clearfix"></div>
@@ -95,9 +137,37 @@
                 </div>
               </div>
             </form>
-          </section>
+          <!--/section-->
+		 </section>
         </div>
       </div>
     </div>
+    
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- validator -->
+	<script src="../vendors/validator/validator.js"></script>
+	<script>
+		$('form')
+			.on('blur', 'input[required], input.optional, select.required', validator.checkField)
+			.on('change', 'select.required', validator.checkField)
+			.on('keypress', 'input[required][pattern]', validator.keypress);
+
+		
+		$('form').submit(function(e){
+			e.preventDefault();
+			var submit = true;
+
+			// Validate the form using generic validaing
+			if( !validator.checkAll( $(this) ) ){
+				submit = false;
+			}
+
+			if( submit )
+				this.submit();
+
+			return false;
+		});
+	</script>
   </body>
 </html>
