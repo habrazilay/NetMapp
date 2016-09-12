@@ -79,8 +79,10 @@ var validator = (function($){
         },
         // a "skip" will skip some of the tests (needed for keydown validation)
         text : function(a, skip){
-            if( strongPassword ){
-            	//the regex blow checkes if the field contains atleast one of each of the following: Uppercase-letter,lowercase-letter,digit,symbol. 
+        	//make sure password meets requirements, the regex blow checkes if the field contains atleast 8 characters,
+            //and also contains atleast one of each of the following: 
+            //Uppercase-letter(A-Z),lowercase-letter(a-z),digit(0-9) and a special character (!@#$&*)  .
+            if( strongPassword ){ 
             	jsRegex = new RegExp('^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$').test(a);
                 if( a && !jsRegex ){
                 	alertTxt = message.password_strong;
