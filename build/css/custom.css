@@ -3130,7 +3130,7 @@ a.hiddenanchor {
   right: 0px;
   margin: 0px auto;
   margin-top: 5%;
-  max-width: 350px;
+  max-width: 400px;
   position: relative; }
 
 .registration_form, .login_form {
@@ -3200,7 +3200,6 @@ a.hiddenanchor {
   padding: 25px 0 0;
   position: relative;
   text-align: center;
-  text-shadow: 0 1px 0 #fff;
   min-width: 280px; }
 
 .login_content a,
@@ -3282,6 +3281,9 @@ a.hiddenanchor {
   font-size: 12px;
   margin: 10px 15px 0 0; }
 
+.register_label {
+    max-height: 27px; }
+  
 .reset_pass {
   margin-top: 10px !important; }
 
