@@ -8,7 +8,7 @@
 
 var validator = (function($){
     var message, tests, checkField, validate, mark, unmark, field, minmax, defaults,
-        validateWords, lengthRange, lengthLimit, pattern, alertTxt, data,
+        validateWords, lengthRange, lengthLimit, strongPassword, pattern, alertTxt, data,
         email_illegalChars = /[\(\)\<\>\,\;\:\\\/\"\[\]]/,
         email_filter = /^.+@.+\..{2,6}$/;  // exmaple email "steve@s-i.photo"
 
@@ -17,7 +17,7 @@ var validator = (function($){
     message = {
         invalid         : 'invalid input',
         checked         : 'must be checked',
-        empty           : 'please put something here',
+        empty           : 'this field is required',
         min             : 'input is too short',
         max             : 'input is too long',
         number_min      : 'too low',
@@ -26,6 +26,7 @@ var validator = (function($){
         number          : 'not a number',
         email           : 'email address is invalid',
         email_repeat    : 'emails do not match',
+        password_strong	: 'not strong enough',
         password_repeat : 'passwords do not match',
         repeat          : 'no match',
         complete        : 'input is not complete',
@@ -78,6 +79,14 @@ var validator = (function($){
         },
         // a "skip" will skip some of the tests (needed for keydown validation)
         text : function(a, skip){
+            if( strongPassword ){
+            	//the regex blow checkes if the field contains atleast one of each of the following: Uppercase-letter,lowercase-letter,digit,symbol. 
+            	jsRegex = new RegExp('^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$').test(a);
+                if( a && !jsRegex ){
+                	alertTxt = message.password_strong;
+                	return false;
+                }
+            }
             // make sure there are at least X number of words, each at least 2 chars long.
             // for example 'john F kenedy' should be at least 2 words and will pass validation
             if( validateWords ){
@@ -116,7 +125,6 @@ var validator = (function($){
                     }
                 }
             }
-
             if( pattern ){
                 var regex, jsRegex;
                 switch( pattern ){
@@ -324,6 +332,7 @@ var validator = (function($){
         }
         /* Gather Custom data attributes for specific validation:
         */
+        strongPassword 	= data['validateStrongPassword'] || 0;
         validateWords   = data['validateWords'] || 0;
         lengthRange     = data['validateLengthRange'] ? (data['validateLengthRange']+'').split(',') : [1];
         lengthLimit     = data['validateLength'] ? (data['validateLength']+'').split(',') : false;
