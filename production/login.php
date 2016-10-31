@@ -1,19 +1,4 @@
 <?php
-// show potential errors / feedback (from registration object)
-if (isset($registration) or isset($login)) {
-	$action = (isset($login)) ? $login : $registration;
-    if ($action->errors) {
-        foreach ($action->errors as $error) {
-            echo $error;
-        }
-    }
-    if ($action->messages) {
-        foreach ($action->messages as $message) {
-            echo $message;
-        }
-    }
-}
-
 // load the registration class
 require_once("classes/Registration.php");
     

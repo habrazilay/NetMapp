@@ -1,5 +1,4 @@
 <?php
-
 // load the login class
 require_once("classes/Login.php");
 
@@ -15,5 +14,15 @@ if ($login->isUserLoggedIn() == true) {
 
 } else {
     // the user is not logged in.
-    include("login.php");
+    ///include("login.php");
+    
+    // load the registration class
+    require_once("classes/Registration.php");
+        
+    // create the registration object. when this object is created, it will do all registration stuff automatically
+    // so this single line handles the entire registration process.
+     $registration = new Registration();
+        
+    
+    include("login.html");
 }

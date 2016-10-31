@@ -19,6 +19,10 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- Animate.css -->
     <link href="https://colorlib.com/polygon/gentelella/css/animate.min.css" rel="stylesheet">
+	<!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -74,7 +78,7 @@
         <div id="register" class="animate form registration_form">
 		 <section class="login_content">
           <!--section class="login_content"-->
-            <form class="form-horizontal" action="login.php" method="post" novalidate>
+            <form class="form-horizontal" action="index.php" method="post" novalidate>
               <h1>Create an Account</h1>
 				  <div class="item form-group">  
 					  <label class="register_label">
@@ -147,6 +151,10 @@
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- validator -->
 	<script src="../vendors/validator/validator.js"></script>
+	<!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
 	<script>
 		$('form')
 			.on('blur', 'input[required], input.optional, select.required', validator.checkField)
@@ -168,6 +176,27 @@
 
 			return false;
 		});
+		
+		var loginErrors = <?php echo (isset($login)) ? json_encode($login->errors) : '[]'; ?>;
+		var loginMessages = <?php echo (isset($login)) ? json_encode($login->messages) : '[]'; ?>;
+		var registerErrors = <?php echo (isset($registration)) ? json_encode($registration->errors) : '[]'; ?>;
+		if (registerErrors.length != 0) window.location.href = "#signup";
+		var registerMessages = <?php echo (isset($registration)) ? json_encode($registration->messages) : '[]'; ?>;
+		
+		loginErrors.forEach(function(error) {popNotify('Login Error', error ,'error');});
+		loginMessages.forEach(function(msg) {popNotify('Login info', msg ,'success');});
+		registerErrors.forEach(function(error) {popNotify('Registration Error', error ,'error');});
+		registerMessages.forEach(function(msg) {popNotify('Registration info', msg ,'success');});
+		
+		function popNotify(title,message,type){
+			new PNotify({
+				title: title,
+				text: message,
+				type: type,
+				styling: 'bootstrap3'
+			});
+		}	
+		
 	</script>
   </body>
 </html>
