@@ -8,6 +8,7 @@
  * DB_PASS: the password of the above user
  */
  
-define("DB_HOST", "127.0.0.1");
+define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
+define("DB_NAME", "projectModel");
