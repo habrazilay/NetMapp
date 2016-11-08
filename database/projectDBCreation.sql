@@ -48,16 +48,17 @@ CREATE TABLE project.sites
 This table contains details about the rooms of this project.
 
 colums:
-id 			- 	unique row identifier.
-sid			-	referencing site identifier who belongs this room.
-name	 	- 	name of the room.
-floor		-	floor number/name of this room.
-location	-	information to identify the room location inside the floor.
-length		-	length of the room in centimeters.
-width		-	width of the room in centimeters.
-description	-	room description.
-createdBy	-	referencing user identifier who created this room.
-dateCreated	-	the date this room has been created.
+id 				- 	unique row identifier.
+sid				-	referencing site identifier who belongs this room.
+name	 		- 	name of the room.
+floor			-	floor number/name of this room.
+location		-	information to identify the room location inside the floor.
+length			-	length of the room in centimeters.
+width			-	width of the room in centimeters.
+description		-	room description.
+createdBy		-	referencing user identifier who created this room.
+dateCreated		-	the date this room has been created.
+cabAmount		-	amount of relevant cabinets for mapping in the room.
 */
 CREATE TABLE project.rooms
 (
@@ -70,5 +71,6 @@ CREATE TABLE project.rooms
 	`width` int DEFAULT NULL,	
 	`description` varchar(100) DEFAULT NULL,
 	`createdBy` int NOT NULL REFERENCES security.users(id),
-	`dateCreated` datetime NOT NULL DEFAULT NOW()
+	`dateCreated` datetime NOT NULL DEFAULT NOW(),
+	`cabAmount` int NOT NULL DEFAULT 0
 );
