@@ -3,7 +3,39 @@
 <?php include("./sidebar_menu.html"); ?>
 <?php include("./menu_footer.html"); ?>
 <?php include("./top_navigation.html"); ?>
- 
+
+<!-- post to db -->
+      <?php
+      
+        // include the configs / constants for the database connection and schema
+        require_once("config/set_mysql_server.php");
+        
+        if(isset($_POST['add_room'])) {
+        // Create connection
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, "project");
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $name = $_POST['room_name'];
+        $location = $_POST['room_location'];
+        $floor = $_POST['room_floor'];
+        $length = $_POST['room_length'];
+        $width = $_POST['room_width'];
+        $description = $_POST['room_description']; 
+        
+        $sql = "INSERT INTO rooms (name,location,floor,length,width,description) 
+        VALUES('" . $name . "','" . $location . "','" . $floor . "','" . $length . "','" . $width . "','" . $description . "' )";
+        
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        
+        $conn->close();}
+        ?>
+<!-- /post to db -->
  
  <!-- page content -->
         <div class="right_col" role="main">
@@ -53,7 +85,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-location">Room location <span></span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="room-location" name="room_location" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="room_location" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
@@ -79,7 +111,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Length <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="room_lenght" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" min="1" value="10">
+                              <input name="room_length" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" min="1" value="10">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Width <span class="required">*</span>
                                 </label>
                                 <input name="room_width" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" min="1" value="10">

@@ -20,8 +20,7 @@
         $description = $_POST['room_description']; 
         
         $sql = "INSERT INTO rooms (name,location,floor,length,width,description) 
-        VALUES('" . $name . "','" . $location . "','" . $floor . "','
-        " . $length . "','" . $width . "','" . $description . "' )";
+        VALUES('" . $name . "','" . $location . "','" . $floor . "','" . $length . "','" . $width . "','" . $description . "' )";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
