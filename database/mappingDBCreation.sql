@@ -68,7 +68,7 @@ CREATE TABLE mapping.devices
 	`masterid` varchar(20) NOT NULL,
 	`uLoc` tinyint DEFAULT NULL,
 	`uHeight` tinyint DEFAULT 1,
-	`uLenght` DECIMAL(1,3) DEFAULT 1.0,
+	`uLenght` DECIMAL(4,3) DEFAULT 1.0,
 	`name` varchar(50) DEFAULT NULL,
 	`typeid` int NOT NULL ,
 	FOREIGN KEY (typeid)
