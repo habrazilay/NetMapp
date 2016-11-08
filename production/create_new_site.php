@@ -1,9 +1,38 @@
+<?php var_dump($_POST); ?>
+<!-- post to db -->
+      <?php
+      
+        // include the configs / constants for the database connection and schema
+        require_once("config/set_mysql_server.php");
+        
+        if(isset($_POST['add_site'])) {
+        // Create connection
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, "project");
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $name = $_POST['site_name'];
+        $city = $_POST['site_location'];
+        $address = $_POST['site_address']; 
+        
+        $sql = "INSERT INTO sites (name,city,address) VALUES('" . $name . "','" . $city . "','" . $address . "' )";
+        
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        
+        $conn->close();}
+        ?>
+<!-- /post to db -->
 <?php include("./header.html"); ?>
 <?php include("./sidebar_menu.html"); ?>
 <?php include("./menu_footer.html"); ?>
 <?php include("./top_navigation.html"); ?>
  
- 
+  
  <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -19,7 +48,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
 
-                    <form class="form-horizontal form-label-left">
+                    <form class="form-horizontal form-label-left" method = "post" action = "<?php $_PHP_SELF ?>">
 
                       
                       <span class="section">Site Details</span>
@@ -28,25 +57,25 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="site-name">Site name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="   " class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="site_name" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="site-location">Site location (city) <span></span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="site-location">Site location (city) <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="room-location" name="room-location" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="site_location" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="room-floor" class="control-label col-md-3 col-sm-3 col-xs-12">Site address</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="site-address" name="site-address" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="site_address" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                       <div class="x_title"></div>
-                          <button type="button" class="btn btn-primary" id = "submit" style="float:right">Submit</button>
-                          <button type="button" class="btn btn-danger" style="float:right">Cancel</button>                         
+                          <button type="submit" class="btn btn-primary" name = "add_site" style="float:right">Submit</button>
+                          <button type="button" class="btn btn-danger" name = "cancel" style="float:right">Cancel</button>                         
                         </div>
                       </div>
                     </form>             
@@ -57,5 +86,3 @@
       
         
 <?php include("./footer.html"); ?>
-  </body>
-</html>

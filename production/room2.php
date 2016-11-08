@@ -39,6 +39,7 @@
           </div>
         </div>
         <!-- /page content -->
+                
 
     <!-- calendar modal -->
     <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -98,7 +99,6 @@
                     <textarea class="form-control" style="height:55px;" id="descr2" name="descr"></textarea>
                   </div>
                 </div>
-
               </form>
             </div>
           </div>
@@ -132,12 +132,8 @@
     <!-- FullCalendar -->
     <link href="../vendors/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
     <link href="../vendors/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
-
-
-<?php include("./footer.html"); ?>
-
-
-    <!-- FullCalendar -->
+    <!-- FullCalendar -->    
+      
     <script>
       $(window).load(function() {
         var date = new Date(),
@@ -206,6 +202,10 @@
           },
           editable: true,
           events: [{
+            title: 'Cab A2',
+            start: new Date(y, m, d-1, 10, 30),
+            allDay: true
+          }, {
             title: 'Cab A3',
             start: new Date(y, m, d, 10, 30),
             allDay: true
@@ -223,9 +223,4 @@
         });
       });
     </script>
-    <!-- /FullCalendar -->
-      
-        
-
-  </body>
-</html>
+    <!-- /FullCalendar --> 
