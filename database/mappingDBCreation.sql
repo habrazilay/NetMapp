@@ -357,7 +357,7 @@ CREATE TABLE mapping.connectionsFullPath
 		REFERENCES mapping.patchPanelPorts(id)
 		ON DELETE CASCADE,
 	`ppPortid5` int DEFAULT NULL,
-	`cableNumAPP` VARCHAR(20) DEFAULT NULL,
+	`cableNumBPP` VARCHAR(20) DEFAULT NULL,
 	`colorBPP` VARCHAR(6) DEFAULT "D3D3D3",
 	FOREIGN KEY (ppPortid5)
 		REFERENCES mapping.patchPanelPorts(id)
