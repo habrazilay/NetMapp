@@ -10,7 +10,7 @@ $login = new Login();
 // ... ask if we are logged in here:
 if ($login->isUserLoggedIn() == true) {
     // the user is logged in.
-    include("create_new_site.php");
+    include("template.php");
 
 } else {
     // the user is not logged in.

@@ -1,4 +1,11 @@
+<?php include("./loginVerify.php"); ?>
 <?php var_dump($_POST); ?>
+<?php var_dump($_SESSION);
+      echo $_SESSION['user_id']; 
+?>
+
+
+
 <!-- post to db -->
       <?php
       
@@ -16,7 +23,7 @@
         $city = $_POST['site_location'];
         $address = $_POST['site_address']; 
         
-        $sql = "INSERT INTO sites (name,city,address) VALUES('" . $name . "','" . $city . "','" . $address . "' )";
+        $sql = "INSERT INTO sites (name,city,address,createdBy) VALUES('" . $name . "','" . $city . "','" . $address . "','" . $_SESSION['user_id'] . "' )";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";

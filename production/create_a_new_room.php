@@ -1,3 +1,4 @@
+<?php include("./loginVerify.php"); ?>
 <?php include("./header.html"); ?>
 <?php include("./sidebar_menu.html"); ?>
 <?php include("./menu_footer.html"); ?>
@@ -28,9 +29,16 @@
                             </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="form-control" name="site_name">
-                            <option>Site 1</option>
-                            <option>Site 2</option>
-                            <option>Site 3</option>
+                            <?php 
+                            require_once("config/set_mysql_server.php");
+                            $db_connection = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_SCHEMA_PROJECT);
+                            $res = $db_connection->query("SELECT id,name FROM sites");
+                            while ($row = $res->fetch_assoc()){
+                            echo "\n\t\t\t\t\t\t\t";
+                            echo "<option id=\"" . $row['id'] . "\" value=\"site\">" . $row['name'] . "</option>";
+                            }
+                            echo "\n";
+                            ?>
                           </select>
                         </div>
                         </div>
