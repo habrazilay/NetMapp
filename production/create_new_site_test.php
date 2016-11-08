@@ -104,7 +104,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Length <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="room_lenght" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" min="1" value="10">
+                              <input name="room_length" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" min="1" value="10">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Width <span class="required">*</span>
                                 </label>
                                 <input name="room_width" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" min="1" value="10">
