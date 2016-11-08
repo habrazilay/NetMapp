@@ -14,7 +14,7 @@ if ($login->isUserLoggedIn() == true) {
 
 } else {
     // the user is not logged in.
-    ///include("login.php");
+    //include("login.php");
     
     // load the registration class
     require_once("classes/Registration.php");
