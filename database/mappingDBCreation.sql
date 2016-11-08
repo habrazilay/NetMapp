@@ -46,12 +46,17 @@ cabid 			- 	cabinet row identifier where the device is placed.
 masterid	 	- 	unique id to easily identify the device by technicians. (Ex. A-0192,B-9813)
 uLoc			-	the lowest Unit location of the device inside the cabinet.
 uHeight			- 	the size of the device in Units.
+uLenght			- 	the length of the device in Units. (Ex. 0.5 for half U device).
 name 			- 	name to identify the device by the client.
 typeid			-	referencing device row identifier of the base database, for more details about the device.
 powerFeedType 	-	referencing power socket row identifier matching this device.	
 powerFeedAmount	-	amount of power sockets availiable for this device.
 activePorts		-	indicates how many required to be mapped on this device. (for estimation and status reports)
+intallationType*		-	indicates in which way the device installed to the cabin. (ear/rails/shelf) 
+arrivalDate		-	date of arrival.
 description		-	device description.
+
+* installationType values: 0-ears, 1-rails, 2-shelf, 3-ear+shelf, 4-on top, 5-next to the cabin.
 */
 CREATE TABLE mapping.devices
 (
@@ -63,6 +68,7 @@ CREATE TABLE mapping.devices
 	`masterid` varchar(20) NOT NULL,
 	`uLoc` tinyint DEFAULT NULL,
 	`uHeight` tinyint DEFAULT 1,
+	`uLenght` DECIMAL(1,3) DEFAULT 1.0,
 	`name` varchar(50) DEFAULT NULL,
 	`typeid` int NOT NULL ,
 	FOREIGN KEY (typeid)
@@ -74,6 +80,9 @@ CREATE TABLE mapping.devices
 		ON DELETE RESTRICT,
 	`powerFeedAmount` tinyint DEFAULT 1,
 	`activePorts` smallint DEFAULT NULL,
+	`installationType` tinyint DEFAULT 0,
+	`arrivalDate` datetime DEFAULT NULL,
+	`faceFront` boolean DEFAULT TRUE,
 	`description` varchar(100) DEFAULT NULL,
 	UNIQUE(masterId)
 );
@@ -158,7 +167,7 @@ description			- 	patch panel description.
 CREATE TABLE mapping.patchPanels
 (
 	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	`cabAid` int NOT NULL ,
+	`cabAid` int NOT NULL,
 	FOREIGN KEY (cabAid)
 		REFERENCES mapping.cabinets(id)
 		ON DELETE CASCADE,
@@ -282,6 +291,7 @@ CREATE TABLE mapping.connectionsPath
 	FOREIGN KEY (portid)
 		REFERENCES mapping.ports(id)
 		ON DELETE CASCADE,
+	`color` VARCHAR(6) DEFAULT "D3D3D3",
 	`nextPortid` int DEFAULT NULL,
 	FOREIGN KEY (nextPortid)
 		REFERENCES mapping.ports(id)
@@ -300,11 +310,15 @@ This table contains the all of the end to end connections between device ports, 
 colums:
 id 			- 	unique row identifier.
 portAid* 	-	referencing the fisrt side port identifier.
-ppPortidA	-	referencing the 1st patch panel port identifier following port A.
-ppPortidA	-	referencing the 2nd patch panel port identifier following patch panel port A.
-ppPortidA	-	referencing the 3rd patch panel port identifier following patch panel port B.
-ppPortidA	-	referencing the 4th patch panel port identifier following patch panel port C.
-ppPortidA	-	referencing the 5th patch panel port identifier following patch panel port D.
+cableNumAPP	-	the number of the cable from port A to the 1st PP in his path to port B.
+colorAPP	-	the color of the cable from port A to the 1st PP in his path to port B.
+ppPortid<X>	-	referencing the X-th patch panel port identifier in the path.
+cableNum<XY>-	the number of the cable from the X-th PP to the (X+1)-th PP in the path from A to B.
+colorPP<XY>	-	the color of the cable from the X-th PP to the (X+1)-th PP in the path from A to B.
+cableNumBPP	-	the number of the cable from the last PP to port B.
+colorBPP	-	the color of the cable from the last PP to port B.
+cableNumAB	-	the number of the cable from port A to Port B (in case of direct connection).
+colorAB		-	the color of the cable from port A to Port B (in case of direct connection).
 portBid* 	-	referencing the second side port identifier.
 
 *portA will be the port with lower device port id.
@@ -313,30 +327,44 @@ CREATE TABLE mapping.connectionsFullPath
 (
 	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	`portAid` int NOT NULL,
+	`cableNumAPP` VARCHAR(20) DEFAULT NULL,
+	`colorAPP` VARCHAR(6) DEFAULT "D3D3D3",
 	FOREIGN KEY (portAid)
 		REFERENCES mapping.devicePorts(id)
 		ON DELETE CASCADE,
-	`ppPortidA` int DEFAULT NULL,
-	FOREIGN KEY (ppPortidA)
+	`ppPortid1` int DEFAULT NULL,
+	`cableNum12` VARCHAR(20) DEFAULT NULL,
+	`colorPP12` VARCHAR(6) DEFAULT "D3D3D3",
+	FOREIGN KEY (ppPortid1)
 		REFERENCES mapping.patchPanelPorts(id)
 		ON DELETE CASCADE,
-	`ppPortidB` int DEFAULT NULL,
-	FOREIGN KEY (ppPortidB)
+	`ppPortid2` int DEFAULT NULL,
+	`cableNum23` VARCHAR(20) DEFAULT NULL,
+	`colorPP23` VARCHAR(6) DEFAULT "D3D3D3",
+	FOREIGN KEY (ppPortid2)
 		REFERENCES mapping.patchPanelPorts(id)
 		ON DELETE CASCADE,	
-	`ppPortidC` int DEFAULT NULL,
-	FOREIGN KEY (ppPortidC)
+	`ppPortid3` int DEFAULT NULL,
+	`cableNum34` VARCHAR(20) DEFAULT NULL,
+	`colorPP34` VARCHAR(6) DEFAULT "D3D3D3",
+	FOREIGN KEY (ppPortid3)
 		REFERENCES mapping.patchPanelPorts(id)
 		ON DELETE CASCADE,
-	`ppPortidD` int DEFAULT NULL,
-	FOREIGN KEY (ppPortidD)
+	`ppPortid4` int DEFAULT NULL,
+	`cableNum45` VARCHAR(20) DEFAULT NULL,
+	`colorPP45` VARCHAR(6) DEFAULT "D3D3D3",
+	FOREIGN KEY (ppPortid4)
 		REFERENCES mapping.patchPanelPorts(id)
 		ON DELETE CASCADE,
-	`ppPortidE` int DEFAULT NULL,
-	FOREIGN KEY (ppPortidE)
+	`ppPortid5` int DEFAULT NULL,
+	`cableNumAPP` VARCHAR(20) DEFAULT NULL,
+	`colorBPP` VARCHAR(6) DEFAULT "D3D3D3",
+	FOREIGN KEY (ppPortid5)
 		REFERENCES mapping.patchPanelPorts(id)
 		ON DELETE CASCADE,
 	`portBid` int DEFAULT NULL,
+	`cableNumAB` VARCHAR(20) DEFAULT NULL,
+	`colorAB` VARCHAR(6) DEFAULT "D3D3D3",
 	FOREIGN KEY (portBid)
 		REFERENCES mapping.devicePorts(id)
 		ON DELETE CASCADE,
@@ -353,13 +381,16 @@ colums:
 id 			- 	unique row identifier.
 portAid* 	-	referencing the fisrt side port identifier.
 portBid* 	-	referencing the second side port identifier.
+status**		- 	determining the status of this connection.
 pathid		-	referencing the path row identifier, which contains the full path details between port A to port B.
 
 *portA will be the port with lower device port id.
+**status values: 0-confirmed, 1-waiting for confirmation(for connection autofilled by cable number), 2-confirmed by the client.
 */
 CREATE TABLE mapping.fullConnections
 (
 	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`status` tinyint NOT NULL DEFAULT 0,
 	`portAid` int NOT NULL,
 	FOREIGN KEY (portAid)
 		REFERENCES mapping.devicePorts(id)
