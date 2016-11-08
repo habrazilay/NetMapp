@@ -1,91 +1,13 @@
 CREATE SCHEMA `security`;
 
-SET NAMES utf8;
-SET time_zone = '+00:00';
-SET foreign_key_checks = 0;
-SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+CREATE TABLE IF NOT EXISTS `security`.`users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'auto incrementing user_id of each user, unique index',
+  `user_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT 'user''s name, unique',
+  `user_password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'user''s password in salted and hashed format',
+  `user_email` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT 'user''s email, unique',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_name` (`user_name`),
+  UNIQUE KEY `user_email` (`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='user data';
 
-CREATE TABLE security.attempts (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ip` varchar(39) NOT NULL,
-  `expiredate` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE security.config (
-  `setting` varchar(100) NOT NULL,
-  `value` varchar(100) DEFAULT NULL,
-  UNIQUE KEY `setting` (`setting`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO security.config (`setting`, `value`) VALUES
-('attack_mitigation_time',  '+30 minutes'),
-('attempts_before_ban', '30'),
-('attempts_before_verify',  '5'),
-('bcrypt_cost', '10'),
-('cookie_domain', NULL),
-('cookie_forget', '+30 minutes'),
-('cookie_http', '0'),
-('cookie_name', 'authID'),
-('cookie_path', '/'),
-('cookie_remember', '+1 month'),
-('cookie_secure', '0'),
-('emailmessage_suppress_activation',  '0'),
-('emailmessage_suppress_reset', '0'),
-('mail_charset','UTF-8'),
-('password_min_score',  '3'),
-('site_activation_page',  'activate'),
-('site_email',  'no-reply@phpauth.cuonic.com'),
-('site_key',  'fghuior.)/!/jdUkd8s2!7HVHG7777ghg'),
-('site_name', 'PHPAuth'),
-('site_password_reset_page',  'reset'),
-('site_timezone', 'Europe/Paris'),
-('site_url',  'https://github.com/PHPAuth/PHPAuth'),
-('smtp',  '0'),
-('smtp_auth', '1'),
-('smtp_host', 'smtp.example.com'),
-('smtp_password', 'password'),
-('smtp_port', '25'),
-('smtp_security', NULL),
-('smtp_username', 'email@example.com'),
-('table_attempts',  'attempts'),
-('table_requests',  'requests'),
-('table_sessions',  'sessions'),
-('table_users', 'users'),
-('verify_email_max_length', '100'),
-('verify_email_min_length', '5'),
-('verify_email_use_banlist',  '1'),
-('verify_password_min_length',  '3'),
-('request_key_expiration', '+10 minutes');
-
-CREATE TABLE security.requests (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) NOT NULL,
-  `rkey` varchar(20) NOT NULL,
-  `expire` datetime NOT NULL,
-  `type` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE security.sessions (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `uid` int(11) NOT NULL,
-  `hash` varchar(40) NOT NULL,
-  `expiredate` datetime NOT NULL,
-  `ip` varchar(39) NOT NULL,
-  `agent` varchar(200) NOT NULL,
-  `cookie_crc` varchar(40) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE security.users (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(100) DEFAULT NULL,
-  `password` varchar(60) DEFAULT NULL,
-  `isactive` tinyint(1) NOT NULL DEFAULT '0',
-  `dt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;	
+INSERT INTO `security`.`users` (`user_name`, `user_password_hash`, `user_email`) VALUES ('newit', '$2y$10$p1r4HKCr1TB/yCYFsk5Ooe9snRIztvNo3gCafPiWsOL38POrQnZbW', 'info@newit.com');
