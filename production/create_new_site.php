@@ -1,11 +1,4 @@
 <?php include("./loginVerify.php"); ?>
-<?php var_dump($_POST); ?>
-<?php var_dump($_SESSION);
-      echo $_SESSION['user_id']; 
-?>
-
-
-
 <!-- post to db -->
       <?php
       
@@ -19,11 +12,12 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
+        $userid = $_SESSION['user_id'];
         $name = $_POST['site_name'];
         $city = $_POST['site_location'];
         $address = $_POST['site_address']; 
         
-        $sql = "INSERT INTO sites (name,city,address,createdBy) VALUES('" . $name . "','" . $city . "','" . $address . "','" . $_SESSION['user_id'] . "' )";
+        $sql = "INSERT INTO sites (name,city,address,createdBy) VALUES('" . $name . "','" . $city . "','" . $address . "','" . $userid . "' )";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";

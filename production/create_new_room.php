@@ -17,6 +17,8 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
+        $userid = $_SESSION['user_id'];
+        $siteid= $_POST['site_name'];
         $name = $_POST['room_name'];
         $location = $_POST['room_location'];
         $floor = $_POST['room_floor'];
@@ -24,13 +26,13 @@
         $width = $_POST['room_width'];
         $description = $_POST['room_description']; 
         
-        $sql = "INSERT INTO rooms (name,location,floor,length,width,description) 
-        VALUES('" . $name . "','" . $location . "','" . $floor . "','" . $length . "','" . $width . "','" . $description . "' )";
+        $sql = "INSERT INTO rooms (sid,name,location,floor,length,width,description,createdBy) 
+        VALUES('" . $siteid . "','" . $name . "','" . $location . "','" . $floor . "','" . $length . "','" . $width . "','" . $description . "','" . $userid . "')";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $sql . "<br>" . $conn->error . "site id:" . $siteid;
         }
         
         $conn->close();}
@@ -67,7 +69,7 @@
                             $res = $db_connection->query("SELECT id,name FROM sites");
                             while ($row = $res->fetch_assoc()){
                             echo "\n\t\t\t\t\t\t\t";
-                            echo "<option id=\"" . $row['id'] . "\" value=\"site\">" . $row['name'] . "</option>";
+                            echo "<option value=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
                             }
                             echo "\n";
                             ?>
@@ -96,15 +98,17 @@
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Measure units <span class="required">*</span></label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <div name="measure_units" class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default" data-toggle-class="btn-secondary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="measure" value="meters"> &nbsp; Meters &nbsp;
-                                </label>
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="measure" value="tiles"> Tiles
-                                </label>
-                              </div>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                          <div class="radio">
+                            <label>
+                              <input type="radio" class="flat" checked name="iCheck"> Tiles
+                            </label>
+                          </div>
+                          <div class="radio">
+                            <label>
+                              <input type="radio" class="flat" name="iCheck"> Meters
+                            </label>
+                          </div>
                             </div>
                           </div>
                           <div class="form-group">
