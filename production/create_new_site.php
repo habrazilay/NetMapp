@@ -78,8 +78,7 @@
                           <button type="submit" class="btn btn-primary" name = "add_site" style="float:right">Submit</button>
                           <button type="button" class="btn btn-danger" name = "cancel" style="float:right">Cancel</button>                         
                         </div>
-                      </div>
-                    </form>             
+                      </div>            
             </div>
           </div>
         </div>
