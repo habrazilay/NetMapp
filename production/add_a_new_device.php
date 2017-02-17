@@ -8,10 +8,10 @@
         
         require_once("config/dbcontroller.php");
         $db_handle = new DBController();
-        $query ="SELECT * FROM sites";
+        $query ="SELECT * FROM room";
         $results = $db_handle->runQuery($query);    
         
-        if(isset($_POST['add_cabinet'])) {
+        if(isset($_POST['add_new_device'])) {
         // Create connection
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA_MAP);
         // Check connection
@@ -19,17 +19,17 @@
             die("Connection failed: " . $conn->connect_error);
         }
         $userid = $_SESSION['user_id'];
-        $roomid= $_POST['room_name'];
-        $name = $_POST['cab_name'];
-        $clientName = $_POST['cab_client_name'];
-        $uHeight = $_POST['cab_uheight'];        
-        $length = $_POST['cab_length'];
-        $width = $_POST['cab_width'];
-        $height = $_POST['cab_height'];
-        $description = $_POST['cab_description']; 
+        $cabid= $_POST['cab_name'];
+        $masterid = $_POST['dev_name'];
+        $name = $_POST['dev_client_name'];
+        $uHeight = $_POST['dev_uheight'];        
+        $uLength = $_POST['dev_length'];
+        $width = $_POST['dev_width'];
+        $height = $_POST['dev_height'];
+        $description = $_POST['dev_description']; 
         
         $sql = "INSERT INTO cabinets (rid,name,clientName,uHeight,length,width,height,description) 
-        VALUES('" . $roomid . "','" . $name . "','" . $clientName . "','" . $uHeight . "','" . $length . "','" . $width . "','" . $height . "','" . $description . "')";
+        VALUES('" . $cabid . "','" . $name . "','" . $clientName . "','" . $uHeight . "','" . $uLength . "','" . $width . "','" . $height . "','" . $description . "')";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully"; //Must to make a popup!
@@ -52,7 +52,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Create a new cabinet</h3>
+                <h3>Add a new device</h3>
               </div>
             </div>
 
@@ -65,30 +65,30 @@
                     <form class="form-horizontal form-label-left" method = "post" action = "<?php $_PHP_SELF ?> ">
 
                       
-                      <span class="section">Cabinet details</span>
+                      <span class="section">Device details</span>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_site">Select a site <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_site">Select a room <span class="required">*</span>
                             </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
                             <script>
-                            function getroom(val) {
+                            function getcabinet(val) {
                                 $.ajax({
                                 type: "POST",
-                                url: "config/get_room.php",
-                                data:'sid='+val,
+                                url: "config/get_cabinet.php",
+                                data:'cabid='+val,
                                 success: function(data){
-                                    $("#room_name").html(data);
+                                    $("#dev_name").html(data);
                                 }
                                 });
                             }
                             </script>
-                          <select name="site" id="site-list" class="form-control" onChange="getroom(this.value);">
+                          <select name="cabinet" id="cabinet-list" class="form-control" onChange="getcabinet(this.value);">
                             <?php
-                            foreach($results as $site) {
+                            foreach($results as $cab) {
                             ?>
-                            <option value="<?php echo $site["id"]; ?>"><?php echo $site["name"]; ?></option>
+                            <option value="<?php echo $cabinet["cabid"]; ?>"><?php echo $cabinet["name"]; ?></option>
                             <?php
                             }
                             ?>
@@ -96,53 +96,53 @@
                         </div>
                         </div>
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_name">Select the room <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dev_name">Select the cabinet <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="room_name" id="room_name" class="form-control">
+                          <select name="cab_name" id="cab_name" class="form-control">
                           </select>
                             </div>
                           </div>         
                           <div class="form-group">
-                            <label for="cabinet-name" class="control-label col-md-3 col-sm-3 col-xs-12">Cabinet name <span class="required">*</span></label>
+                            <label for="cabinet-name" class="control-label col-md-3 col-sm-3 col-xs-12">Device ID <span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="cab_name" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="dev_name" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
-                            <label for="cabinet-client-name" class="control-label col-md-3 col-sm-3 col-xs-12">Cabinet's client name </label>
+                            <label for="cabinet-client-name" class="control-label col-md-3 col-sm-3 col-xs-12">Device's client name </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="cab_client_name" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="dev_client_name" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
-                            <label for="cab-u-height" class="control-label col-md-3 col-sm-3 col-xs-12">Cabinet U height </label>
+                            <label for="cab-u-height" class="control-label col-md-3 col-sm-3 col-xs-12">Device's U height </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="cab_uheight" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" value="42">
-                              <label for="cab-height" class="control-label col-md-3 col-sm-3 col-xs-12">Height </label>
+                              <input name="dev_uheight" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" value="1">
+                              <label for="cab-height" class="control-label col-md-3 col-sm-3 col-xs-12">U lenght </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="cab_height" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" value="80">
+                              <input name="dev_height" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" value="1">
                             </div>
                           </div>
                           </div>
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Length </span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Power feed amount </span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="cab_length" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" min="1" value="60">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Width </span>
+                              <input name="dev_length" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" min="1" value="2">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Active ports </span>
                                 </label>
-                                <input name="cab_width" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" min="1" value="200">
+                                <input name="dev_width" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" min="1" value="24">
                             </div>
                           </div>
                           <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Cabinet description </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea name="cab_description" required="required" name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
+                          <textarea name="dev_description" required="required" name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
                         </div>
                       </div>
                       <div class="x_title"></div>
-                          <button type="submit" class="btn btn-primary" name = "add_cabinet" style="float:right">Submit</button>
+                          <button type="submit" class="btn btn-primary" name = "add_new_device" style="float:right">Submit</button>
                           <button type="button" class="btn btn-danger" name = "cancel" style="float:right">Cancel</button>                         
                         </div>
                       </div>
