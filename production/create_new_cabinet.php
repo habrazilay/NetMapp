@@ -1,8 +1,4 @@
 <!--<?php include("./loginVerify.php"); ?>-->
-<?php include("./header.html"); ?>
-<?php include("./sidebar_menu.html"); ?>
-<?php include("./menu_footer.html"); ?>
-<?php include("./top_navigation.html"); ?>
 
 <!-- post to db -->
       <?php
@@ -10,9 +6,14 @@
         // include the configs / constants for the database connection and schema
         require_once("config/set_mysql_server.php");
         
+        require_once("config/dbcontroller.php");
+        $db_handle = new DBController();
+        $query ="SELECT * FROM sites";
+        $results = $db_handle->runQuery($query);    
+        
         if(isset($_POST['add_cabinet'])) {
         // Create connection
-        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, "mapping");
+        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA_MAP);
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
@@ -31,7 +32,7 @@
         VALUES('" . $roomid . "','" . $name . "','" . $clientName . "','" . $uHeight . "','" . $length . "','" . $width . "','" . $height . "','" . $description . "')";
         
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo "New record created successfully"; //Must to make a popup!
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error . "site id:" . $siteid;
         }
@@ -39,6 +40,11 @@
         $conn->close();}
         ?>
 <!-- /post to db -->
+
+<?php include("./header.html"); ?>
+<?php include("./sidebar_menu.html"); ?>
+<?php include("./menu_footer.html"); ?>
+<?php include("./top_navigation.html"); ?>
 
 
 <!-- /page content -->
@@ -56,46 +62,44 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
 
-                    <form class="form-horizontal form-label-left" method = "post" action = "<?php $_PHP_SELF ?>">
+                    <form class="form-horizontal form-label-left" method = "post" action = "<?php $_PHP_SELF ?> ">
 
                       
                       <span class="section">Cabinet details</span>
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-site">Select a site <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_site">Select a site <span class="required">*</span>
                             </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                           <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                          <select class="form-control" name="site_name">
-                            <?php 
-                            require_once("config/set_mysql_server.php");
-                            $db_connection = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_SCHEMA_PROJECT);
-                            $res = $db_connection->query("SELECT id,name FROM sites");
-                            while ($row = $res->fetch_assoc()){
-                            echo "\n\t\t\t\t\t\t\t";
-                            echo "<option value=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
+                            <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+                            <script>
+                            function getroom(val) {
+                                $.ajax({
+                                type: "POST",
+                                url: "config/get_room.php",
+                                data:'sid='+val,
+                                success: function(data){
+                                    $("#room_name").html(data);
+                                }
+                                });
                             }
-                            echo "\n";
+                            </script>
+                          <select name="site" id="site-list" class="form-control" onChange="getroom(this.value);">
+                            <?php
+                            foreach($results as $site) {
                             ?>
-                          </select>
+                            <option value="<?php echo $site["id"]; ?>"><?php echo $site["name"]; ?></option>
+                            <?php
+                            }
+                            ?>
+                            </select>
                         </div>
                         </div>
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-name">Select the room <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_name">Select the room <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                          <select class="form-control" name="room_name">
-                            <?php 
-                            require_once("config/set_mysql_server.php");
-                            $db_connection = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_SCHEMA_PROJECT);
-                            $res = $db_connection->query("SELECT id,name FROM rooms");
-                            while ($row = $res->fetch_assoc()){
-                            echo "\n\t\t\t\t\t\t\t";
-                            echo "<option value=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
-                            }
-                            echo "\n";
-                            ?>
+                          <select name="room_name" id="room_name" class="form-control">
                           </select>
                             </div>
                           </div>         

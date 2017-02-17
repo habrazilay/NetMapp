@@ -1,9 +1,4 @@
 <?php include("./loginVerify.php"); ?>
-<?php include("./header.html"); ?>
-<?php include("./sidebar_menu.html"); ?>
-<?php include("./menu_footer.html"); ?>
-<?php include("./top_navigation.html"); ?>
-
 <!-- post to db -->
       <?php
       
@@ -38,6 +33,10 @@
         $conn->close();}
         ?>
 <!-- /post to db -->
+<?php include("./header.html"); ?>
+<?php include("./sidebar_menu.html"); ?>
+<?php include("./menu_footer.html"); ?>
+<?php include("./top_navigation.html"); ?>
  
  <!-- page content -->
         <div class="right_col" role="main">
