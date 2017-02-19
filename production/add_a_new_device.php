@@ -8,7 +8,12 @@
         
         require_once("config/dbcontroller.php");
         $db_handle = new DBController(DB_SCHEMA_PROJECT);
-        $query ="SELECT * FROM room";
+        $query ="SELECT * FROM rooms";
+        $results = $db_handle->runQuery($query, DB_SCHEMA_PROJECT);
+        
+        require_once("config/dbcontroller.php");
+        $db_handle = new DBController(DB_SCHEMA_PROJECT);
+        $query ="SELECT * FROM sites";
         $results = $db_handle->runQuery($query, DB_SCHEMA_PROJECT);    
         
         if(isset($_POST['add_new_device'])) {
@@ -66,40 +71,62 @@
 
                       
                       <span class="section">Device details</span>
-
+                      
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_site">Select a room <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_site">Select a site <span class="required">*</span>
                             </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
-                            <script>
-                            function getcabinet(val) {
-                                $.ajax({
-                                type: "POST",
-                                url: "config/get_cabinet.php",
-                                data:'rid='+val,
-                                success: function(data){
-                                    $("#dev_name").html(data);
-                                }
-                                });
-                            }
-                            </script>
-                          <select name="cabinet" id="cabinet-list" class="form-control" onChange="getcabinet(this.value);">
+                        <div class="col-md-6 col-sm-6 col-xs-12">  
+                          <select name="site" id="site-list" class="form-control" onChange="getroom(this.value);">
                             <?php
-                            foreach($results as $room) {
+                            foreach($results as $site) {
                             ?>
-                            <option value="<?php echo $room["id"]; ?>"><?php echo $room["name"]; ?></option>
+                            <option value="<?php echo $site["id"]; ?>"><?php echo $site["name"]; ?></option>
                             <?php
                             }
                             ?>
                             </select>
                         </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_name">Select the room <span class="required">*</span>
+                            </label>
+
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                                <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>           
+                            <script>
+                            function getroom(val) {
+                                $.ajax({
+                                type: "POST",
+                                url: "config/get_room.php",
+                                data:'sid='+val,
+                                success: function(data){
+                                    $("#room_name").html(data);
+                                }
+                                });
+                            }
+                            </script>
+                          <select name="room_name" id="room_name" class="form-control"onChange="getcabinet(this.value);">
+                          </select>
+                            </div>
+                            </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dev_name">Select the cabinet <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="cab_name" id="dev_name" class="form-control">
+                                <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+                            <script>
+                            function getcabinet(val) {
+                                $.ajax({
+                                type: "POST",
+                                url: "config/get_cabinet.php",
+                                data:'cabid='+val,
+                                success: function(data){
+                                    $("#cab_name").html(data);
+                                }
+                                });
+                            }
+                            </script>
+                          <select name="cab_name" id="cab_name" class="form-control">
                           </select>
                             </div>
                           </div>         
