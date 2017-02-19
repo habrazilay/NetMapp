@@ -7,9 +7,9 @@
         require_once("config/set_mysql_server.php");
         
         require_once("config/dbcontroller.php");
-        $db_handle = new DBController();
+        $db_handle = new DBController(DB_SCHEMA_PROJECT);
         $query ="SELECT * FROM room";
-        $results = $db_handle->runQuery($query);    
+        $results = $db_handle->runQuery($query, DB_SCHEMA_PROJECT);    
         
         if(isset($_POST['add_new_device'])) {
         // Create connection
@@ -77,7 +77,7 @@
                                 $.ajax({
                                 type: "POST",
                                 url: "config/get_cabinet.php",
-                                data:'cabid='+val,
+                                data:'rid='+val,
                                 success: function(data){
                                     $("#dev_name").html(data);
                                 }
@@ -86,9 +86,9 @@
                             </script>
                           <select name="cabinet" id="cabinet-list" class="form-control" onChange="getcabinet(this.value);">
                             <?php
-                            foreach($results as $cab) {
+                            foreach($results as $room) {
                             ?>
-                            <option value="<?php echo $cabinet["cabid"]; ?>"><?php echo $cabinet["name"]; ?></option>
+                            <option value="<?php echo $room["id"]; ?>"><?php echo $room["name"]; ?></option>
                             <?php
                             }
                             ?>
@@ -99,7 +99,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dev_name">Select the cabinet <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select name="cab_name" id="cab_name" class="form-control">
+                          <select name="cab_name" id="dev_name" class="form-control">
                           </select>
                             </div>
                           </div>         
