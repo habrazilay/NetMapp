@@ -7,9 +7,9 @@
         require_once("config/set_mysql_server.php");
         
         require_once("config/dbcontroller.php");
-        $db_handle = new DBController();
+        $db_handle = new DBController(DB_SCHEMA_PROJECT);
         $query ="SELECT * FROM sites";
-        $results = $db_handle->runQuery($query);    
+        $results = $db_handle->runQuery($query, DB_SCHEMA_PROJECT);    
         
         if(isset($_POST['add_cabinet'])) {
         // Create connection

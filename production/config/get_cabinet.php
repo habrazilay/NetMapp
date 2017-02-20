@@ -2,7 +2,7 @@
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 if(!empty($_POST["cabid"])) {
-    $query ="SELECT * FROM cabinets WHERE cabid = '" . $_POST["cabid"] . "'";
+    $query ="SELECT * FROM cabinets WHERE rid = '" . $_POST["sid"] . "'";
     $results = $db_handle->runQuery($query);
 ?>
 <?php
