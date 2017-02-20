@@ -12,6 +12,7 @@ if (top != self) {
 // Messages
 //
 
+<<<<<<< HEAD
 // stores hidden message ids
 var hiddenMessages = [];
 
@@ -30,6 +31,31 @@ $(function () {
             $(this).remove();
         });
         link.html(link.html().replace('#MSG_COUNT', hidden));
+=======
+$(function () {
+
+    if (window.location.protocol === 'https:') {
+        $('#no_https').remove();
+    } else {
+        $('#no_https a').click(function () {
+            var old_location = window.location;
+            window.location.href = 'https:' + old_location.href.substring(old_location.protocol.length);
+            return false;
+        });
+    }
+
+    var hiddenmessages = $('.hiddenmessage');
+
+    if (hiddenmessages.length > 0) {
+        hiddenmessages.hide();
+        var link = $('#show_hidden_messages');
+        link.click(function (e) {
+            e.preventDefault();
+            hiddenmessages.show();
+            $(this).remove();
+        });
+        link.html(link.html().replace('#MSG_COUNT', hiddenmessages.length));
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         link.css('display', '');
     }
 });

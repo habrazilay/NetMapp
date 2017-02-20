@@ -65,7 +65,11 @@ unset($CFG);
 require_once 'libraries/sql-parser/autoload.php';
 
 /* Ensure default langauge is active */
+<<<<<<< HEAD
 require_once 'libraries/php-gettext/gettext.inc';
+=======
+require_once GETTEXT_INC;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 PMA\libraries\LanguageManager::getInstance()->getLanguage('en')->activate();
 
 // Set proxy information from env, if available

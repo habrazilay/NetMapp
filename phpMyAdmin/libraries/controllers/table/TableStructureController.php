@@ -476,7 +476,11 @@ class TableStructureController extends TableController
      * @param array  $selected the selected columns
      * @param string $action   target script to call
      *
+<<<<<<< HEAD
      * @return boolean $regenerate true if error occurred
+=======
+     * @return void
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      */
     protected function displayHtmlForColumnChange($selected, $action)

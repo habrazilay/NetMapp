@@ -107,7 +107,11 @@ class AuthenticationHttpTest extends PMATestCase
             ->with()
             ->will($this->returnValue(false));
 
+<<<<<<< HEAD
         $mockResponse->expects($this->exactly($set_title * 6))
+=======
+        $mockResponse->expects($this->exactly($set_title * 7))
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             ->method('addHTML')
             ->with();
 

@@ -2,10 +2,15 @@
 
 /**
  * Token utilities.
+<<<<<<< HEAD
  *
  * @package    SqlParser
  * @subpackage Utils
  */
+=======
+ */
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Utils;
 
 use SqlParser\Lexer;
@@ -16,18 +21,30 @@ use SqlParser\TokensList;
  * Token utilities.
  *
  * @category   Token
+<<<<<<< HEAD
  * @package    SqlParser
  * @subpackage Utils
+=======
+ *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class Tokens
 {
+<<<<<<< HEAD
 
     /**
      * Checks if a pattern is a match for the specified token.
      *
      * @param Token $token   The token to be matched.
      * @param array $pattern The pattern to be matches.
+=======
+    /**
+     * Checks if a pattern is a match for the specified token.
+     *
+     * @param Token $token   the token to be matched
+     * @param array $pattern the pattern to be matches
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return bool
      */
@@ -72,7 +89,10 @@ class Tokens
 
     public static function replaceTokens($list, array $find, array $replace)
     {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         /**
          * Whether the first parameter is a list.
          *
@@ -151,7 +171,10 @@ class Tokens
                 ++$k;
             }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             // Checking if the sequence was found.
             if ($k === $findCount) {
                 // Inserting new tokens.

@@ -4,13 +4,13 @@ class DBController {
 	function __construct($db) {
 		$conn = $this->connectDB($db);
 		if(!empty($conn)) {
-			$this->selectDB($conn, $db);
+			$this->selectDB($conn,$db);
 		}
 	}
 	
 	function connectDB($db) {
 	    require_once("set_mysql_server.php");
-		$conn = new mysqli(DB_HOST,DB_USER,DB_PASS,$db);
+		$conn = new mysqli(DB_HOST,DB_USER,DB_PASS, $db);
 		return $conn;
 	}
 	
@@ -19,7 +19,7 @@ class DBController {
 		mysqli_select_db($conn, $db)or die("cannot select DB");
 	}
 
-	function runQuery($query, $db) {
+	function runQuery($query,$db) {
 	    $conn = new mysqli(DB_HOST,DB_USER,DB_PASS,$db);
 		$result = mysqli_query($conn, $query);
 		while($row=$result->fetch_assoc()) {

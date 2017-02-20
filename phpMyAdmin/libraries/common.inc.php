@@ -294,9 +294,12 @@ $GLOBALS['url_params'] = array();
  * @global array $goto_whitelist
  */
 $goto_whitelist = array(
+<<<<<<< HEAD
     //'browse_foreigners.php',
     //'changelog.php',
     //'chk_rel.php',
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     'db_datadict.php',
     'db_sql.php',
     'db_events.php',
@@ -310,9 +313,12 @@ $goto_whitelist = array(
     'db_routines.php',
     'export.php',
     'import.php',
+<<<<<<< HEAD
     //'index.php',
     //'navigation.php',
     //'license.php',
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     'index.php',
     'pdf_pages.php',
     'pdf_schema.php',
@@ -345,7 +351,10 @@ $goto_whitelist = array(
     'tbl_row_action.php',
     'tbl_select.php',
     'tbl_zoom_select.php',
+<<<<<<< HEAD
     //'themes.php',
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     'transformation_overview.php',
     'transformation_wrapper.php',
     'user_password.php',

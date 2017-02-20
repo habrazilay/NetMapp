@@ -424,7 +424,13 @@ class Node
             return $retval;
         }
 
+<<<<<<< HEAD
         $dbSeparator = $GLOBALS['cfg']['NavigationTreeDbSeparator'];
+=======
+        $dbSeparator = $GLOBALS['dbi']->escapeString(
+            $GLOBALS['cfg']['NavigationTreeDbSeparator']
+        );
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         if (isset($GLOBALS['cfg']['Server']['DisableIS'])
             && !$GLOBALS['cfg']['Server']['DisableIS']
         ) {
@@ -434,7 +440,11 @@ class Node
             $query .= "SELECT DB_first_level ";
             $query .= "FROM ( ";
             $query .= "SELECT DISTINCT SUBSTRING_INDEX(SCHEMA_NAME, ";
+<<<<<<< HEAD
             $query .= "'" . $GLOBALS['dbi']->escapeString($dbSeparator) . "', 1) ";
+=======
+            $query .= "'%s', 1) ";
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $query .= "DB_first_level ";
             $query .= "FROM INFORMATION_SCHEMA.SCHEMATA ";
             $query .= $this->_getWhereClause('SCHEMA_NAME', $searchClause);
@@ -444,11 +454,27 @@ class Node
             $query .= ") t2 ";
             $query .= $this->_getWhereClause('SCHEMA_NAME', $searchClause);
             $query .= "AND 1 = LOCATE(CONCAT(DB_first_level, ";
+<<<<<<< HEAD
             $query .= "'" . $GLOBALS['dbi']->escapeString($dbSeparator) . "'), ";
             $query .= "CONCAT(SCHEMA_NAME, ";
             $query .= "'" . $GLOBALS['dbi']->escapeString($dbSeparator) . "')) ";
             $query .= "ORDER BY SCHEMA_NAME ASC";
             $retval = $GLOBALS['dbi']->fetchResult($query);
+=======
+            $query .= "'%s'), ";
+            $query .= "CONCAT(SCHEMA_NAME, ";
+            $query .= "'%s')) ";
+            $query .= "ORDER BY SCHEMA_NAME ASC";
+
+            $retval = $GLOBALS['dbi']->fetchResult(
+                sprintf(
+                    $query,
+                    $dbSeparator,
+                    $dbSeparator,
+                    $dbSeparator
+                )
+            );
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
             return $retval;
         }
@@ -685,7 +711,11 @@ class Node
     {
         if (!empty($searchClause)) {
             $databases = array(
+<<<<<<< HEAD
                 "%" . $GLOBALS['dbi']->escapeString($searchClause, true) . "%",
+=======
+                "%" . $GLOBALS['dbi']->escapeString($searchClause) . "%",
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             );
         } elseif (!empty($GLOBALS['cfg']['Server']['only_db'])) {
             $databases = $GLOBALS['cfg']['Server']['only_db'];
@@ -712,10 +742,14 @@ class Node
         if (!empty($searchClause)) {
             $whereClause .= "AND " . Util::backquote($columnName)
                 . " LIKE '%";
+<<<<<<< HEAD
             $whereClause .= $GLOBALS['dbi']->escapeString(
                 $searchClause,
                 true
             );
+=======
+            $whereClause .= $GLOBALS['dbi']->escapeString($searchClause);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $whereClause .= "%' ";
         }
 

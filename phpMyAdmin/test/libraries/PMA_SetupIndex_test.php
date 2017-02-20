@@ -149,7 +149,11 @@ class PMA_SetupIndex_Test extends PHPUnit_Framework_TestCase
         $result = ob_get_clean();
 
         $this->assertContains(
+<<<<<<< HEAD
             '<div class="type" id="0"><h4>foo</h4>123</div>',
+=======
+            '<div class="type hiddenmessage" id="0"><h4>foo</h4>123</div>',
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $result
         );
 
@@ -157,6 +161,7 @@ class PMA_SetupIndex_Test extends PHPUnit_Framework_TestCase
             '<div class="type" id="1"><h4>bar</h4>321</div>',
             $result
         );
+<<<<<<< HEAD
 
         $this->assertContains(
             '<script type="text/javascript">',
@@ -242,6 +247,11 @@ class PMA_SetupIndex_Test extends PHPUnit_Framework_TestCase
         }
     }
 
+=======
+    }
+
+    /**
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * Test for ServerConfigChecks::performConfigChecks
      *

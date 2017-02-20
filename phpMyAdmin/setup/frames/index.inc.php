@@ -46,6 +46,7 @@ $configChecker = new ServerConfigChecks($GLOBALS['ConfigFile']);
 $configChecker->performConfigChecks();
 
 //
+<<<<<<< HEAD
 // Check whether we can read/write configuration
 //
 $config_readable = false;
@@ -93,6 +94,23 @@ if (!$is_https) {
 
 echo '<form id="select_lang" method="post" action="'
     , htmlspecialchars($_SERVER['REQUEST_URI']) , '">';
+=======
+// Https connection warning (check done on the client side)
+//
+$text = __(
+    'You are not using a secure connection; all data (including potentially '
+    . 'sensitive information, like passwords) is transferred unencrypted!'
+);
+$text .= ' <a href="#">';
+$text .= __(
+    'If your server is also configured to accept HTTPS requests '
+    . 'follow this link to use a secure connection.'
+);
+$text .= '</a>';
+PMA_messagesSet('notice', 'no_https', __('Insecure connection'), $text);
+
+echo '<form id="select_lang" method="post">';
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 echo PMA_URL_getHiddenInputs();
 echo '<bdo lang="en" dir="ltr"><label for="lang">';
 echo __('Language') , (__('Language') != 'Language' ? ' - Language' : '');
@@ -288,6 +306,7 @@ echo '<td colspan="2" class="lastrow" style="text-align: left">';
 echo '<input type="submit" name="submit_display" value="' , __('Display') , '" />';
 echo '<input type="submit" name="submit_download" value="' , __('Download') , '" />';
 echo '&nbsp; &nbsp;';
+<<<<<<< HEAD
 
 echo '<input type="submit" name="submit_save" value="' , __('Save') , '"';
 if (!$config_writable) {
@@ -308,6 +327,8 @@ if (!$config_exists || !$config_writable) {
 echo '/>';
 
 echo '&nbsp; &nbsp;';
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 echo '<input type="submit" name="submit_clear" value="' , __('Clear')
     , '" class="red" />';
 echo '</td>';

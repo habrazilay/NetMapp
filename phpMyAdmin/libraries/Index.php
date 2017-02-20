@@ -727,9 +727,13 @@ class Index
                         . ' DROP PRIMARY KEY;';
                     $this_params['message_to_show']
                         = __('The primary key has been dropped.');
+<<<<<<< HEAD
                     $js_msg = PMA_jsFormat(
                         'ALTER TABLE ' . $table . ' DROP PRIMARY KEY'
                     );
+=======
+                    $js_msg = PMA_jsFormat($this_params['sql_query']);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 } else {
                     $this_params['sql_query'] = 'ALTER TABLE '
                         . Util::backquote($table) . ' DROP INDEX '
@@ -737,12 +741,16 @@ class Index
                     $this_params['message_to_show'] = sprintf(
                         __('Index %s has been dropped.'), htmlspecialchars($index->getName())
                     );
+<<<<<<< HEAD
 
                     $js_msg = PMA_jsFormat(
                         'ALTER TABLE ' . $table . ' DROP INDEX '
                         . $index->getName() . ';'
                     );
 
+=======
+                    $js_msg = PMA_jsFormat($this_params['sql_query']);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 }
 
                 $r .= '<td ' . $row_span . ' class="print_ignore">';

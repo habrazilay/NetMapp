@@ -2,10 +2,15 @@
 
 /**
  * Table utilities.
+<<<<<<< HEAD
  *
  * @package    SqlParser
  * @subpackage Utils
  */
+=======
+ */
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Utils;
 
 use SqlParser\Statements\CreateStatement;
@@ -14,17 +19,28 @@ use SqlParser\Statements\CreateStatement;
  * Table utilities.
  *
  * @category   Statement
+<<<<<<< HEAD
  * @package    SqlParser
  * @subpackage Utils
+=======
+ *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class Table
 {
+<<<<<<< HEAD
 
     /**
      * Gets the foreign keys of the table.
      *
      * @param CreateStatement $statement The statement to be processed.
+=======
+    /**
+     * Gets the foreign keys of the table.
+     *
+     * @param CreateStatement $statement the statement to be processed
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return array
      */
@@ -73,7 +89,10 @@ class Table
             }
 
             $ret[] = $tmp;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         }
 
         return $ret;
@@ -82,7 +101,11 @@ class Table
     /**
      * Gets fields of the table.
      *
+<<<<<<< HEAD
      * @param CreateStatement $statement The statement to be processed.
+=======
+     * @param CreateStatement $statement the statement to be processed
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return array
      */
@@ -133,7 +156,10 @@ class Table
                     $ret[$field->name]['expr'] = $option;
                 }
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         }
 
         return $ret;

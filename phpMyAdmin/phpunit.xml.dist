@@ -27,9 +27,15 @@
             <directory suffix="_test.php">test/libraries/rte</directory>
             <directory suffix="_test.php">test/libraries</directory>
         </testsuite>
+<<<<<<< HEAD
         <!-- <testsuite name="Selenium">
             <directory suffix="Test.php">test/selenium</directory>
         </testsuite> -->
+=======
+        <testsuite name="Selenium">
+            <directory suffix="Test.php">test/selenium</directory>
+        </testsuite>
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     </testsuites>
 
     <logging>

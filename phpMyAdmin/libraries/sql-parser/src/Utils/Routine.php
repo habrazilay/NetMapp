@@ -2,10 +2,15 @@
 
 /**
  * Routine utilities.
+<<<<<<< HEAD
  *
  * @package    SqlParser
  * @subpackage Utils
  */
+=======
+ */
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Utils;
 
 use SqlParser\Lexer;
@@ -18,17 +23,28 @@ use SqlParser\Statements\CreateStatement;
  * Routine utilities.
  *
  * @category   Routines
+<<<<<<< HEAD
  * @package    SqlParser
  * @subpackage Utils
+=======
+ *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class Routine
 {
+<<<<<<< HEAD
 
     /**
      * Parses a parameter of a routine.
      *
      * @param string $param Parameter's definition.
+=======
+    /**
+     * Parses a parameter of a routine.
+     *
+     * @param string $param parameter's definition
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return array
      */
@@ -53,14 +69,22 @@ class Routine
             '',
             $type->name,
             implode(',', $type->parameters),
+<<<<<<< HEAD
             implode(' ', $options)
+=======
+            implode(' ', $options),
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         );
     }
 
     /**
      * Parses a parameter of a routine.
      *
+<<<<<<< HEAD
      * @param string $param Parameter's definition.
+=======
+     * @param string $param parameter's definition
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return array
      */
@@ -87,14 +111,22 @@ class Routine
             $param->name,
             $param->type->name,
             implode(',', $param->type->parameters),
+<<<<<<< HEAD
             implode(' ', $options)
+=======
+            implode(' ', $options),
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         );
     }
 
     /**
      * Gets the parameters of a routine from the parse tree.
      *
+<<<<<<< HEAD
      * @param CreateStatement $statement The statement to be processed.
+=======
+     * @param CreateStatement $statement the statement to be processed
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return array
      */

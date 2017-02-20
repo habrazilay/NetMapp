@@ -6,7 +6,11 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
+<<<<<<< HEAD
     <title>Installation &#8212; phpMyAdmin 4.6.5.2 documentation</title>
+=======
+    <title>Installation &#8212; phpMyAdmin 4.6.6 documentation</title>
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +18,11 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
+<<<<<<< HEAD
         VERSION:     '4.6.5.2',
+=======
+        VERSION:     '4.6.6',
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,8 +31,15 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+<<<<<<< HEAD
     <link rel="copyright" title="Copyright" href="copyright.html" />
     <link rel="top" title="phpMyAdmin 4.6.5.2 documentation" href="index.html" />
+=======
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="top" title="phpMyAdmin 4.6.6 documentation" href="index.html" />
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     <link rel="next" title="Configuration" href="config.html" />
     <link rel="prev" title="Requirements" href="require.html" /> 
   </head>
@@ -41,7 +56,11 @@
         <li class="right" >
           <a href="require.html" title="Requirements"
              accesskey="P">previous</a> |</li>
+<<<<<<< HEAD
         <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.6.5.2 documentation</a> &#187;</li> 
+=======
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.6.6 documentation</a> &#187;</li> 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
       </ul>
     </div>  
 
@@ -135,7 +154,11 @@ limitations.</p>
 </div>
 </div>
 <div class="section" id="installing-using-docker">
+<<<<<<< HEAD
 <h2>Installing using Docker<a class="headerlink" href="#installing-using-docker" title="Permalink to this headline">¶</a></h2>
+=======
+<span id="docker"></span><h2>Installing using Docker<a class="headerlink" href="#installing-using-docker" title="Permalink to this headline">¶</a></h2>
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 <p>phpMyAdmin comes with a Docker image, which you can easily deploy. You can
 download it using:</p>
 <div class="highlight-sh"><div class="highlight"><pre>docker pull phpmyadmin/phpmyadmin
@@ -198,11 +221,19 @@ of Docker image there are various ways to set it (for example
 documentation for <a class="reference external" href="https://hub.docker.com/r/_/mariadb/">MariaDB container</a>
 or <a class="reference external" href="https://hub.docker.com/r/_/mysql/">MySQL container</a>.</p>
 </div>
+<<<<<<< HEAD
 <p>Additionally configuration can be tweaked by <code class="file docutils literal"><span class="pre">/www/config.user.inc.php</span></code>. If
 this file exists, it will be loaded after configuration generated from above
 environment variables, so you can override any configuration variable. This
 configuraiton can be added as a volume when invoking docker using
 <cite>-v /some/local/directory/config.user.inc.php:/www/config.user.inc.php</cite> parameters.</p>
+=======
+<p>Additionally configuration can be tweaked by <code class="file docutils literal"><span class="pre">/etc/phpmyadmin/config.user.inc.php</span></code>. If
+this file exists, it will be loaded after configuration generated from above
+environment variables, so you can override any configuration variable. This
+configuraiton can be added as a volume when invoking docker using
+<cite>-v /some/local/directory/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php</cite> parameters.</p>
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last">See <a class="reference internal" href="config.html#config"><span class="std std-ref">Configuration</span></a> for detailed description of configuration options.</p>
@@ -210,7 +241,11 @@ configuraiton can be added as a volume when invoking docker using
 <div class="section" id="docker-volumes">
 <h3>Docker Volumes<a class="headerlink" href="#docker-volumes" title="Permalink to this headline">¶</a></h3>
 <p>You can use following volumes to customise image behavior:</p>
+<<<<<<< HEAD
 <p><code class="file docutils literal"><span class="pre">/www/config.user.inc.php</span></code></p>
+=======
+<p><code class="file docutils literal"><span class="pre">/etc/phpmyadmin/config.user.inc.php</span></code></p>
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 <blockquote>
 <div>Can be used for additional settings, see previous chapter for more details.</div></blockquote>
 <p><code class="file docutils literal"><span class="pre">/sessions/</span></code></p>
@@ -236,8 +271,13 @@ for example when uswing <a class="reference internal" href="#auth-signon"><span 
 <div class="highlight-sh"><div class="highlight"><pre>docker run --name phpmyadmin -d --link mysql_db_server:db -p 8080:80 phpmyadmin/phpmyadmin
 </pre></div>
 </div>
+<<<<<<< HEAD
 <p>Running with additional configration:</p>
 <div class="highlight-sh"><div class="highlight"><pre>docker run --name phpmyadmin -d --link mysql_db_server:db -p 8080:80 -v /some/local/directory/config.user.inc.php:/config.user.inc.php phpmyadmin/phpmyadmin
+=======
+<p>Running with additional configuration:</p>
+<div class="highlight-sh"><div class="highlight"><pre>docker run --name phpmyadmin -d --link mysql_db_server:db -p 8080:80 -v /some/local/directory/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php phpmyadmin/phpmyadmin
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 </pre></div>
 </div>
 </div>
@@ -314,6 +354,7 @@ simple configuration may look like this:</p>
 <div class="section" id="using-setup-script">
 <span id="setup-script"></span><span id="index-4"></span><h3>Using Setup script<a class="headerlink" href="#using-setup-script" title="Permalink to this headline">¶</a></h3>
 <p>Instead of manually editing <code class="file docutils literal"><span class="pre">config.inc.php</span></code>, you can use phpMyAdmin&#8217;s
+<<<<<<< HEAD
 setup feature. First you must manually create a folder <code class="docutils literal"><span class="pre">config</span></code>
 in the phpMyAdmin directory. This is a security measure. On a
 Linux/Unix system you can use the following commands:</p>
@@ -358,6 +399,14 @@ rm -rf config                      <span class="c"># remove not needed directory
 <p class="last">Debian and Ubuntu have simplified this setup and all you need to do is to
 execute <strong class="program">/usr/sbin/pma-secure</strong>.</p>
 </div>
+=======
+setup feature. The file can be generated using the setup and you can download it
+for upload to the server.</p>
+<p>Next, open your browser and visit the location where you installed phpMyAdmin,
+with the <code class="docutils literal"><span class="pre">/setup</span></code> suffix. The changes are not saved to the server, you need to
+use the <span class="guilabel">Download</span> button to save them to your computer and then upload
+to the server.</p>
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 <p>Now the file is ready to be used. You can choose to review or edit the
 file with your favorite editor, if you prefer to set some advanced
 options which the setup script does not provide.</p>
@@ -1111,12 +1160,20 @@ manually or after a period of inactivity). <a class="reference external" href="h
         <li class="right" >
           <a href="require.html" title="Requirements"
              >previous</a> |</li>
+<<<<<<< HEAD
         <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.6.5.2 documentation</a> &#187;</li> 
+=======
+        <li class="nav-item nav-item-0"><a href="index.html">phpMyAdmin 4.6.6 documentation</a> &#187;</li> 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; <a href="copyright.html">Copyright</a> 2012 - 2016, The phpMyAdmin devel team.
+<<<<<<< HEAD
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+=======
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.9.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     </div>
   </body>
 </html>

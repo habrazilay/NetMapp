@@ -67,6 +67,33 @@ class PMA_CleanupPathInfo_Test extends PHPUnit_Framework_TestCase
                 '/phpmyadmin/index.php'
             ),
             array(
+<<<<<<< HEAD
+=======
+                '',
+                '//example.com/../phpmyadmin/index.php',
+                '',
+                '/phpmyadmin/index.php'
+            ),
+            array(
+                '',
+                '//example.com/../../.././phpmyadmin/index.php',
+                '',
+                '/phpmyadmin/index.php'
+            ),
+            array(
+                '',
+                '/page.php/malicouspathinfo?malicouspathinfo',
+                'malicouspathinfo',
+                '/page.php'
+            ),
+            array(
+                '/phpmyadmin/./index.php',
+                '/phpmyadmin/./index.php',
+                '',
+                '/phpmyadmin/index.php'
+            ),
+            array(
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 '/phpmyadmin/index.php',
                 '/phpmyadmin/index.php',
                 '',

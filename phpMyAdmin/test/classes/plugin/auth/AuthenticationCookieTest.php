@@ -1070,12 +1070,30 @@ class AuthenticationCookieTest extends PMATestCase
         $this->object->setIV('testiv09testiv09');
         // works with the openssl extension active or inactive
         $this->assertEquals(
+<<<<<<< HEAD
             '{"iv":"dGVzdGl2MDl0ZXN0aXYwOQ==","mac":"34367a80e4276906637b5eaecf8c3931547aae68","payload":"+coP\/up\/ZBTBwbiEpCUVXQ=="}',
+=======
+            '{"iv":"dGVzdGl2MDl0ZXN0aXYwOQ==","mac":"347aa45ae1ade00c980f31129ec2defef18b2bfd","payload":"YDEaxOfP9nD9q\/2pC6hjfQ=="}',
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $this->object->cookieEncrypt('data123', 'sec321')
         );
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Test for PMA\libraries\plugins\auth\AuthenticationConfig::cookieEncrypt
+     *
+     * @return void
+     */
+    public function testCookieEncryptPHPSecLib()
+    {
+        $this->object->setUseOpenSSL(false);
+        $this->testCookieEncrypt();
+    }
+
+    /**
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * Test for PMA\libraries\plugins\auth\AuthenticationConfig::cookieDecrypt
      *
      * @return void
@@ -1086,7 +1104,11 @@ class AuthenticationCookieTest extends PMATestCase
         $this->assertEquals(
             'data123',
             $this->object->cookieDecrypt(
+<<<<<<< HEAD
                 '{"iv":"dGVzdGl2MDl0ZXN0aXYwOQ==","mac":"34367a80e4276906637b5eaecf8c3931547aae68","payload":"+coP\/up\/ZBTBwbiEpCUVXQ=="}',
+=======
+                '{"iv":"dGVzdGl2MDl0ZXN0aXYwOQ==","mac":"347aa45ae1ade00c980f31129ec2defef18b2bfd","payload":"YDEaxOfP9nD9q\/2pC6hjfQ=="}',
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 'sec321'
             )
         );
@@ -1097,6 +1119,20 @@ class AuthenticationCookieTest extends PMATestCase
      *
      * @return void
      */
+<<<<<<< HEAD
+=======
+    public function testCookieDecryptPHPSecLib()
+    {
+        $this->object->setUseOpenSSL(false);
+        $this->testCookieDecrypt();
+    }
+
+    /**
+     * Test for PMA\libraries\plugins\auth\AuthenticationConfig::cookieDecrypt
+     *
+     * @return void
+     */
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     public function testCookieDecryptInvalid()
     {
         // works with the openssl extension active or inactive

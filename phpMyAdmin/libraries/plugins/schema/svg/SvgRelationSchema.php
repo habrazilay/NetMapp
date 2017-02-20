@@ -72,7 +72,11 @@ class SvgRelationSchema extends ExportRelationSchema
         );
         $this->diagram->SetAuthor('phpMyAdmin ' . PMA_VERSION);
         $this->diagram->setFont('Arial');
+<<<<<<< HEAD
         $this->diagram->setFontSize('16px');
+=======
+        $this->diagram->setFontSize(16);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         $alltables = $this->getTablesFromRequest();
 
@@ -264,4 +268,8 @@ class SvgRelationSchema extends ExportRelationSchema
             $table->tableDraw($this->showColor);
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584

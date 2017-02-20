@@ -400,7 +400,11 @@ function PMA_getHtmlForReplicationChangeMaster($submitname)
     $html .= '  <legend>' . __('Slave configuration');
     $html .= ' - ' . __('Change or reconfigure master server') . '</legend>';
     $html .= __(
+<<<<<<< HEAD
         'Make sure, you have unique server-id in your configuration file (my.cnf). '
+=======
+        'Make sure you have a unique server-id in your configuration file (my.cnf). '
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         . 'If not, please add the following line into [mysqld] section:'
     );
     $html .= '<br />';
@@ -906,7 +910,14 @@ function PMA_handleControlRequest()
         $messageSuccess = null;
         $messageError = null;
 
+<<<<<<< HEAD
         if (isset($_REQUEST['slave_changemaster'])) {
+=======
+        if (isset($_REQUEST['slave_changemaster']) && ! $GLOBALS['cfg']['AllowArbitraryServer']) {
+            $_SESSION['replication']['sr_action_status'] = 'error';
+            $_SESSION['replication']['sr_action_info'] = __('Connection to server is disabled, please enable $cfg[\'AllowArbitraryServer\'] in phpMyAdmin configuration.');
+        } elseif (isset($_REQUEST['slave_changemaster'])) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $result = PMA_handleRequestForSlaveChangeMaster();
         } elseif (isset($_REQUEST['sr_slave_server_control'])) {
             $result = PMA_handleRequestForSlaveServerControl();

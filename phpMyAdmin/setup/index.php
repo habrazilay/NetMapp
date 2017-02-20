@@ -12,6 +12,13 @@
  */
 require './lib/common.inc.php';
 
+<<<<<<< HEAD
+=======
+if (file_exists(CONFIG_FILE)) {
+    PMA_fatalError(__('Configuration already exists, setup is disabled!'));
+}
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 $page = PMA_isValid($_GET['page'], 'scalar') ? $_GET['page'] : null;
 $page = preg_replace('/[^a-z]/', '', $page);
 if ($page === '') {

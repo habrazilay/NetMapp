@@ -2,10 +2,15 @@
 
 /**
  * The definition of a parameter of a function or procedure.
+<<<<<<< HEAD
  *
  * @package    SqlParser
  * @subpackage Components
  */
+=======
+ */
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Components;
 
 use SqlParser\Context;
@@ -18,13 +23,20 @@ use SqlParser\TokensList;
  * The definition of a parameter of a function or procedure.
  *
  * @category   Components
+<<<<<<< HEAD
  * @package    SqlParser
  * @subpackage Components
+=======
+ *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class ParameterDefinition extends Component
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * The name of the new column.
      *
@@ -47,9 +59,15 @@ class ParameterDefinition extends Component
     public $type;
 
     /**
+<<<<<<< HEAD
      * @param Parser     $parser  The parser that serves as context.
      * @param TokensList $list    The list of tokens that are being parsed.
      * @param array      $options Parameters for parsing.
+=======
+     * @param Parser     $parser  the parser that serves as context
+     * @param TokensList $list    the list of tokens that are being parsed
+     * @param array      $options parameters for parsing
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return ParameterDefinition[]
      */
@@ -57,7 +75,11 @@ class ParameterDefinition extends Component
     {
         $ret = array();
 
+<<<<<<< HEAD
         $expr = new ParameterDefinition();
+=======
+        $expr = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         /**
          * The state of the parser.
@@ -74,7 +96,11 @@ class ParameterDefinition extends Component
          *      3 ------------------------[ , ]-----------------------> 1
          *      3 ------------------------[ ) ]-----------------------> (END)
          *
+<<<<<<< HEAD
          * @var int $state
+=======
+         * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $state = 0;
 
@@ -82,7 +108,11 @@ class ParameterDefinition extends Component
             /**
              * Token parsed at this moment.
              *
+<<<<<<< HEAD
              * @var Token $token
+=======
+             * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 
@@ -117,7 +147,11 @@ class ParameterDefinition extends Component
                 $state = 3;
             } elseif ($state === 3) {
                 $ret[] = $expr;
+<<<<<<< HEAD
                 $expr = new ParameterDefinition();
+=======
+                $expr = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 if ($token->value === ',') {
                     $state = 1;
                 } elseif ($token->value === ')') {
@@ -133,12 +167,21 @@ class ParameterDefinition extends Component
         }
 
         --$list->idx;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return $ret;
     }
 
     /**
+<<<<<<< HEAD
      * @param ParameterDefinition[] $component The component to be built.
      * @param array                 $options   Parameters for building.
+=======
+     * @param ParameterDefinition[] $component the component to be built
+     * @param array                 $options   parameters for building
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return string
      */

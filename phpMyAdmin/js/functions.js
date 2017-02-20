@@ -515,10 +515,17 @@ function PMA_current_version(data)
     if (data && data.version && data.date) {
         var current = parseVersionString($('span.version').text());
         var latest = parseVersionString(data.version);
+<<<<<<< HEAD
         var url = 'https://web.phpmyadmin.net/files/' + escapeHtml(data.version) + '/';
         var version_information_message = '<span class="latest">' +
             PMA_messages.strLatestAvailable +
             ' <a href="' + url + '">' + escapeHtml(data.version) + '</a>' +
+=======
+        var url = 'https://web.phpmyadmin.net/files/' + escapeHtml(encodeURIComponent(data.version)) + '/';
+        var version_information_message = '<span class="latest">' +
+            PMA_messages.strLatestAvailable +
+            ' <a href="' + url + '" class="disableAjax">' + escapeHtml(data.version) + '</a>' +
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             '</span>';
         if (latest > current) {
             var message = PMA_sprintf(
@@ -532,7 +539,11 @@ function PMA_current_version(data)
                 htmlClass = 'error';
             }
             $('#newer_version_notice').remove();
+<<<<<<< HEAD
             $('#maincontainer').after('<div id="newer_version_notice" class="' + htmlClass + '"><a href="' + url + '">' + message + '</a></div>');
+=======
+            $('#maincontainer').after('<div id="newer_version_notice" class="' + htmlClass + '"><a href="' + url + '" class="disableAjax">' + message + '</a></div>');
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         }
         if (latest === current) {
             version_information_message = ' (' + PMA_messages.strUpToDate + ')';
@@ -1207,7 +1218,11 @@ function insertQuery(queryType)
         } else if (queryType == "update") {
             query = "UPDATE `" + table + "` SET " + editDis + " WHERE 1";
         } else if (queryType == "delete") {
+<<<<<<< HEAD
             query = "DELETE FROM `" + table + "` WHERE 1";
+=======
+            query = "DELETE FROM `" + table + "` WHERE 0";
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         }
         setQuery(query);
         sql_box_locked = false;

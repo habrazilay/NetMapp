@@ -8,6 +8,10 @@
 namespace PMA\libraries;
 
 use PMA\libraries\navigation\Navigation;
+<<<<<<< HEAD
+=======
+use PMA\libraries\Config;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
 require_once 'libraries/js_escape.lib.php';
 require_once 'libraries/url_generating.lib.php';
@@ -427,6 +431,7 @@ class Header
                     $retval .= $nav->getDisplay();
                 }
                 // Include possible custom headers
+<<<<<<< HEAD
                 if (file_exists(CUSTOM_HEADER_FILE)) {
                     $retval .= '<div id="pma_header">';
                     ob_start();
@@ -435,6 +440,9 @@ class Header
                     ob_end_clean();
                     $retval .= '</div>';
                 }
+=======
+                $retval .= Config::renderHeader();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 // offer to load user preferences from localStorage
                 if ($this->_userprefsOfferImport) {
                     include_once './libraries/user_preferences.lib.php';
@@ -646,7 +654,11 @@ class Header
         $retval  = '<meta charset="utf-8" />';
         $retval .= '<meta name="referrer" content="no-referrer" />';
         $retval .= '<meta name="robots" content="noindex,nofollow" />';
+<<<<<<< HEAD
         $retval .= '<meta http-equiv="X-UA-Compatible" content="IE=Edge">';
+=======
+        $retval .= '<meta http-equiv="X-UA-Compatible" content="IE=Edge" />';
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         if (! $GLOBALS['cfg']['AllowThirdPartyFraming']) {
             $retval .= '<style id="cfs-style">html{display: none;}</style>';
         }

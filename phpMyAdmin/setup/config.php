@@ -15,6 +15,7 @@ require './lib/common.inc.php';
 
 require './libraries/config/setup.forms.php';
 
+<<<<<<< HEAD
 /**
  * Loads configuration file path
  *
@@ -37,6 +38,11 @@ $form_display = new FormDisplay($GLOBALS['ConfigFile']);
 $form_display->registerForm('_config.php', $forms['_config.php']);
 $form_display->save('_config.php');
 $config_file_path = $GLOBALS['ConfigFile']->getFilePath();
+=======
+$form_display = new FormDisplay($GLOBALS['ConfigFile']);
+$form_display->registerForm('_config.php', $forms['_config.php']);
+$form_display->save('_config.php');
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
 if (isset($_POST['eol'])) {
     $_SESSION['eol'] = ($_POST['eol'] == 'unix') ? 'unix' : 'win';
@@ -58,6 +64,7 @@ if (PMA_ifSetOr($_POST['submit_clear'], '')) {
     PMA_downloadHeader('config.inc.php', 'text/plain');
     echo ConfigGenerator::getConfigFile($GLOBALS['ConfigFile']);
     exit;
+<<<<<<< HEAD
 } elseif (PMA_ifSetOr($_POST['submit_save'], '')) {
     //
     // Save generated config file on the server
@@ -92,6 +99,8 @@ if (PMA_ifSetOr($_POST['submit_clear'], '')) {
     header('HTTP/1.1 303 See Other');
     header('Location: index.php' . PMA_URL_getCommon());
     exit;
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 } else {
     //
     // Show generated config file in a <textarea>

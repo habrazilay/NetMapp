@@ -1,7 +1,11 @@
 phpMyAdmin - Readme
 ===================
 
+<<<<<<< HEAD
 Version 4.6.5.2
+=======
+Version 4.6.6
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
 A web interface for MySQL and MariaDB.
 

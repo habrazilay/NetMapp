@@ -4,9 +4,14 @@
  * Defines a token along with a set of types and flags and utility functions.
  *
  * An array of tokens will result after parsing the query.
+<<<<<<< HEAD
  *
  * @package SqlParser
  */
+=======
+ */
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser;
 
 /**
@@ -14,12 +19,19 @@ namespace SqlParser;
  * categorization for the purpose of parsing.
  *
  * @category Tokens
+<<<<<<< HEAD
  * @package  SqlParser
+=======
+ *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license  https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class Token
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     // Types of tokens (a vague description of a token's purpose).
 
     /**
@@ -29,14 +41,22 @@ class Token
      *
      * @var int
      */
+<<<<<<< HEAD
     const TYPE_NONE                     =  0;
+=======
+    const TYPE_NONE = 0;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     /**
      * SQL specific keywords: SELECT, UPDATE, INSERT, etc.
      *
      * @var int
      */
+<<<<<<< HEAD
     const TYPE_KEYWORD                  =  1;
+=======
+    const TYPE_KEYWORD = 1;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     /**
      * Any type of legal operator.
@@ -50,14 +70,22 @@ class Token
      *
      * @var int
      */
+<<<<<<< HEAD
     const TYPE_OPERATOR                 =  2;
+=======
+    const TYPE_OPERATOR = 2;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     /**
      * Spaces, tabs, new lines, etc.
      *
      * @var int
      */
+<<<<<<< HEAD
     const TYPE_WHITESPACE               =  3;
+=======
+    const TYPE_WHITESPACE = 3;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     /**
      * Any type of legal comment.
@@ -79,21 +107,33 @@ class Token
      *
      * @var int
      */
+<<<<<<< HEAD
     const TYPE_COMMENT                  =  4;
+=======
+    const TYPE_COMMENT = 4;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     /**
      * Boolean values: true or false.
      *
      * @var int
      */
+<<<<<<< HEAD
     const TYPE_BOOL                     =  5;
+=======
+    const TYPE_BOOL = 5;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     /**
      * Numbers: 4, 0x8, 15.16, 23e42, etc.
      *
      * @var int
      */
+<<<<<<< HEAD
     const TYPE_NUMBER                   =  6;
+=======
+    const TYPE_NUMBER = 6;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     /**
      * Literal strings: 'string', "test".
@@ -101,6 +141,7 @@ class Token
      *
      * @var int
      */
+<<<<<<< HEAD
     const TYPE_STRING                   =  7;
 
     /**
@@ -110,6 +151,17 @@ class Token
      * @var int
      */
     const TYPE_SYMBOL                   =  8;
+=======
+    const TYPE_STRING = 7;
+
+    /**
+     * Database, table names, variables, etc.
+     * For example: ```SELECT `foo`, `bar` FROM `database`.`table`;```.
+     *
+     * @var int
+     */
+    const TYPE_SYMBOL = 8;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     /**
      * Delimits an unknown string.
@@ -117,7 +169,11 @@ class Token
      *
      * @var int
      */
+<<<<<<< HEAD
     const TYPE_DELIMITER                =  9;
+=======
+    const TYPE_DELIMITER = 9;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     /**
      * Labels in LOOP statement, ITERATE statement etc.
@@ -125,15 +181,24 @@ class Token
      *  begin_label: BEGIN [statement_list] END [end_label]
      *  begin_label: LOOP [statement_list] END LOOP [end_label]
      *  begin_label: REPEAT [statement_list] ... END REPEAT [end_label]
+<<<<<<< HEAD
      *  begin_label: WHILE ... DO [statement_list] END WHILE [end_label]
      *
      * @var int
      */
     const TYPE_LABEL                =  10;
+=======
+     *  begin_label: WHILE ... DO [statement_list] END WHILE [end_label].
+     *
+     * @var int
+     */
+    const TYPE_LABEL = 10;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     // Flags that describe the tokens in more detail.
     // All keywords must have flag 1 so `Context::isKeyword` method doesn't
     // require strict comparison.
+<<<<<<< HEAD
     const FLAG_KEYWORD_RESERVED         =  2;
     const FLAG_KEYWORD_COMPOSED         =  4;
     const FLAG_KEYWORD_DATA_TYPE        =  8;
@@ -169,6 +234,43 @@ class Token
     const FLAG_SYMBOL_BACKTICK          =  2;
     const FLAG_SYMBOL_USER              =  4;
     const FLAG_SYMBOL_SYSTEM            =  8;
+=======
+    const FLAG_KEYWORD_RESERVED = 2;
+    const FLAG_KEYWORD_COMPOSED = 4;
+    const FLAG_KEYWORD_DATA_TYPE = 8;
+    const FLAG_KEYWORD_KEY = 16;
+    const FLAG_KEYWORD_FUNCTION = 32;
+
+    // Numbers related flags.
+    const FLAG_NUMBER_HEX = 1;
+    const FLAG_NUMBER_FLOAT = 2;
+    const FLAG_NUMBER_APPROXIMATE = 4;
+    const FLAG_NUMBER_NEGATIVE = 8;
+    const FLAG_NUMBER_BINARY = 16;
+
+    // Strings related flags.
+    const FLAG_STRING_SINGLE_QUOTES = 1;
+    const FLAG_STRING_DOUBLE_QUOTES = 2;
+
+    // Comments related flags.
+    const FLAG_COMMENT_BASH = 1;
+    const FLAG_COMMENT_C = 2;
+    const FLAG_COMMENT_SQL = 4;
+    const FLAG_COMMENT_MYSQL_CMD = 8;
+
+    // Operators related flags.
+    const FLAG_OPERATOR_ARITHMETIC = 1;
+    const FLAG_OPERATOR_LOGICAL = 2;
+    const FLAG_OPERATOR_BITWISE = 4;
+    const FLAG_OPERATOR_ASSIGNMENT = 8;
+    const FLAG_OPERATOR_SQL = 16;
+
+    // Symbols related flags.
+    const FLAG_SYMBOL_VARIABLE = 1;
+    const FLAG_SYMBOL_BACKTICK = 2;
+    const FLAG_SYMBOL_USER = 4;
+    const FLAG_SYMBOL_SYSTEM = 8;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     /**
      * The token it its raw string representation.
@@ -178,7 +280,11 @@ class Token
     public $token;
 
     /**
+<<<<<<< HEAD
      * The value this token contains (i.e. token after some evaluation)
+=======
+     * The value this token contains (i.e. token after some evaluation).
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @var mixed
      */
@@ -208,9 +314,15 @@ class Token
     /**
      * Constructor.
      *
+<<<<<<< HEAD
      * @param string $token The value of the token.
      * @param int    $type  The type of the token.
      * @param int    $flags The flags of the token.
+=======
+     * @param string $token the value of the token
+     * @param int    $type  the type of the token
+     * @param int    $flags the flags of the token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function __construct($token, $type = 0, $flags = 0)
     {
@@ -230,12 +342,18 @@ class Token
     public function extract()
     {
         switch ($this->type) {
+<<<<<<< HEAD
             case Token::TYPE_KEYWORD:
                 if (!($this->flags & Token::FLAG_KEYWORD_RESERVED)) {
+=======
+            case self::TYPE_KEYWORD:
+                if (!($this->flags & self::FLAG_KEYWORD_RESERVED)) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     // Unreserved keywords should stay the way they are because they
                     // might represent field names.
                     return $this->token;
                 }
+<<<<<<< HEAD
                 return strtoupper($this->token);
             case Token::TYPE_WHITESPACE:
                 return ' ';
@@ -245,25 +363,53 @@ class Token
                 $ret = str_replace('--', '', $this->token); // e.g. ---42 === -42
                 if ($this->flags & Token::FLAG_NUMBER_HEX) {
                     if ($this->flags & Token::FLAG_NUMBER_NEGATIVE) {
+=======
+
+                return strtoupper($this->token);
+            case self::TYPE_WHITESPACE:
+                return ' ';
+            case self::TYPE_BOOL:
+                return strtoupper($this->token) === 'TRUE';
+            case self::TYPE_NUMBER:
+                $ret = str_replace('--', '', $this->token); // e.g. ---42 === -42
+                if ($this->flags & self::FLAG_NUMBER_HEX) {
+                    if ($this->flags & self::FLAG_NUMBER_NEGATIVE) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                         $ret = str_replace('-', '', $this->token);
                         sscanf($ret, '%x', $ret);
                         $ret = -$ret;
                     } else {
                         sscanf($ret, '%x', $ret);
                     }
+<<<<<<< HEAD
                 } elseif (($this->flags & Token::FLAG_NUMBER_APPROXIMATE)
                 || ($this->flags & Token::FLAG_NUMBER_FLOAT)
+=======
+                } elseif (($this->flags & self::FLAG_NUMBER_APPROXIMATE)
+                || ($this->flags & self::FLAG_NUMBER_FLOAT)
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 ) {
                     sscanf($ret, '%f', $ret);
                 } else {
                     sscanf($ret, '%d', $ret);
                 }
+<<<<<<< HEAD
                 return $ret;
             case Token::TYPE_STRING:
                 $quote = $this->token[0];
                 $str = str_replace($quote . $quote, $quote, $this->token);
                 return mb_substr($str, 1, -1, 'UTF-8'); // trims quotes
             case Token::TYPE_SYMBOL:
+=======
+
+                return $ret;
+            case self::TYPE_STRING:
+                $quote = $this->token[0];
+                $str = str_replace($quote . $quote, $quote, $this->token);
+
+                return mb_substr($str, 1, -1, 'UTF-8'); // trims quotes
+            case self::TYPE_SYMBOL:
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 $str = $this->token;
                 if ((isset($str[0])) && ($str[0] === '@')) {
                     // `mb_strlen($str)` must be used instead of `null` because
@@ -282,8 +428,15 @@ class Token
                     $str = str_replace($quote . $quote, $quote, $str);
                     $str = mb_substr($str, 1, -1, 'UTF-8');
                 }
+<<<<<<< HEAD
                 return $str;
         }
+=======
+
+                return $str;
+        }
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return $this->token;
     }
 

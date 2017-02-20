@@ -319,7 +319,11 @@ From Wikipedia, the free encyclopedia
     socket
       a form of inter-process communication.	
 
+<<<<<<< HEAD
       .. seealso:: <https://www.wikipedia.org/wiki/Socket#Computer_sockets>
+=======
+      .. seealso:: <https://en.wikipedia.org/wiki/Unix_domain_socket>
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     SSL
       Secure Sockets Layer is a cryptographic protocol which provides secure
@@ -369,6 +373,11 @@ From Wikipedia, the free encyclopedia
     UFPDF
       Unicode/UTF-8 extension for :term:`FPDF`
 
+<<<<<<< HEAD
+=======
+      .. seealso:: <https://acko.net/blog/ufpdf-unicode-utf-8-extension-for-fpdf/>
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     URL
       Uniform Resource Locator is a sequence of characters, conforming to a
       standardized format, that is used for referring to resources, such as

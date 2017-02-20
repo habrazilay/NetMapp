@@ -102,10 +102,19 @@ class LanguageTest extends PMATestCase
     public function testMySQLLocale()
     {
         $czech = $this->manager->getLanguage('cs');
+<<<<<<< HEAD
         $this->assertEquals('cs_CZ', $czech->getMySQLLocale());
 
         $korani = $this->manager->getLanguage('ckb');
         $this->assertEquals('', $korani->getMySQLLocale());
+=======
+        $this->assertNotEquals($czech, false);
+        $this->assertEquals('cs_CZ', $czech->getMySQLLocale());
+
+        $azerbaijani = $this->manager->getLanguage('az');
+        $this->assertNotEquals($azerbaijani, false);
+        $this->assertEquals('', $azerbaijani->getMySQLLocale());
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     }
 
     /**

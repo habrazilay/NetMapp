@@ -79,6 +79,7 @@ function PMA_messagesEnd()
  */
 function PMA_messagesShowHtml()
 {
+<<<<<<< HEAD
     $old_ids = array();
     foreach ($_SESSION['messages'] as $type => $messages) {
         foreach ($messages as $id => $msg) {
@@ -96,6 +97,20 @@ function PMA_messagesShowHtml()
         echo "\nhiddenMessages.push('$id');";
     }
     echo "\n</script>\n";
+=======
+    foreach ($_SESSION['messages'] as $type => $messages) {
+        foreach ($messages as $id => $msg) {
+            if (! $msg['fresh'] && $type != 'error') {
+                $extra = ' hiddenmessage';
+            } else {
+                $extra = '';
+            }
+            echo '<div class="' , $type, $extra , '" id="' , $id , '">'
+                , '<h4>' , $msg['title'] , '</h4>'
+                , $msg['message'] , '</div>';
+        }
+    }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 }
 
 /**
@@ -186,6 +201,7 @@ function PMA_versionCheck()
         }
     }
 }
+<<<<<<< HEAD
 
 /**
  * Checks whether config file is readable/writable
@@ -211,3 +227,5 @@ function PMA_checkConfigRw(&$is_readable, &$is_writable, &$file_exists)
         $is_writable = $is_writable && @is_writable($file_path);
     }
 }
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584

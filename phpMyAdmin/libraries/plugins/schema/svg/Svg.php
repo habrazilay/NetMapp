@@ -104,7 +104,11 @@ class Svg extends XMLWriter
     /**
      * Set document font size
      *
+<<<<<<< HEAD
      * @param string $value sets the font size in pixels
+=======
+     * @param integer $value sets the font size in pixels
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return void
      */
@@ -116,7 +120,11 @@ class Svg extends XMLWriter
     /**
      * Get document font size
      *
+<<<<<<< HEAD
      * @return string returns the font size
+=======
+     * @return integer returns the font size
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function getFontSize()
     {
@@ -240,7 +248,11 @@ class Svg extends XMLWriter
         $this->writeAttribute('style', $styles);
         if (isset($text)) {
             $this->writeAttribute('font-family', $this->font);
+<<<<<<< HEAD
             $this->writeAttribute('font-size', $this->fontSize);
+=======
+            $this->writeAttribute('font-size', $this->fontSize . 'px');
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $this->text($text);
         }
         $this->endElement();

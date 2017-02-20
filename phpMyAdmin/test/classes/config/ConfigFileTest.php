@@ -578,6 +578,7 @@ class ConfigFileTest extends PMATestCase
     }
 
     /**
+<<<<<<< HEAD
      * Test for ConfigFile::getFilePath
      *
      * @return void
@@ -589,6 +590,8 @@ class ConfigFileTest extends PMATestCase
     }
 
     /**
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * Test for ConfigFile::getConfigArray
      *
      * @return void

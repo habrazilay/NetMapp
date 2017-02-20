@@ -9,9 +9,14 @@
  *
  * Because the lexer relies on the subscript operator this class had to be
  * implemented.
+<<<<<<< HEAD
  *
  * @package SqlParser
  */
+=======
+ */
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser;
 
 /**
@@ -20,12 +25,19 @@ namespace SqlParser;
  * In this library, this class should be used to parse UTF-8 queries.
  *
  * @category Misc
+<<<<<<< HEAD
  * @package  SqlParser
+=======
+ *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license  https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class UtfString implements \ArrayAccess
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * The raw, multi-byte string.
      *
@@ -69,24 +81,36 @@ class UtfString implements \ArrayAccess
     /**
      * Constructor.
      *
+<<<<<<< HEAD
      * @param string $str The string.
+=======
+     * @param string $str the string
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function __construct($str)
     {
         $this->str = $str;
         $this->byteIdx = 0;
         $this->charIdx = 0;
+<<<<<<< HEAD
         // TODO: `strlen($str)` might return a wrong length when function
         // overloading is enabled.
         // https://php.net/manual/ro/mbstring.overload.php
         $this->byteLen = strlen($str);
+=======
+        $this->byteLen = mb_strlen($str, '8bit');
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         $this->charLen = mb_strlen($str, 'UTF-8');
     }
 
     /**
      * Checks if the given offset exists.
      *
+<<<<<<< HEAD
      * @param int $offset The offset to be checked.
+=======
+     * @param int $offset the offset to be checked
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return bool
      */
@@ -98,7 +122,11 @@ class UtfString implements \ArrayAccess
     /**
      * Gets the character at given offset.
      *
+<<<<<<< HEAD
      * @param int $offset The offset to be returned.
+=======
+     * @param int $offset the offset to be returned
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return string
      */
@@ -139,12 +167,19 @@ class UtfString implements \ArrayAccess
     /**
      * Sets the value of a character.
      *
+<<<<<<< HEAD
      * @param int    $offset The offset to be set.
      * @param string $value  The value to be set.
      *
      * @throws \Exception Not implemented.
      *
      * @return void
+=======
+     * @param int    $offset the offset to be set
+     * @param string $value  the value to be set
+     *
+     * @throws \Exception not implemented
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function offsetSet($offset, $value)
     {
@@ -154,11 +189,17 @@ class UtfString implements \ArrayAccess
     /**
      * Unsets an index.
      *
+<<<<<<< HEAD
      * @param int $offset The value to be unset.
      *
      * @throws \Exception Not implemented.
      *
      * @return void
+=======
+     * @param int $offset the value to be unset
+     *
+     * @throws \Exception not implemented
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function offsetUnset($offset)
     {
@@ -172,9 +213,15 @@ class UtfString implements \ArrayAccess
      * However, this implementation supports UTF-8 characters containing up to 6
      * bytes.
      *
+<<<<<<< HEAD
      * @param string $byte The byte to be analyzed.
      *
      * @see http://tools.ietf.org/html/rfc3629
+=======
+     * @param string $byte the byte to be analyzed
+     *
+     * @see https://tools.ietf.org/html/rfc3629
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return int
      */
@@ -192,6 +239,10 @@ class UtfString implements \ArrayAccess
         } elseif ($byte < 252) {
             return 5; // unofficial
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return 6; // unofficial
     }
 

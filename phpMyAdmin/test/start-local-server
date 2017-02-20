@@ -1,5 +1,14 @@
 #!/bin/sh
 
+<<<<<<< HEAD
+=======
+# Do not run as CGI
+if [ -n "$GATEWAY_INTERFACE" ] ; then
+    echo 'Can not invoke as CGI!'
+    exit 1
+fi
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 set -e
 set -x
 

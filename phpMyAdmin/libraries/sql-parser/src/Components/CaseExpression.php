@@ -1,11 +1,17 @@
 <?php
 
 /**
+<<<<<<< HEAD
  * Parses a reference to a CASE expression
  *
  * @package    SqlParser
  * @subpackage Components
  */
+=======
+ * Parses a reference to a CASE expression.
+ */
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Components;
 
 use SqlParser\Component;
@@ -13,6 +19,7 @@ use SqlParser\Parser;
 use SqlParser\Token;
 use SqlParser\TokensList;
 
+<<<<<<< HEAD
 
 /**
  * Parses a reference to a CASE expression
@@ -20,41 +27,69 @@ use SqlParser\TokensList;
  * @category   Components
  * @package    SqlParser
  * @subpackage Components
+=======
+/**
+ * Parses a reference to a CASE expression.
+ *
+ * @category   Components
+ *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class CaseExpression extends Component
 {
+<<<<<<< HEAD
 
     /**
      * The value to be compared
+=======
+    /**
+     * The value to be compared.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @var Expression
      */
     public $value;
 
     /**
+<<<<<<< HEAD
      * The conditions in WHEN clauses
+=======
+     * The conditions in WHEN clauses.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @var array
      */
     public $conditions;
 
     /**
+<<<<<<< HEAD
      * The results matching with the WHEN clauses
+=======
+     * The results matching with the WHEN clauses.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @var array
      */
     public $results;
 
     /**
+<<<<<<< HEAD
      * The values to be compared against
+=======
+     * The values to be compared against.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @var array
      */
     public $compare_values;
 
     /**
+<<<<<<< HEAD
      * The result in ELSE section of expr
+=======
+     * The result in ELSE section of expr.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @var array
      */
@@ -62,45 +97,75 @@ class CaseExpression extends Component
 
     /**
      * Constructor.
+<<<<<<< HEAD
      *
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function __construct()
     {
     }
 
     /**
+<<<<<<< HEAD
      *
      * @param Parser     $parser  The parser that serves as context.
      * @param TokensList $list    The list of tokens that are being parsed.
+=======
+     * @param Parser     $parser the parser that serves as context
+     * @param TokensList $list   the list of tokens that are being parsed
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return Expression
      */
     public static function parse(Parser $parser, TokensList $list, array $options = array())
     {
+<<<<<<< HEAD
         $ret = new CaseExpression();
 
         /**
          * State of parser
          *
          * @var int $parser
+=======
+        $ret = new self();
+
+        /**
+         * State of parser.
+         *
+         * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $state = 0;
 
         /**
+<<<<<<< HEAD
          * Syntax type (type 0 or type 1)
          *
          * @var int $type
+=======
+         * Syntax type (type 0 or type 1).
+         *
+         * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $type = 0;
 
         ++$list->idx; // Skip 'CASE'
 
         for (; $list->idx < $list->count; ++$list->idx) {
+<<<<<<< HEAD
 
             /**
              * Token parsed at this moment.
              *
              * @var Token $token
+=======
+            /**
+             * Token parsed at this moment.
+             *
+             * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 
@@ -205,12 +270,21 @@ class CaseExpression extends Component
         }
 
         --$list->idx;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return $ret;
     }
 
     /**
+<<<<<<< HEAD
      * @param Expression $component The component to be built.
      * @param array      $options   Parameters for building.
+=======
+     * @param Expression $component the component to be built
+     * @param array      $options   parameters for building
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return string
      */

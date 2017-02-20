@@ -70,20 +70,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_site">Select a site <span class="required">*</span>
                             </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
-                            <script>
-                            function getroom(val) {
-                                $.ajax({
-                                type: "POST",
-                                url: "config/get_room.php",
-                                data:'sid='+val,
-                                success: function(data){
-                                    $("#room_name").html(data);
-                                }
-                                });
-                            }
-                            </script>
+                        <div class="col-md-6 col-sm-6 col-xs-12">  
                           <select name="site" id="site-list" class="form-control" onChange="getroom(this.value);">
                             <?php
                             foreach($results as $site) {
@@ -99,6 +86,19 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_name">Select the room <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
+                                <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>           
+                            <script>
+                            function getroom(val) {
+                                $.ajax({
+                                type: "POST",
+                                url: "config/get_room.php",
+                                data:'sid='+val,
+                                success: function(data){
+                                    $("#room_name").html(data);
+                                }
+                                });
+                            }
+                            </script>
                           <select name="room_name" id="room_name" class="form-control">
                           </select>
                             </div>

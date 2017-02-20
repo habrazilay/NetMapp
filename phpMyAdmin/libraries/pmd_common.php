@@ -39,7 +39,13 @@ function PMA_getTablesInfo()
         $GLOBALS['PMD']['TABLE_NAME'][$i]
             = $GLOBALS['db'] . "." . $one_table['TABLE_NAME'];
         $GLOBALS['PMD']['OWNER'][$i] = $GLOBALS['db'];
+<<<<<<< HEAD
         $GLOBALS['PMD']['TABLE_NAME_SMALL'][$i] = $one_table['TABLE_NAME'];
+=======
+        $GLOBALS['PMD']['TABLE_NAME_SMALL'][$i] = htmlspecialchars(
+            $one_table['TABLE_NAME'], ENT_QUOTES
+        );
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         $GLOBALS['PMD_URL']['TABLE_NAME'][$i]
             = $GLOBALS['db'] . "." . $one_table['TABLE_NAME'];

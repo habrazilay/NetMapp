@@ -2,10 +2,15 @@
 
 /**
  * `WHERE` keyword parser.
+<<<<<<< HEAD
  *
  * @package    SqlParser
  * @subpackage Components
  */
+=======
+ */
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Components;
 
 use SqlParser\Component;
@@ -17,13 +22,20 @@ use SqlParser\TokensList;
  * `WHERE` keyword parser.
  *
  * @category   Keywords
+<<<<<<< HEAD
  * @package    SqlParser
  * @subpackage Components
+=======
+ *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class Condition extends Component
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * Logical operators that can be used to delimit expressions.
      *
@@ -37,6 +49,7 @@ class Condition extends Component
      * @var array
      */
     public static $ALLOWED_KEYWORDS = array(
+<<<<<<< HEAD
         'ALL'                           => 1,
         'AND'                           => 1,
         'BETWEEN'                       => 1,
@@ -55,6 +68,26 @@ class Condition extends Component
         'REGEXP'                        => 1,
         'RLIKE'                         => 1,
         'XOR'                           => 1,
+=======
+        'ALL' => 1,
+        'AND' => 1,
+        'BETWEEN' => 1,
+        'EXISTS' => 1,
+        'IF' => 1,
+        'IN' => 1,
+        'INTERVAL' => 1,
+        'IS' => 1,
+        'LIKE' => 1,
+        'MATCH' => 1,
+        'NOT IN' => 1,
+        'NOT NULL' => 1,
+        'NOT' => 1,
+        'NULL' => 1,
+        'OR' => 1,
+        'REGEXP' => 1,
+        'RLIKE' => 1,
+        'XOR' => 1,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**
@@ -81,7 +114,11 @@ class Condition extends Component
     /**
      * Constructor.
      *
+<<<<<<< HEAD
      * @param string $expr The condition or the operator.
+=======
+     * @param string $expr the condition or the operator
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function __construct($expr = null)
     {
@@ -89,9 +126,15 @@ class Condition extends Component
     }
 
     /**
+<<<<<<< HEAD
      * @param Parser     $parser  The parser that serves as context.
      * @param TokensList $list    The list of tokens that are being parsed.
      * @param array      $options Parameters for parsing.
+=======
+     * @param Parser     $parser  the parser that serves as context
+     * @param TokensList $list    the list of tokens that are being parsed
+     * @param array      $options parameters for parsing
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return Condition[]
      */
@@ -99,12 +142,20 @@ class Condition extends Component
     {
         $ret = array();
 
+<<<<<<< HEAD
         $expr = new Condition();
+=======
+        $expr = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         /**
          * Counts brackets.
          *
+<<<<<<< HEAD
          * @var int $brackets
+=======
+         * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $brackets = 0;
 
@@ -115,16 +166,27 @@ class Condition extends Component
          * the keyword `AND`, which is also an operator that delimits
          * expressions.
          *
+<<<<<<< HEAD
          * @var bool $betweenBefore
+=======
+         * @var bool
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $betweenBefore = false;
 
         for (; $list->idx < $list->count; ++$list->idx) {
+<<<<<<< HEAD
 
             /**
              * Token parsed at this moment.
              *
              * @var Token $token
+=======
+            /**
+             * Token parsed at this moment.
+             *
+             * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 
@@ -158,12 +220,20 @@ class Condition extends Component
                     }
 
                     // Adding the operator.
+<<<<<<< HEAD
                     $expr = new Condition($token->value);
+=======
+                    $expr = new self($token->value);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     $expr->isOperator = true;
                     $ret[] = $expr;
 
                     // Preparing to parse another condition.
+<<<<<<< HEAD
                     $expr = new Condition();
+=======
+                    $expr = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     continue;
                 }
             }
@@ -211,12 +281,21 @@ class Condition extends Component
         }
 
         --$list->idx;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return $ret;
     }
 
     /**
+<<<<<<< HEAD
      * @param Condition[] $component The component to be built.
      * @param array       $options   Parameters for building.
+=======
+     * @param Condition[] $component the component to be built
+     * @param array       $options   parameters for building
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return string
      */

@@ -10,7 +10,11 @@
  *
  * @returns bool
  */
+<<<<<<< HEAD
 function isStorageSupported(type)
+=======
+function isStorageSupported(type, warn)
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 {
     try {
         window[type].setItem('PMATest', 'test');
@@ -22,7 +26,13 @@ function isStorageSupported(type)
         }
     } catch(error) {
         // Not supported
+<<<<<<< HEAD
         PMA_ajaxShowMessage(PMA_messages.strNoLocalStorage, false);
+=======
+        if (warn) {
+            PMA_ajaxShowMessage(PMA_messages.strNoLocalStorage, false);
+        }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     }
     return false;
 }
@@ -740,7 +750,11 @@ AJAX.registerOnload('config.js', function () {
         });
 
     // detect localStorage state
+<<<<<<< HEAD
     var ls_supported = isStorageSupported('localStorage');
+=======
+    var ls_supported = isStorageSupported('localStorage', true);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     var ls_exists = ls_supported ? (window.localStorage.config || false) : false;
     $('div.localStorage-' + (ls_supported ? 'un' : '') + 'supported').hide();
     $('div.localStorage-' + (ls_exists ? 'empty' : 'exists')).hide();

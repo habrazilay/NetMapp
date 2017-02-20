@@ -2,10 +2,15 @@
 
 /**
  * `JOIN` keyword parser.
+<<<<<<< HEAD
  *
  * @package    SqlParser
  * @subpackage Components
  */
+=======
+ */
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Components;
 
 use SqlParser\Component;
@@ -17,19 +22,27 @@ use SqlParser\TokensList;
  * `JOIN` keyword parser.
  *
  * @category   Keywords
+<<<<<<< HEAD
  * @package    SqlParser
  * @subpackage Components
+=======
+ *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class JoinKeyword extends Component
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * Types of join.
      *
      * @var array
      */
     public static $JOINS = array(
+<<<<<<< HEAD
         'CROSS JOIN'                    => 'CROSS',
         'FULL JOIN'                     => 'FULL',
         'FULL OUTER JOIN'               => 'FULL',
@@ -46,12 +59,33 @@ class JoinKeyword extends Component
         'NATURAL LEFT OUTER JOIN'       => 'NATURAL LEFT OUTER',
         'NATURAL RIGHT OUTER JOIN'      => 'NATURAL RIGHT OUTER',
         'STRAIGHT_JOIN'                 => 'STRAIGHT',
+=======
+        'CROSS JOIN' => 'CROSS',
+        'FULL JOIN' => 'FULL',
+        'FULL OUTER JOIN' => 'FULL',
+        'INNER JOIN' => 'INNER',
+        'JOIN' => 'JOIN',
+        'LEFT JOIN' => 'LEFT',
+        'LEFT OUTER JOIN' => 'LEFT',
+        'RIGHT JOIN' => 'RIGHT',
+        'RIGHT OUTER JOIN' => 'RIGHT',
+        'NATURAL JOIN' => 'NATURAL',
+        'NATURAL LEFT JOIN' => 'NATURAL LEFT',
+        'NATURAL RIGHT JOIN' => 'NATURAL RIGHT',
+        'NATURAL LEFT OUTER JOIN' => 'NATURAL LEFT OUTER',
+        'NATURAL RIGHT OUTER JOIN' => 'NATURAL RIGHT OUTER',
+        'STRAIGHT_JOIN' => 'STRAIGHT',
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**
      * Type of this join.
      *
      * @see static::$JOINS
+<<<<<<< HEAD
+=======
+     *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * @var string
      */
     public $type;
@@ -71,16 +105,26 @@ class JoinKeyword extends Component
     public $on;
 
     /**
+<<<<<<< HEAD
      * Columns in Using clause
+=======
+     * Columns in Using clause.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @var ArrayObj
      */
     public $using;
 
     /**
+<<<<<<< HEAD
      * @param Parser     $parser  The parser that serves as context.
      * @param TokensList $list    The list of tokens that are being parsed.
      * @param array      $options Parameters for parsing.
+=======
+     * @param Parser     $parser  the parser that serves as context
+     * @param TokensList $list    the list of tokens that are being parsed
+     * @param array      $options parameters for parsing
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return JoinKeyword[]
      */
@@ -88,7 +132,11 @@ class JoinKeyword extends Component
     {
         $ret = array();
 
+<<<<<<< HEAD
         $expr = new JoinKeyword();
+=======
+        $expr = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         /**
          * The state of the parser.
@@ -106,7 +154,11 @@ class JoinKeyword extends Component
          *
          *      4 ----------------------[ columns ]--------------------> 0
          *
+<<<<<<< HEAD
          * @var int $state
+=======
+         * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $state = 0;
 
@@ -121,7 +173,11 @@ class JoinKeyword extends Component
             /**
              * Token parsed at this moment.
              *
+<<<<<<< HEAD
              * @var Token $token
+=======
+             * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 
@@ -158,7 +214,11 @@ class JoinKeyword extends Component
                             && (!empty(static::$JOINS[$token->value]))
                         ) {
                             $ret[] = $expr;
+<<<<<<< HEAD
                             $expr = new JoinKeyword();
+=======
+                            $expr = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                             $expr->type = static::$JOINS[$token->value];
                             $state = 1;
                         } else {
@@ -170,15 +230,25 @@ class JoinKeyword extends Component
             } elseif ($state === 3) {
                 $expr->on = Condition::parse($parser, $list);
                 $ret[] = $expr;
+<<<<<<< HEAD
                 $expr = new JoinKeyword();
+=======
+                $expr = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 $state = 0;
             } elseif ($state === 4) {
                 $expr->using = ArrayObj::parse($parser, $list);
                 $ret[] = $expr;
+<<<<<<< HEAD
                 $expr = new JoinKeyword();
                 $state = 0;
             }
 
+=======
+                $expr = new self();
+                $state = 0;
+            }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         }
 
         if (!empty($expr->type)) {
@@ -186,12 +256,21 @@ class JoinKeyword extends Component
         }
 
         --$list->idx;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return $ret;
     }
 
     /**
+<<<<<<< HEAD
      * @param JoinKeyword[] $component The component to be built.
      * @param array         $options   Parameters for building.
+=======
+     * @param JoinKeyword[] $component the component to be built
+     * @param array         $options   parameters for building
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return string
      */
@@ -205,6 +284,10 @@ class JoinKeyword extends Component
                 . (!empty($c->using)
                     ? ' USING ' . ArrayObj::build($c->using) : '');
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return implode(' ', $ret);
     }
 }

@@ -350,6 +350,13 @@ class gettext_reader {
    * @return int array index of the right plural form
    */
   function select_string($n) {
+<<<<<<< HEAD
+=======
+    if (!is_int($n)) {
+      throw new InvalidArgumentException(
+        "Select_string only accepts integers: " . $n);
+    }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     $string = $this->get_plural_forms();
     $string = str_replace('nplurals',"\$total",$string);
     $string = str_replace("n",$n,$string);

@@ -246,12 +246,20 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
 
         $value = array(
             'sql_text' => 'insert sql_text',
+<<<<<<< HEAD
             '#' => 'types',
+=======
+            '#' => 11,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         );
 
         $value2 = array(
             'sql_text' => 'update sql_text',
+<<<<<<< HEAD
             '#' => 'types2',
+=======
+            '#' => 10,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         );
 
         $dbi->expects($this->at(1))->method('fetchAssoc')
@@ -269,10 +277,17 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
         $ret = PMA_getJsonForLogDataTypeSlow($start, $end);
 
         $result_rows = array(
+<<<<<<< HEAD
             array('sql_text' => 'insert sql_text', '#' => 'types'),
             array('sql_text' => 'update sql_text', '#' => 'types2')
         );
         $result_sum = array('insert' =>0, 'TOTAL' =>0, 'update' => 0);
+=======
+            array('sql_text' => 'insert sql_text', '#' => 11),
+            array('sql_text' => 'update sql_text', '#' => 10)
+        );
+        $result_sum = array('insert' =>11, 'TOTAL' =>21, 'update' => 10);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         $this->assertEquals(
             2,
             $ret['numRows']
@@ -303,13 +318,21 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
 
         $value = array(
             'sql_text' => 'insert sql_text',
+<<<<<<< HEAD
             '#' => 'types',
+=======
+            '#' => 10,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             'argument' => 'argument argument2',
         );
 
         $value2 = array(
             'sql_text' => 'update sql_text',
+<<<<<<< HEAD
             '#' => 'types2',
+=======
+            '#' => 11,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             'argument' => 'argument3 argument4',
         );
 
@@ -331,7 +354,11 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
             $value,
             $value2,
         );
+<<<<<<< HEAD
         $result_sum = array('argument' =>0, 'TOTAL' =>0, 'argument3' => 0);
+=======
+        $result_sum = array('argument' =>10, 'TOTAL' =>21, 'argument3' => 11);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         $this->assertEquals(
             2,
@@ -363,7 +390,11 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
 
         $value = array(
             'sql_text' => 'insert sql_text',
+<<<<<<< HEAD
             '#' => 'types',
+=======
+            '#' => 22,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             'argument' => 'argument argument2',
         );
 
@@ -402,7 +433,11 @@ class PMA_ServerStatusMonitor_Test extends PHPUnit_Framework_TestCase
 
         $value = array(
             'sql_text' => 'insert sql_text',
+<<<<<<< HEAD
             '#' => 'types',
+=======
+            '#' => 33,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             'argument' => 'argument argument2',
         );
 
