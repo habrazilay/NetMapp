@@ -38,7 +38,7 @@
         $height = $_POST['dev_height'];
         $description = $_POST['dev_description']; 
         
-        $sql = "INSERT INTO cabinets (rid,name,clientName,uHeight,length,width,height,description) 
+        $sql = "INSERT INTO cabinets (cab_name,name,clientName,uHeight,length,width,height,description) 
         VALUES('" . $cabid . "','" . $name . "','" . $clientName . "','" . $uHeight . "','" . $uLength . "','" . $width . "','" . $height . "','" . $description . "')";
         
         if ($conn->query($sql) === TRUE) {
@@ -82,6 +82,7 @@
                             </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">  
                           <select name="site" id="site-list" class="form-control" onChange="getroom(this.value);">
+                              <option disabled selected>Please Select...</option>
                             <?php
                             foreach($results as $site) {
                             ?>
