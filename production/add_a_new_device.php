@@ -33,7 +33,7 @@
         $height = $_POST['dev_height'];
         $description = $_POST['dev_description']; 
         
-        $sql = "INSERT INTO cabinets (rid,name,clientName,uHeight,length,width,height,description) 
+        $sql = "INSERT INTO cabinets (cab_name,name,clientName,uHeight,length,width,height,description) 
         VALUES('" . $cabid . "','" . $name . "','" . $clientName . "','" . $uHeight . "','" . $uLength . "','" . $width . "','" . $height . "','" . $description . "')";
         
         if ($conn->query($sql) === TRUE) {
