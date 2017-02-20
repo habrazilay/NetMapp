@@ -414,7 +414,10 @@ class Table
 
                 if ($is_timestamp
                     && preg_match('/TIMESTAMP/i', $attribute)
+<<<<<<< HEAD
+=======
                     && strlen($length) !== 0
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     && $length !== 0
                 ) {
                     $query .= '(' . $length . ')';
@@ -474,12 +477,16 @@ class Table
                 // else fall-through intended, no break here
             case 'CURRENT_TIMESTAMP' :
                 $query .= ' DEFAULT ' . $default_type;
+<<<<<<< HEAD
+                if ($length !== 0 && $is_timestamp) {
+=======
 
                 if (strlen($length) !== 0
                     && $length !== 0
                     && $is_timestamp
                     && $default_type !== 'NULL' // Not to be added in case of NULL
                 ) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     $query .= '(' . $length . ')';
                 }
                 break;
@@ -1342,7 +1349,19 @@ class Table
      */
     function rename($new_name, $new_db = null)
     {
+<<<<<<< HEAD
+        $lowerCaseTableNames = Util::cacheGet(
+            'lower_case_table_names',
+            function () {
+                return $GLOBALS['dbi']->fetchValue(
+                    "SELECT @@lower_case_table_names"
+                );
+            }
+        );
+        if ($lowerCaseTableNames) {
+=======
         if ($GLOBALS['dbi']->getLowerCaseNames() === '1') {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $new_name = strtolower($new_name);
         }
 
@@ -2457,7 +2476,11 @@ class Table
          * @var \SqlParser\Statements\CreateStatement $stmt
         */
         $stmt = $parser->statements[0];
+<<<<<<< HEAD
+        $fields = Table::getFields($stmt);
+=======
         $fields = \SqlParser\Utils\Table::getFields($stmt);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         if ($column != null) {
             $expression = isset($fields[$column]['expr']) ?
                 substr($fields[$column]['expr'], 1, -1) : '';

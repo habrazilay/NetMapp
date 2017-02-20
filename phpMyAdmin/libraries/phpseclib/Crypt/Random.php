@@ -148,6 +148,15 @@ class Random
             session_start();
 
             $v = $seed = $_SESSION['seed'] = pack('H*', sha1(
+<<<<<<< HEAD
+                serialize($_SERVER) .
+                serialize($_POST) .
+                serialize($_GET) .
+                serialize($_COOKIE) .
+                serialize($GLOBALS) .
+                serialize($_SESSION) .
+                serialize($_OLD_SESSION)
+=======
                 (isset($_SERVER) ? phpseclib_safe_serialize($_SERVER) : '') .
                 (isset($_POST) ? phpseclib_safe_serialize($_POST) : '') .
                 (isset($_GET) ? phpseclib_safe_serialize($_GET) : '') .
@@ -155,6 +164,7 @@ class Random
                 phpseclib_safe_serialize($GLOBALS) .
                 phpseclib_safe_serialize($_SESSION) .
                 phpseclib_safe_serialize($_OLD_SESSION)
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             ));
             if (!isset($_SESSION['count'])) {
                 $_SESSION['count'] = 0;
@@ -241,6 +251,8 @@ class Random
         return substr($result, 0, $length);
     }
 }
+<<<<<<< HEAD
+=======
 
 if (!function_exists('phpseclib_safe_serialize')) {
     /**
@@ -276,3 +288,4 @@ if (!function_exists('phpseclib_safe_serialize')) {
         return serialize($safearr);
     }
 }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584

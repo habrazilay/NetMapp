@@ -2157,7 +2157,11 @@ class Util
             }
         }
         if ($found_error) {
+<<<<<<< HEAD
+            PMA_fatalError($error_message, null, false);
+=======
             PMA_fatalError($error_message);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         }
     } // end function
 
@@ -2965,6 +2969,8 @@ class Util
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Calculates session cache key
      *
      * @return string
@@ -2979,6 +2985,7 @@ class Util
     }
 
     /**
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * Verifies if something is cached in the session
      *
      * @param string $var variable name
@@ -2987,7 +2994,11 @@ class Util
      */
     public static function cacheExists($var)
     {
+<<<<<<< HEAD
+        return isset($_SESSION['cache']['server_' . $GLOBALS['server']][$var]);
+=======
         return isset($_SESSION['cache'][self::cacheKey()][$var]);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     }
 
     /**
@@ -3001,7 +3012,11 @@ class Util
     public static function cacheGet($var, $callback = null)
     {
         if (self::cacheExists($var)) {
+<<<<<<< HEAD
+            return $_SESSION['cache']['server_' . $GLOBALS['server']][$var];
+=======
             return $_SESSION['cache'][self::cacheKey()][$var];
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         } else {
             if ($callback) {
                 $val = $callback();
@@ -3022,7 +3037,11 @@ class Util
      */
     public static function cacheSet($var, $val = null)
     {
+<<<<<<< HEAD
+        $_SESSION['cache']['server_' . $GLOBALS['server']][$var] = $val;
+=======
         $_SESSION['cache'][self::cacheKey()][$var] = $val;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     }
 
     /**
@@ -3034,7 +3053,11 @@ class Util
      */
     public static function cacheUnset($var)
     {
+<<<<<<< HEAD
+        unset($_SESSION['cache']['server_' . $GLOBALS['server']][$var]);
+=======
         unset($_SESSION['cache'][self::cacheKey()][$var]);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     }
 
     /**
@@ -4528,11 +4551,27 @@ class Util
      */
     public static function getCollateForIS()
     {
+<<<<<<< HEAD
+        $lowerCaseTableNames = self::cacheGet(
+            'lower_case_table_names',
+            function () {
+                return $GLOBALS['dbi']->fetchValue(
+                    "SELECT @@lower_case_table_names"
+                );
+            }
+        );
+
+        if ($lowerCaseTableNames === '0' // issue #10961
+            || $lowerCaseTableNames === '2' // issue #11461
+        ) {
+            return "COLLATE utf8_bin";
+=======
         $names = $GLOBALS['dbi']->getLowerCaseNames();
         if ($names === '0') {
             return "COLLATE utf8_bin";
         } elseif ($names === '2') {
             return "COLLATE utf8_general_ci";
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         }
         return "";
     }

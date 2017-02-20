@@ -692,7 +692,11 @@ Server connection settings
         For auto-upgrade functionality to work, your
         ``$cfg['Servers'][$i]['controluser']`` must have ALTER privilege on
         ``phpmyadmin`` database. See the `MySQL documentation for GRANT
+<<<<<<< HEAD
+        <https://dev.mysql.com/doc/mysql/en/grant.html>`_ on how to
+=======
         <https://dev.mysql.com/doc/refman/5.7/en/grant.html>`_ on how to
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         ``GRANT`` privileges to a user.
 
 .. _history:
@@ -1577,7 +1581,11 @@ Cookie authentication options
     :default: ``''``
 
     The public key for the reCaptcha service that can be obtained from
+<<<<<<< HEAD
+    https://www.google.com/recaptcha.
+=======
     https://www.google.com/recaptcha/intro/.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     reCaptcha will be then used in :ref:`cookie`.
 
@@ -1587,7 +1595,11 @@ Cookie authentication options
     :default: ``''``
 
     The private key for the reCaptcha service that can be obtain from
+<<<<<<< HEAD
+    https://www.google.com/recaptcha.
+=======
     https://www.google.com/recaptcha/intro/.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     reCaptcha will be then used in :ref:`cookie`.
 
@@ -1850,11 +1862,14 @@ Main panel
     You can additionally hide more information by using
     :config:option:`$cfg['Servers'][$i]['verbose']`.
 
+<<<<<<< HEAD
+=======
 .. config:option:: $cfg['ShowPhpInfo']
 
     :type: boolean
     :default: false
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 .. config:option:: $cfg['ShowChgPassword']
 
     :type: boolean
@@ -1865,11 +1880,17 @@ Main panel
     :type: boolean
     :default: true
 
+<<<<<<< HEAD
+    Defines whether to display the 
+=======
     Defines whether to display the :guilabel:`PHP information` and
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     :guilabel:`Change password` links and form for creating database or not at
     the starting main (right) frame. This setting does not check MySQL commands
     entered directly.
 
+<<<<<<< HEAD
+=======
     Please note that to block the usage of ``phpinfo()`` in scripts, you have to
     put this in your :file:`php.ini`:
 
@@ -1885,6 +1906,7 @@ Main panel
         This might also make easier some remote attacks on your installations,
         so enable this only when needed.
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     Also note that enabling the :guilabel:`Change password` link has no effect
     with config authentication mode: because of the hard coded password value
     in the configuration file, end users can't be allowed to change their
@@ -2244,11 +2266,19 @@ Languages
 .. config:option:: $cfg['DefaultConnectionCollation']
 
     :type: string
+<<<<<<< HEAD
+    :default: ``'utf8_general_ci'``
+
+    Defines the default connection collation to use, if not user-defined.
+    See the `MySQL documentation for charsets
+    <https://dev.mysql.com/doc/mysql/en/charset-charsets.html>`_
+=======
     :default: ``'utf8mb4_general_ci'``
 
     Defines the default connection collation to use, if not user-defined.
     See the `MySQL documentation for charsets
     <https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html>`_
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     for list of possible values.
 
 .. config:option:: $cfg['Lang']
@@ -2947,7 +2977,11 @@ Developer
     :default: false
 
     Enable to let server present itself as demo server.
+<<<<<<< HEAD
+    This is used for <https://demo.phpmyadmin.net/>.
+=======
     This is used for `phpMyAdmin demo server <https://www.phpmyadmin.net/try/>`_.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
 
 Examples

@@ -587,10 +587,13 @@ function PMA_getHtmlToChooseUserGroup($username)
 function PMA_setUserGroup($username, $userGroup)
 {
     $cfgRelation = PMA_getRelationsParam();
+<<<<<<< HEAD
+=======
     if (empty($cfgRelation['db']) || empty($cfgRelation['users']) || empty($cfgRelation['usergroups'])) {
         return;
     }
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     $userTable = Util::backquote($cfgRelation['db'])
         . "." . Util::backquote($cfgRelation['users']);
 
@@ -2986,8 +2989,13 @@ function PMA_getUserGroupForUser($username)
 {
     $cfgRelation = PMA_getRelationsParam();
 
+<<<<<<< HEAD
+    if (! isset($cfgRelation['db'])
+        || ! isset($cfgRelation['users'])
+=======
     if (empty($cfgRelation['db'])
         || empty($cfgRelation['users'])
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     ) {
         return null;
     }
@@ -3076,7 +3084,11 @@ function PMA_getExtraDataForAjaxBehavior(
         // if $cfg['Servers'][$i]['users'] and $cfg['Servers'][$i]['usergroups'] are
         // enabled
         $cfgRelation = PMA_getRelationsParam();
+<<<<<<< HEAD
+        if (isset($cfgRelation['users']) && isset($cfgRelation['usergroups'])) {
+=======
         if (!empty($cfgRelation['users']) && !empty($cfgRelation['usergroups'])) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $new_user_string .= '<td class="usrGroup"></td>';
         }
 
@@ -4359,7 +4371,11 @@ function PMA_addUser(
 
     // Copy the user group while copying a user
     $old_usergroup =
+<<<<<<< HEAD
+        $_REQUEST['old_usergroup'] ? $_REQUEST['old_usergroup'] : null;
+=======
         isset($_REQUEST['old_usergroup']) ? $_REQUEST['old_usergroup'] : null;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     PMA_setUserGroup($_REQUEST['username'], $old_usergroup);
 
 
@@ -5241,7 +5257,11 @@ function PMA_getHashedPassword($password)
  */
 function PMA_checkIfMariaDBPwdCheckPluginActive()
 {
+<<<<<<< HEAD
+    if (Util::getServerType() !== 'MariaDB') {
+=======
     if (!(Util::getServerType() == 'MariaDB' && PMA_MYSQL_INT_VERSION >= 100002)) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return false;
     }
 

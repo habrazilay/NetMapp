@@ -226,6 +226,8 @@ var Scorer = {
 };
 
 
+<<<<<<< HEAD
+=======
 
 
 
@@ -326,6 +328,7 @@ function splitQuery(query) {
 
 
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 /**
  * Search Module
  */
@@ -424,7 +427,11 @@ var Search = {
     var searchterms = [];
     var excluded = [];
     var hlterms = [];
+<<<<<<< HEAD
+    var tmp = query.split(/\s+/);
+=======
     var tmp = splitQuery(query);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     var objectterms = [];
     for (i = 0; i < tmp.length; i++) {
       if (tmp[i] !== "") {

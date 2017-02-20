@@ -13,8 +13,12 @@ use PMA\libraries\Message;
 use PMA\libraries\plugins\AuthenticationPlugin;
 use PMA\libraries\Response;
 use PMA\libraries\Util;
+<<<<<<< HEAD
+use ReCaptcha\ReCaptcha;
+=======
 use PMA\libraries\Config;
 use ReCaptcha;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
 require_once './libraries/session.lib.php';
 
@@ -41,6 +45,8 @@ class AuthenticationCookie extends AuthenticationPlugin
     private $_cookie_iv = null;
 
     /**
+<<<<<<< HEAD
+=======
      * Whether to use OpenSSL directly
      */
     private $_use_openssl;
@@ -70,6 +76,7 @@ class AuthenticationCookie extends AuthenticationPlugin
     }
 
     /**
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * Displays authentication form
      *
      * this function MUST exit/quit the application
@@ -116,6 +123,12 @@ class AuthenticationCookie extends AuthenticationPlugin
         $header->disableMenuAndConsole();
         $header->disableWarnings();
 
+<<<<<<< HEAD
+        if (@file_exists(CUSTOM_HEADER_FILE)) {
+            include CUSTOM_HEADER_FILE;
+        }
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         echo '
     <div class="container">
     <a href="';
@@ -257,7 +270,13 @@ class AuthenticationCookie extends AuthenticationPlugin
             echo '</div>';
         }
         echo '</div>';
+<<<<<<< HEAD
+        if (@file_exists(CUSTOM_FOOTER_FILE)) {
+            include CUSTOM_FOOTER_FILE;
+        }
+=======
         echo Config::renderFooter();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         if (! defined('TESTSUITE')) {
             exit;
         } else {
@@ -304,6 +323,11 @@ class AuthenticationCookie extends AuthenticationPlugin
                 if (! empty($_POST["g-recaptcha-response"])) {
 
                     include_once 'libraries/plugins/auth/recaptcha/autoload.php';
+<<<<<<< HEAD
+                    $reCaptcha = new ReCaptcha(
+                        $GLOBALS['cfg']['CaptchaLoginPrivateKey']
+                    );
+=======
                     if (function_exists('curl_init')) {
                         $reCaptcha = new ReCaptcha\ReCaptcha(
                             $GLOBALS['cfg']['CaptchaLoginPrivateKey'],
@@ -320,6 +344,7 @@ class AuthenticationCookie extends AuthenticationPlugin
                             new ReCaptcha\RequestMethod\SocketPost()
                         );
                     }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
                     // verify captcha status.
                     $resp = $reCaptcha->verify(
@@ -650,7 +675,11 @@ class AuthenticationCookie extends AuthenticationPlugin
     private function _getSessionEncryptionSecret()
     {
         if (empty($_SESSION['encryption_key'])) {
+<<<<<<< HEAD
+            if (self::useOpenSSL()) {
+=======
             if ($this->_use_openssl) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 $_SESSION['encryption_key'] = openssl_random_pseudo_bytes(32);
             } else {
                 $_SESSION['encryption_key'] = Crypt\Random::string(32);
@@ -660,6 +689,23 @@ class AuthenticationCookie extends AuthenticationPlugin
     }
 
     /**
+<<<<<<< HEAD
+     * Checks whether we should use openssl for encryption.
+     *
+     * @return boolean
+     */
+    public static function useOpenSSL()
+    {
+        return (
+            function_exists('openssl_encrypt')
+            && function_exists('openssl_decrypt')
+            && function_exists('openssl_random_pseudo_bytes')
+        );
+    }
+
+    /**
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * Concatenates secret in order to make it 16 bytes log
      *
      * This doesn't add any security, just ensures the secret
@@ -718,6 +764,8 @@ class AuthenticationCookie extends AuthenticationPlugin
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Reports any SSL errors
      *
      * @return void
@@ -730,6 +778,7 @@ class AuthenticationCookie extends AuthenticationPlugin
     }
 
     /**
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * Encryption using openssl's AES or phpseclib's AES
      * (phpseclib uses mcrypt when it is available)
      *
@@ -743,6 +792,16 @@ class AuthenticationCookie extends AuthenticationPlugin
         $mac_secret = $this->getMACSecret($secret);
         $aes_secret = $this->getAESSecret($secret);
         $iv = $this->createIV();
+<<<<<<< HEAD
+        if (self::useOpenSSL()) {
+            $result = openssl_encrypt(
+                $data,
+                'AES-128-CBC',
+                $secret,
+                0,
+                $iv
+            );
+=======
         if ($this->_use_openssl) {
             $result = openssl_encrypt(
                 $data,
@@ -752,6 +811,7 @@ class AuthenticationCookie extends AuthenticationPlugin
                 $iv
             );
             $this->reportSSLErrors();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         } else {
             $cipher = new Crypt\AES(Crypt\Base::MODE_CBC);
             $cipher->setIV($iv);
@@ -795,6 +855,16 @@ class AuthenticationCookie extends AuthenticationPlugin
             return false;
         }
 
+<<<<<<< HEAD
+        if (self::useOpenSSL()) {
+            return openssl_decrypt(
+                $data['payload'],
+                'AES-128-CBC',
+                $secret,
+                0,
+                base64_decode($data['iv'])
+            );
+=======
         if ($this->_use_openssl) {
             $result = openssl_decrypt(
                 $data['payload'],
@@ -805,6 +875,7 @@ class AuthenticationCookie extends AuthenticationPlugin
             );
             $this->reportSSLErrors();
             return $result;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         } else {
             $cipher = new Crypt\AES(Crypt\Base::MODE_CBC);
             $cipher->setIV(base64_decode($data['iv']));
@@ -820,7 +891,11 @@ class AuthenticationCookie extends AuthenticationPlugin
      */
     public function getIVSize()
     {
+<<<<<<< HEAD
+        if (self::useOpenSSL()) {
+=======
         if ($this->_use_openssl) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             return openssl_cipher_iv_length('AES-128-CBC');
         }
         $cipher = new Crypt\AES(Crypt\Base::MODE_CBC);
@@ -841,7 +916,11 @@ class AuthenticationCookie extends AuthenticationPlugin
         if (! is_null($this->_cookie_iv)) {
             return $this->_cookie_iv;
         }
+<<<<<<< HEAD
+        if (self::useOpenSSL()) {
+=======
         if ($this->_use_openssl) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             return openssl_random_pseudo_bytes(
                 $this->getIVSize()
             );

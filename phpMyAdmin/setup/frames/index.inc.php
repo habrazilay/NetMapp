@@ -46,6 +46,55 @@ $configChecker = new ServerConfigChecks($GLOBALS['ConfigFile']);
 $configChecker->performConfigChecks();
 
 //
+<<<<<<< HEAD
+// Check whether we can read/write configuration
+//
+$config_readable = false;
+$config_writable = false;
+$config_exists = false;
+PMA_checkConfigRw($config_readable, $config_writable, $config_exists);
+if (!$config_writable || !$config_readable) {
+    PMA_messagesSet(
+        'error', 'config_rw', __('Cannot load or save configuration'),
+        PMA_sanitize(
+            __(
+                'Please create web server writable folder [em]config[/em] in '
+                . 'phpMyAdmin top level directory as described in '
+                . '[doc@setup_script]documentation[/doc]. Otherwise you will be '
+                . 'only able to download or display it.'
+            )
+        )
+    );
+}
+//
+// Check https connection
+//
+$is_https = !empty($_SERVER['HTTPS'])
+    && mb_strtolower($_SERVER['HTTPS']) == 'on';
+if (!$is_https) {
+    $text = __(
+        'You are not using a secure connection; all data (including potentially '
+        . 'sensitive information, like passwords) is transferred unencrypted!'
+    );
+
+    $text .= ' <a href="#" onclick="window.location.href = \'https:\' + window.location.href.substring(window.location.protocol.length);">';
+
+    // Temporary workaround to use tranlated message in older releases
+    $text .= str_replace(
+        array('[a@%s]', '[/a]'),
+        array('', ''),
+        __(
+            'If your server is also configured to accept HTTPS requests '
+            . 'follow [a@%s]this link[/a] to use a secure connection.'
+        )
+    );
+    $text .= '</a>';
+    PMA_messagesSet('notice', 'no_https', __('Insecure connection'), $text);
+}
+
+echo '<form id="select_lang" method="post" action="'
+    , htmlspecialchars($_SERVER['REQUEST_URI']) , '">';
+=======
 // Https connection warning (check done on the client side)
 //
 $text = __(
@@ -61,6 +110,7 @@ $text .= '</a>';
 PMA_messagesSet('notice', 'no_https', __('Insecure connection'), $text);
 
 echo '<form id="select_lang" method="post">';
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 echo PMA_URL_getHiddenInputs();
 echo '<bdo lang="en" dir="ltr"><label for="lang">';
 echo __('Language') , (__('Language') != 'Language' ? ' - Language' : '');
@@ -256,6 +306,29 @@ echo '<td colspan="2" class="lastrow" style="text-align: left">';
 echo '<input type="submit" name="submit_display" value="' , __('Display') , '" />';
 echo '<input type="submit" name="submit_download" value="' , __('Download') , '" />';
 echo '&nbsp; &nbsp;';
+<<<<<<< HEAD
+
+echo '<input type="submit" name="submit_save" value="' , __('Save') , '"';
+if (!$config_writable) {
+    echo ' disabled="disabled"';
+}
+echo '/>';
+
+echo '<input type="submit" name="submit_load" value="' , __('Load') , '"';
+if (!$config_exists) {
+    echo ' disabled="disabled"';
+}
+echo '/>';
+
+echo '<input type="submit" name="submit_delete" value="' , __('Delete') , '"';
+if (!$config_exists || !$config_writable) {
+    echo ' disabled="disabled"';
+}
+echo '/>';
+
+echo '&nbsp; &nbsp;';
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 echo '<input type="submit" name="submit_clear" value="' , __('Clear')
     , '" class="red" />';
 echo '</td>';

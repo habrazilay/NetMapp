@@ -8,7 +8,11 @@
  */
 use PMA\libraries\gis\GISGeometrycollection;
 
+<<<<<<< HEAD
+require_once 'libraries/tcpdf/tcpdf.php';
+=======
 require_once TCPDF_INC;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
 /**
  * Tests for PMA\libraries\gis\GISGeometrycollection class
@@ -208,9 +212,12 @@ class GISGeometryCollectionTest extends PHPUnit_Framework_TestCase
      */
     public function providerForPrepareRowAsPng()
     {
+<<<<<<< HEAD
+=======
         if (! function_exists('imagecreatetruecolor')) {
             $this->markTestSkipped('GD extension missing!');
         }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return array(
             array(
                 'GEOMETRYCOLLECTION(POLYGON((35 10,10 20,15 40,45 45,35 10),'

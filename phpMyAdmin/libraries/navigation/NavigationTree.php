@@ -16,8 +16,11 @@ use PMA\libraries\RecentFavoriteTable;
 use PMA\libraries\Response;
 use PMA\libraries\Util;
 
+<<<<<<< HEAD
+=======
 require_once 'libraries/check_user_privileges.lib.php';
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 /**
  * Displays a collapsible of database objects in the navigation frame
  *
@@ -173,6 +176,12 @@ class NavigationTree
          * @todo describe a scenario where this code is executed
          */
         if (!$GLOBALS['cfg']['Server']['DisableIS']) {
+<<<<<<< HEAD
+            $query = "SELECT (COUNT(DB_first_level) DIV %d) * %d ";
+            $query .= "from ( ";
+            $query .= " SELECT distinct SUBSTRING_INDEX(SCHEMA_NAME, ";
+            $query .= " '" . $GLOBALS['dbi']->escapeString($GLOBALS['cfg']['NavigationTreeDbSeparator']) . "', 1) ";
+=======
             $dbSeparator = $GLOBALS['dbi']->escapeString(
                 $GLOBALS['cfg']['NavigationTreeDbSeparator']
             );
@@ -180,6 +189,7 @@ class NavigationTree
             $query .= "from ( ";
             $query .= " SELECT distinct SUBSTRING_INDEX(SCHEMA_NAME, ";
             $query .= " '%s', 1) ";
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $query .= " DB_first_level ";
             $query .= " FROM INFORMATION_SCHEMA.SCHEMATA ";
             $query .= " WHERE `SCHEMA_NAME` < '%s' ";
@@ -190,7 +200,10 @@ class NavigationTree
                     $query,
                     (int)$GLOBALS['cfg']['FirstLevelNavigationItems'],
                     (int)$GLOBALS['cfg']['FirstLevelNavigationItems'],
+<<<<<<< HEAD
+=======
                     $dbSeparator,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     $GLOBALS['dbi']->escapeString($GLOBALS['db'])
                 )
             );

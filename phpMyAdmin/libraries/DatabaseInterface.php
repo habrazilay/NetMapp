@@ -48,11 +48,14 @@ class DatabaseInterface
     private $_table_cache;
 
     /**
+<<<<<<< HEAD
+=======
      * @var null|string lower_case_table_names value cache
      */
     private $_lower_case_table_names = null;
 
     /**
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * Constructor
      *
      * @param DBIExtension $ext Object to be used for database queries
@@ -1463,13 +1466,31 @@ class DatabaseInterface
             $default_charset = 'utf8';
             $default_collation = 'utf8_general_ci';
         }
+<<<<<<< HEAD
+        if (! empty($GLOBALS['collation_connection'])) {
+=======
         $collation_connection = $GLOBALS['PMA_Config']->get('collation_connection');
         if (! empty($collation_connection)) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $this->query(
                 "SET CHARACTER SET '$default_charset';",
                 $link,
                 self::QUERY_STORE
             );
+<<<<<<< HEAD
+            /* Automatically adjust collation to mb4 variant */
+            if ($default_charset == 'utf8mb4'
+                && strncmp('utf8_', $GLOBALS['collation_connection'], 5) == 0
+            ) {
+                $GLOBALS['collation_connection'] = 'utf8mb4_' . substr(
+                    $GLOBALS['collation_connection'],
+                    5
+                );
+            }
+            $result = $this->tryQuery(
+                "SET collation_connection = '"
+                . $this->escapeString($GLOBALS['collation_connection'], $link)
+=======
             /* Automatically adjust collation if not supported by server */
             if ($default_charset == 'utf8'
                 && strncmp('utf8mb4_', $collation_connection, 8) == 0
@@ -1479,6 +1500,7 @@ class DatabaseInterface
             $result = $this->tryQuery(
                 "SET collation_connection = '"
                 . $this->escapeString($collation_connection, $link)
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 . "';",
                 $link,
                 self::QUERY_STORE
@@ -1490,7 +1512,11 @@ class DatabaseInterface
                 );
                 $this->query(
                     "SET collation_connection = '"
+<<<<<<< HEAD
+                    . $this->escapeString($GLOBALS['collation_connection'], $link)
+=======
                     . $this->escapeString($collation_connection, $link)
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     . "';",
                     $link,
                     self::QUERY_STORE
@@ -2138,7 +2164,11 @@ class DatabaseInterface
         if (Util::cacheExists('mysql_cur_user')) {
             return Util::cacheGet('mysql_cur_user');
         }
+<<<<<<< HEAD
+        $user = $GLOBALS['dbi']->fetchValue('SELECT USER();');
+=======
         $user = $GLOBALS['dbi']->fetchValue('SELECT CURRENT_USER();');
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         if ($user !== false) {
             Util::cacheSet('mysql_cur_user', $user);
             return Util::cacheGet('mysql_cur_user');
@@ -2260,6 +2290,8 @@ class DatabaseInterface
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Returns value for lower_case_table_names variable
      *
      * @return string
@@ -2275,6 +2307,7 @@ class DatabaseInterface
     }
 
     /**
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * Get the list of system schemas
      *
      * @return array list of system schemas
@@ -2613,6 +2646,9 @@ class DatabaseInterface
      */
     public function getFieldsMeta($result)
     {
+<<<<<<< HEAD
+        return $this->_extension->getFieldsMeta($result);
+=======
         $result = $this->_extension->getFieldsMeta($result);
 
         if ($this->getLowerCaseNames() === '2') {
@@ -2632,6 +2668,7 @@ class DatabaseInterface
         }
 
         return $result;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     }
 
     /**

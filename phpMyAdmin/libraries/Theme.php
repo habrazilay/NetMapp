@@ -431,6 +431,12 @@ class Theme
         if (!is_null($fs)) {
             return $fs;
         }
+<<<<<<< HEAD
+        if (isset($_COOKIE['pma_fontsize'])) {
+            return htmlspecialchars($_COOKIE['pma_fontsize']);
+        }
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return '82%';
     }
 

@@ -35,6 +35,11 @@ PHP
   ``allow_url_open`` in your :file:`php.ini` or to have the
   `curl <https://www.php.net/curl>`_ extension.
 
+<<<<<<< HEAD
+* Performance suggestion: install the ``ctype`` extension.
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 .. seealso:: :ref:`faq1_31`, :ref:`authentication_modes`
 
 Database

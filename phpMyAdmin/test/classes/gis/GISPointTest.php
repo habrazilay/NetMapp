@@ -9,7 +9,11 @@
 use PMA\libraries\gis\GISPoint;
 
 require_once 'GISGeomTest.php';
+<<<<<<< HEAD
+require_once 'libraries/tcpdf/tcpdf.php';
+=======
 require_once TCPDF_INC;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
 /**
  * Tests for PMA\libraries\gis\GISPoint class.
@@ -197,9 +201,12 @@ class GISPointTest extends GISGeomTest
      */
     public function providerForPrepareRowAsPng()
     {
+<<<<<<< HEAD
+=======
         if (! function_exists('imagecreatetruecolor')) {
             $this->markTestSkipped('GD extension missing!');
         }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return array(
             array(
                 'POINT(12 35)',

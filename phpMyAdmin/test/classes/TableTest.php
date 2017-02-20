@@ -751,6 +751,10 @@ class TableTest extends PMATestCase
     {
         $table = 'PMA_BookMark';
         $db = 'PMA';
+<<<<<<< HEAD
+        Util::cacheSet('lower_case_table_names', false);
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         $table = new Table($table, $db);
 

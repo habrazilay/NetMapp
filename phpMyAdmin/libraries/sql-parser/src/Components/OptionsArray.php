@@ -2,8 +2,15 @@
 
 /**
  * Parses a list of options.
+<<<<<<< HEAD
+ *
+ * @package    SqlParser
+ * @subpackage Components
+ */
+=======
  */
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Components;
 
 use SqlParser\Component;
@@ -15,11 +22,20 @@ use SqlParser\TokensList;
  * Parses a list of options.
  *
  * @category   Components
+<<<<<<< HEAD
+ * @package    SqlParser
+ * @subpackage Components
+=======
  *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class OptionsArray extends Component
 {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * ArrayObj of selected options.
      *
@@ -40,41 +56,67 @@ class OptionsArray extends Component
     }
 
     /**
+<<<<<<< HEAD
+     * @param Parser     $parser  The parser that serves as context.
+     * @param TokensList $list    The list of tokens that are being parsed.
+     * @param array      $options Parameters for parsing.
+=======
      * @param Parser     $parser  the parser that serves as context
      * @param TokensList $list    the list of tokens that are being parsed
      * @param array      $options parameters for parsing
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return OptionsArray
      */
     public static function parse(Parser $parser, TokensList $list, array $options = array())
     {
+<<<<<<< HEAD
+        $ret = new OptionsArray();
+=======
         $ret = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         /**
          * The ID that will be assigned to duplicate options.
          *
+<<<<<<< HEAD
+         * @var int $lastAssignedId
+=======
          * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $lastAssignedId = count($options) + 1;
 
         /**
          * The option that was processed last time.
          *
+<<<<<<< HEAD
+         * @var array $lastOption
+=======
          * @var array
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $lastOption = null;
 
         /**
          * The index of the option that was processed last time.
          *
+<<<<<<< HEAD
+         * @var int $lastOptionId
+=======
          * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $lastOptionId = 0;
 
         /**
          * Counts brackets.
          *
+<<<<<<< HEAD
+         * @var int $brackets
+=======
          * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $brackets = 0;
 
@@ -89,7 +131,11 @@ class OptionsArray extends Component
          *
          *      2 ----------------------[ value ]----------------------> 0
          *
+<<<<<<< HEAD
+         * @var int $state
+=======
          * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $state = 0;
 
@@ -97,7 +143,11 @@ class OptionsArray extends Component
             /**
              * Token parsed at this moment.
              *
+<<<<<<< HEAD
+             * @var Token $token
+=======
              * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 
@@ -178,7 +228,11 @@ class OptionsArray extends Component
                         'value' => '',
                     );
                     $state = 1;
+<<<<<<< HEAD
+                } elseif ($lastOption[1] === 'expr'  || $lastOption[1] === 'expr=') {
+=======
                 } elseif ($lastOption[1] === 'expr' || $lastOption[1] === 'expr=') {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     // This is a keyword that is followed by an expression.
                     // The expression is used by the specialized parser.
 
@@ -253,7 +307,11 @@ class OptionsArray extends Component
         ) {
             $parser->error(
                 sprintf(
+<<<<<<< HEAD
+                    __('Value/Expression for the option %1$s was expected'),
+=======
                     __('Value/Expression for the option %1$s was expected.'),
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     $ret->options[$lastOptionId]['name']
                 ),
                 $list->tokens[$list->idx - 1]
@@ -265,13 +323,21 @@ class OptionsArray extends Component
         }
 
         --$list->idx;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return $ret;
     }
 
     /**
+<<<<<<< HEAD
+     * @param OptionsArray $component The component to be built.
+     * @param array        $options   Parameters for building.
+=======
      * @param OptionsArray $component the component to be built
      * @param array        $options   parameters for building
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return string
      */
@@ -291,14 +357,21 @@ class OptionsArray extends Component
                     . (!empty($option['expr']) ? $option['expr'] : $option['value']);
             }
         }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return implode(' ', $options);
     }
 
     /**
      * Checks if it has the specified option and returns it value or true.
      *
+<<<<<<< HEAD
+     * @param string $key     The key to be checked.
+=======
      * @param string $key     the key to be checked
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * @param bool   $getExpr Gets the expression instead of the value.
      *                        The value is the processed form of the expression.
      *
@@ -315,16 +388,25 @@ class OptionsArray extends Component
                 return true;
             }
         }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return false;
     }
 
     /**
      * Removes the option from the array.
      *
+<<<<<<< HEAD
+     * @param string $key The key to be removed.
+     *
+     * @return bool Whether the key was found and deleted or not.
+=======
      * @param string $key the key to be removed
      *
      * @return bool whether the key was found and deleted or not
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function remove($key)
     {
@@ -332,16 +414,25 @@ class OptionsArray extends Component
             if (is_array($option)) {
                 if (!strcasecmp($key, $option['name'])) {
                     unset($this->options[$idx]);
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     return true;
                 }
             } elseif (!strcasecmp($key, $option)) {
                 unset($this->options[$idx]);
+<<<<<<< HEAD
+                return true;
+            }
+        }
+=======
 
                 return true;
             }
         }
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return false;
     }
 
@@ -349,13 +440,23 @@ class OptionsArray extends Component
      * Merges the specified options with these ones. Values with same ID will be
      * replaced.
      *
+<<<<<<< HEAD
+     * @param array|OptionsArray $options The options to be merged.
+     *
+     * @return void
+=======
      * @param array|OptionsArray $options the options to be merged
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function merge($options)
     {
         if (is_array($options)) {
             $this->options = array_merge_recursive($this->options, $options);
+<<<<<<< HEAD
+        } elseif ($options instanceof OptionsArray) {
+=======
         } elseif ($options instanceof self) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $this->options = array_merge_recursive($this->options, $options->options);
         }
     }

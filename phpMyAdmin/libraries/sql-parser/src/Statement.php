@@ -5,8 +5,14 @@
  * class defined here.
  *
  * A statement represents the result of parsing the lexemes.
+<<<<<<< HEAD
+ *
+ * @package SqlParser
+ */
+=======
  */
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser;
 
 use SqlParser\Components\OptionsArray;
@@ -15,11 +21,19 @@ use SqlParser\Components\OptionsArray;
  * Abstract statement definition.
  *
  * @category Statements
+<<<<<<< HEAD
+ * @package  SqlParser
+=======
  *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license  https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 abstract class Statement
 {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * Options for this statement.
      *
@@ -81,8 +95,13 @@ abstract class Statement
     /**
      * Constructor.
      *
+<<<<<<< HEAD
+     * @param Parser     $parser The instance that requests parsing.
+     * @param TokensList $list   The list of tokens to be parsed.
+=======
      * @param Parser     $parser the instance that requests parsing
      * @param TokensList $list   the list of tokens to be parsed
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function __construct(Parser $parser = null, TokensList $list = null)
     {
@@ -101,7 +120,11 @@ abstract class Statement
         /**
          * Query to be returned.
          *
+<<<<<<< HEAD
+         * @var string $query
+=======
          * @var string
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $query = '';
 
@@ -130,7 +153,11 @@ abstract class Statement
             /**
              * The name of the clause.
              *
+<<<<<<< HEAD
+             * @var string $name
+=======
              * @var string
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $name = $clause[0];
 
@@ -138,15 +165,23 @@ abstract class Statement
              * The type of the clause.
              *
              * @see self::$CLAUSES
+<<<<<<< HEAD
+             * @var int $type
+=======
              *
              * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $type = $clause[1];
 
             /**
              * The builder (parser) of this clause.
              *
+<<<<<<< HEAD
+             * @var Component $class
+=======
              * @var Component
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $class = Parser::$KEYWORD_PARSERS[$name]['class'];
 
@@ -154,7 +189,11 @@ abstract class Statement
              * The name of the field that is used as source for the builder.
              * Same field is used to store the result of parsing.
              *
+<<<<<<< HEAD
+             * @var string $field
+=======
              * @var string
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $field = Parser::$KEYWORD_PARSERS[$name]['field'];
 
@@ -188,8 +227,15 @@ abstract class Statement
     /**
      * Parses the statements defined by the tokens list.
      *
+<<<<<<< HEAD
+     * @param Parser     $parser The instance that requests parsing.
+     * @param TokensList $list   The list of tokens to be parsed.
+     *
+     * @return void
+=======
      * @param Parser     $parser the instance that requests parsing
      * @param TokensList $list   the list of tokens to be parsed
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function parse(Parser $parser, TokensList $list)
     {
@@ -197,7 +243,11 @@ abstract class Statement
          * Array containing all list of clauses parsed.
          * This is used to check for duplicates.
          *
+<<<<<<< HEAD
+         * @var array $parsedClauses
+=======
          * @var array
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $parsedClauses = array();
 
@@ -209,7 +259,11 @@ abstract class Statement
          * For statements that do not have any options this is set to `true` by
          * default.
          *
+<<<<<<< HEAD
+         * @var bool $parsedOptions
+=======
          * @var bool
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $parsedOptions = empty(static::$OPTIONS);
 
@@ -217,7 +271,11 @@ abstract class Statement
             /**
              * Token parsed at this moment.
              *
+<<<<<<< HEAD
+             * @var Token $token
+=======
              * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 
@@ -279,21 +337,33 @@ abstract class Statement
             /**
              * The name of the class that is used for parsing.
              *
+<<<<<<< HEAD
+             * @var Component $class
+=======
              * @var Component
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $class = null;
 
             /**
              * The name of the field where the result of the parsing is stored.
              *
+<<<<<<< HEAD
+             * @var string $field
+=======
              * @var string
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $field = null;
 
             /**
              * Parser's options.
              *
+<<<<<<< HEAD
+             * @var array $options
+=======
              * @var array
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $options = array();
 
@@ -386,23 +456,47 @@ abstract class Statement
     /**
      * Function called before the token is processed.
      *
+<<<<<<< HEAD
+     * @param Parser     $parser The instance that requests parsing.
+     * @param TokensList $list   The list of tokens to be parsed.
+     * @param Token      $token  The token that is being parsed.
+     *
+     * @return void
+     */
+    public function before(Parser $parser, TokensList $list, Token $token)
+    {
+
+=======
      * @param Parser     $parser the instance that requests parsing
      * @param TokensList $list   the list of tokens to be parsed
      * @param Token      $token  the token that is being parsed
      */
     public function before(Parser $parser, TokensList $list, Token $token)
     {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     }
 
     /**
      * Function called after the token was processed.
      *
+<<<<<<< HEAD
+     * @param Parser     $parser The instance that requests parsing.
+     * @param TokensList $list   The list of tokens to be parsed.
+     * @param Token      $token  The token that is being parsed.
+     *
+     * @return void
+     */
+    public function after(Parser $parser, TokensList $list, Token $token)
+    {
+
+=======
      * @param Parser     $parser the instance that requests parsing
      * @param TokensList $list   the list of tokens to be parsed
      * @param Token      $token  the token that is being parsed
      */
     public function after(Parser $parser, TokensList $list, Token $token)
     {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     }
 
     /**
@@ -430,12 +524,21 @@ abstract class Statement
     /**
      * Validates the order of the clauses in parsed statement
      * Ideally this should be called after successfully
+<<<<<<< HEAD
+     * completing the parsing of each statement
+     *
+     * @param Parser     $parser The instance that requests parsing.
+     * @param TokensList $list   The list of tokens to be parsed.
+     *
+     * @return boolean
+=======
      * completing the parsing of each statement.
      *
      * @param Parser     $parser the instance that requests parsing
      * @param TokensList $list   the list of tokens to be parsed
      *
      * @return bool
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function validateClauseOrder($parser, $list)
     {
@@ -454,9 +557,15 @@ abstract class Statement
          *   0 - JOIN not found till now
          *   1 - JOIN has been found
          *   2 - A Non-JOIN clause has been found
+<<<<<<< HEAD
+         *       after a previously found JOIN clause
+         *
+         * @var int $joinStart
+=======
          *       after a previously found JOIN clause.
          *
          * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $joinStart = 0;
 
@@ -470,11 +579,19 @@ abstract class Statement
 
             // Handle ordering of Multiple Joins in a query
             if ($clauseStartIdx != -1) {
+<<<<<<< HEAD
+                if ($joinStart == 0 && stripos($clauseType, 'JOIN')) {
+                    $joinStart = 1;
+                } elseif ($joinStart == 1 && ! stripos($clauseType, 'JOIN')) {
+                    $joinStart = 2;
+                } elseif ($joinStart == 2 && stripos($clauseType, 'JOIN')) {
+=======
                 if ($joinStart == 0 && stripos($clauseType, 'JOIN') !== false) {
                     $joinStart = 1;
                 } elseif ($joinStart == 1 && stripos($clauseType, 'JOIN') === false) {
                     $joinStart = 2;
                 } elseif ($joinStart == 2 && stripos($clauseType, 'JOIN') !== false) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     $error = 1;
                 }
             }
@@ -486,7 +603,10 @@ abstract class Statement
                         __('Unexpected ordering of clauses.'),
                         $token
                     );
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     return false;
                 } else {
                     $minIdx = $clauseStartIdx;

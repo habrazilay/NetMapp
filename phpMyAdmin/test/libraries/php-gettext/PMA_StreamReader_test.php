@@ -5,6 +5,15 @@
  * @package PhpMyAdmin-test
  */
 
+<<<<<<< HEAD
+/*
+ * Include to test.
+ */
+
+require_once 'libraries/php-gettext/streams.php';
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 class PMA_StreamReader_Test extends PHPUnit_Framework_TestCase
 {
     /**

@@ -1,10 +1,10 @@
 <?php
 require_once("dbcontroller.php");
 require_once("set_mysql_server.php");
-$db_handle = new DBController(DB_SCHEMA_PROJECT);
-if(!empty($_POST["id"])) {
-    $query ="SELECT * FROM cabinets WHERE cabid = '" . $_POST["id"] . "'";
-    $results = $db_handle->runQuery($query, DB_SCHEMA_PROJECT);
+$db_handle = new DBController(DB_SCHEMA_MAP);
+if(!empty($_POST["cabid"])) {
+    $query ="SELECT * FROM cabinets WHERE cabid = '" . $_POST["cabid"] . "'";
+    $results = $db_handle->runQuery($query, DB_SCHEMA_MAP);
 ?>
 <?php
     foreach($results as $cabinet) {

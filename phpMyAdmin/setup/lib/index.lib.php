@@ -79,6 +79,25 @@ function PMA_messagesEnd()
  */
 function PMA_messagesShowHtml()
 {
+<<<<<<< HEAD
+    $old_ids = array();
+    foreach ($_SESSION['messages'] as $type => $messages) {
+        foreach ($messages as $id => $msg) {
+            echo '<div class="' , $type , '" id="' , $id , '">'
+                , '<h4>' , $msg['title'] , '</h4>'
+                , $msg['message'] , '</div>';
+            if (!$msg['fresh'] && $type != 'error') {
+                $old_ids[] = $id;
+            }
+        }
+    }
+
+    echo "\n" , '<script type="text/javascript">';
+    foreach ($old_ids as $id) {
+        echo "\nhiddenMessages.push('$id');";
+    }
+    echo "\n</script>\n";
+=======
     foreach ($_SESSION['messages'] as $type => $messages) {
         foreach ($messages as $id => $msg) {
             if (! $msg['fresh'] && $type != 'error') {
@@ -91,6 +110,7 @@ function PMA_messagesShowHtml()
                 , $msg['message'] , '</div>';
         }
     }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 }
 
 /**
@@ -181,3 +201,31 @@ function PMA_versionCheck()
         }
     }
 }
+<<<<<<< HEAD
+
+/**
+ * Checks whether config file is readable/writable
+ *
+ * @param bool &$is_readable whether the file is readable
+ * @param bool &$is_writable whether the file is writable
+ * @param bool &$file_exists whether the file exists
+ *
+ * @return void
+ */
+function PMA_checkConfigRw(&$is_readable, &$is_writable, &$file_exists)
+{
+    $file_path = $GLOBALS['ConfigFile']->getFilePath();
+    $file_dir = dirname($file_path);
+    $is_readable = true;
+    $is_writable = @is_dir($file_dir);
+    if (SETUP_DIR_WRITABLE) {
+        $is_writable = $is_writable && @is_writable($file_dir);
+    }
+    $file_exists = file_exists($file_path);
+    if ($file_exists) {
+        $is_readable = is_readable($file_path);
+        $is_writable = $is_writable && @is_writable($file_path);
+    }
+}
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584

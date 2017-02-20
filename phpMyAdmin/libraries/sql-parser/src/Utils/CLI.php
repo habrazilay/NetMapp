@@ -1,19 +1,35 @@
 <?php
 
 /**
+<<<<<<< HEAD
+ * CLI interface
+ *
+ * @package    SqlParser
+ * @subpackage Utils
+ */
+=======
  * CLI interface.
  */
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Utils;
 
 use SqlParser\Parser;
 use SqlParser\Lexer;
 
 /**
+<<<<<<< HEAD
+ * CLI interface
+ *
+ * @category   Exceptions
+ * @package    SqlParser
+ * @subpackage Utils
+=======
  * CLI interface.
  *
  * @category   Exceptions
  *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class CLI
@@ -48,6 +64,15 @@ class CLI
             return false;
         }
         $this->mergeLongOpts($params, $longopts);
+<<<<<<< HEAD
+        if (! isset($params['f'])) {
+            $params['f'] = 'cli';
+        }
+        if (! in_array($params['f'], array('html', 'cli', 'text'))) {
+            echo "ERROR: Invalid value for format!\n";
+            return false;
+        }
+=======
         if (!isset($params['f'])) {
             $params['f'] = 'cli';
         }
@@ -57,6 +82,7 @@ class CLI
             return false;
         }
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return $params;
     }
 
@@ -68,7 +94,10 @@ class CLI
         }
         if (isset($params['h'])) {
             $this->usageHighlight();
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             return 0;
         }
         if (isset($params['q'])) {
@@ -76,12 +105,18 @@ class CLI
                 $params['q'], array('type' => $params['f'])
             );
             echo "\n";
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             return 0;
         }
         echo "ERROR: Missing parameters!\n";
         $this->usageHighlight();
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return 1;
     }
 
@@ -97,7 +132,10 @@ class CLI
             'hq:', $longopts
         );
         $this->mergeLongOpts($params, $longopts);
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return $params;
     }
 
@@ -109,7 +147,10 @@ class CLI
         }
         if (isset($params['h'])) {
             $this->usageLint();
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             return 0;
         }
         if (isset($params['q'])) {
@@ -122,12 +163,18 @@ class CLI
             $output = Error::format($errors);
             echo implode("\n", $output);
             echo "\n";
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             return 10;
         }
         echo "ERROR: Missing parameters!\n";
         $this->usageLint();
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return 1;
     }
 }

@@ -690,7 +690,11 @@ class TransformationPluginsTest extends PMATestCase
      */
     public function transformationDataProvider()
     {
+<<<<<<< HEAD
+        return array(
+=======
         $result = array(
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             array(
                 new Image_JPEG_Upload(),
                 array(
@@ -772,6 +776,20 @@ class TransformationPluginsTest extends PMATestCase
                 '31 31 31 31 31 30 30 31 '
             ),
             array(
+<<<<<<< HEAD
+                new Image_JPEG_Inline(),
+                array(
+                    'PMA_JPEG_Inline',
+                    array("./image/", "200", "wrapper_link"=>"PMA_wrapper_link")
+                ),
+                '<a href="transformation_wrapper.phpPMA_wrapper_link" '
+                . 'rel="noopener noreferrer" target="_blank"><img src="transformation_wrapper.php'
+                . 'PMA_wrapper_link&amp;resize=jpeg&amp;newWidth=0&amp;'
+                . 'newHeight=200" alt="[PMA_JPEG_Inline]" border="0" /></a>'
+            ),
+            array(
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 new Image_JPEG_Link(),
                 array(
                     'PMA_IMAGE_LINK',
@@ -782,6 +800,21 @@ class TransformationPluginsTest extends PMATestCase
                 . ' alt="[PMA_IMAGE_LINK]">[BLOB]</a>'
             ),
             array(
+<<<<<<< HEAD
+                new Image_PNG_Inline(),
+                array(
+                    'PMA_PNG_Inline',
+                    array("./image/", "200", "wrapper_link"=>"PMA_wrapper_link")
+                ),
+                '<a href="transformation_wrapper.phpPMA_wrapper_link"'
+                . ' rel="noopener noreferrer" target="_blank"><img src="transformation_wrapper.php'
+                . 'PMA_wrapper_link&amp;'
+                . 'resize=jpeg&amp;newWidth=0&amp;newHeight=200" '
+                . 'alt="[PMA_PNG_Inline]" border="0" /></a>'
+            ),
+            array(
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 new Text_Plain_Dateformat(),
                 array(
                     12345,
@@ -947,6 +980,8 @@ class TransformationPluginsTest extends PMATestCase
                 'suffixMA_suffix'
             ),
         );
+<<<<<<< HEAD
+=======
 
         if (function_exists('imagecreatetruecolor')) {
             $result[] = array(
@@ -974,6 +1009,7 @@ class TransformationPluginsTest extends PMATestCase
             );
         }
         return $result;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     }
 
     /**

@@ -12,10 +12,15 @@
         $results = $db_handle->runQuery($query, DB_SCHEMA_PROJECT);
         
         require_once("config/dbcontroller.php");
+        $db_handle = new DBController(DB_SCHEMA_MAP);
+        $query ="SELECT * FROM cabinets";
+        $results = $db_handle->runQuery($query, DB_SCHEMA_MAP);    
+        
+		require_once("config/dbcontroller.php");
         $db_handle = new DBController(DB_SCHEMA_PROJECT);
         $query ="SELECT * FROM sites";
-        $results = $db_handle->runQuery($query, DB_SCHEMA_PROJECT);    
-        
+        $results = $db_handle->runQuery($query, DB_SCHEMA_PROJECT);
+		
         if(isset($_POST['add_new_device'])) {
         // Create connection
         $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA_MAP);
@@ -119,7 +124,7 @@
                                 $.ajax({
                                 type: "POST",
                                 url: "config/get_cabinet.php",
-                                data:'cabid='+val,
+                                data:'sid='+val,
                                 success: function(data){
                                     $("#cab_name").html(data);
                                 }

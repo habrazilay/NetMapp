@@ -101,7 +101,11 @@ class Config
      */
     public function checkSystem()
     {
+<<<<<<< HEAD
+        $this->set('PMA_VERSION', '4.6.5.2');
+=======
         $this->set('PMA_VERSION', '4.6.6');
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         /**
          * @deprecated
          */
@@ -683,7 +687,11 @@ class Config
             } while ($dataline != '');
             $message = trim(implode(' ', $commit));
 
+<<<<<<< HEAD
+        } elseif (isset($commit_json)) {
+=======
         } elseif (isset($commit_json) && isset($commit_json->author) && isset($commit_json->committer)) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $author = array(
                 'name' => $commit_json->author->name,
                 'email' => $commit_json->author->email,
@@ -1692,6 +1700,8 @@ class Config
             )
         );
     }
+<<<<<<< HEAD
+=======
 
     /**
      * Wrapper for footer/header rendering
@@ -1734,6 +1744,7 @@ class Config
     {
         return self::_renderCustom(CUSTOM_HEADER_FILE, 'pma_header');
     }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 }
 
 if (!defined('TESTSUITE')) {

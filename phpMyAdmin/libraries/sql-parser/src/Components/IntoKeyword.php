@@ -2,8 +2,15 @@
 
 /**
  * `INTO` keyword parser.
+<<<<<<< HEAD
+ *
+ * @package    SqlParser
+ * @subpackage Components
+ */
+=======
  */
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Components;
 
 use SqlParser\Component;
@@ -15,11 +22,18 @@ use SqlParser\TokensList;
  * `INTO` keyword parser.
  *
  * @category   Keywords
+<<<<<<< HEAD
+ * @package    SqlParser
+ * @subpackage Components
+=======
  *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class IntoKeyword extends Component
 {
+<<<<<<< HEAD
+=======
     /**
      * FIELDS/COLUMNS Options for `SELECT...INTO` statements.
      *
@@ -41,6 +55,7 @@ class IntoKeyword extends Component
         'STARTING BY' => array(1, 'expr'),
         'TERMINATED BY' => array(2, 'expr'),
     );
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     /**
      * Type of target (OUTFILE or SYMBOL).
@@ -64,13 +79,22 @@ class IntoKeyword extends Component
     public $columns;
 
     /**
+<<<<<<< HEAD
+     * The values to be selected into (SELECT .. INTO @var1)
+=======
      * The values to be selected into (SELECT .. INTO @var1).
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @var ExpressionArray
      */
     public $values;
 
     /**
+<<<<<<< HEAD
+     * @param Parser     $parser  The parser that serves as context.
+     * @param TokensList $list    The list of tokens that are being parsed.
+     * @param array      $options Parameters for parsing.
+=======
      * Options for FIELDS/COLUMNS keyword.
      *
      * @var OptionsArray
@@ -99,12 +123,17 @@ class IntoKeyword extends Component
      * @param Parser     $parser  the parser that serves as context
      * @param TokensList $list    the list of tokens that are being parsed
      * @param array      $options parameters for parsing
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return IntoKeyword
      */
     public static function parse(Parser $parser, TokensList $list, array $options = array())
     {
+<<<<<<< HEAD
+        $ret = new IntoKeyword();
+=======
         $ret = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         /**
          * The state of the parser.
@@ -118,7 +147,11 @@ class IntoKeyword extends Component
          *
          *      2 ---------------------[ filename ]--------------------> 1
          *
+<<<<<<< HEAD
+         * @var int $state
+=======
          * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $state = 0;
 
@@ -126,7 +159,11 @@ class IntoKeyword extends Component
             /**
              * Token parsed at this moment.
              *
+<<<<<<< HEAD
+             * @var Token $token
+=======
              * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 
@@ -147,10 +184,15 @@ class IntoKeyword extends Component
                     continue;
                 }
 
+<<<<<<< HEAD
+                // No other keyword is expected.
+                break;
+=======
                 // No other keyword is expected except for $state = 4, which expects `LINES`
                 if ($state !== 4) {
                     break;
                 }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             }
 
             if ($state === 0) {
@@ -179,6 +221,10 @@ class IntoKeyword extends Component
                 break;
             } elseif ($state === 2) {
                 $ret->dest = $token->value;
+<<<<<<< HEAD
+                ++$list->idx;
+                break;
+=======
 
                 $state = 3;
             } elseif ($state == 3) {
@@ -191,10 +237,19 @@ class IntoKeyword extends Component
 
                 $ret->parseFileOptions($parser, $list, $token->value);
                 $state = 5;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             }
         }
 
         --$list->idx;
+<<<<<<< HEAD
+        return $ret;
+    }
+
+    /**
+     * @param IntoKeyword $component The component to be built.
+     * @param array       $options   Parameters for building.
+=======
 
         return $ret;
     }
@@ -229,6 +284,7 @@ class IntoKeyword extends Component
     /**
      * @param IntoKeyword $component the component to be built
      * @param array       $options   parameters for building
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return string
      */
@@ -237,11 +293,20 @@ class IntoKeyword extends Component
         if ($component->dest instanceof Expression) {
             $columns = !empty($component->columns) ?
                 '(`' . implode('`, `', $component->columns) . '`)' : '';
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             return $component->dest . $columns;
         } elseif (isset($component->values)) {
             return ExpressionArray::build($component->values);
         } else {
+<<<<<<< HEAD
+            return 'OUTFILE "' . $component->dest . '"';
+        }
+    }
+}
+=======
             $ret = 'OUTFILE "' . $component->dest . '"';
 
             $fields_options_str = OptionsArray::build($component->fields_options);
@@ -259,3 +324,4 @@ class IntoKeyword extends Component
         }
     }
 }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584

@@ -329,7 +329,11 @@ class ConfigTest extends PMATestCase
         $this->object->checkGd2();
         $this->assertEquals(0, $this->object->get('PMA_IS_GD2'));
 
+<<<<<<< HEAD
+        $this->object->set('GD2Available', $prevIsGb2Val);
+=======
         $this->object->set('GD2Available', 'auto');
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         if (!@function_exists('imagecreatetruecolor')) {
             $this->object->checkGd2();
@@ -943,7 +947,10 @@ class ConfigTest extends PMATestCase
      * Test for Check HTTP
      *
      * @group medium
+<<<<<<< HEAD
+=======
      * @group network
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return void
      */

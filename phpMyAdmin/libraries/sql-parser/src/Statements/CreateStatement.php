@@ -2,8 +2,15 @@
 
 /**
  * `CREATE` statement.
+<<<<<<< HEAD
+ *
+ * @package    SqlParser
+ * @subpackage Statements
+ */
+=======
  */
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Statements;
 
 use SqlParser\Parser;
@@ -17,22 +24,65 @@ use SqlParser\Components\PartitionDefinition;
 use SqlParser\Components\Expression;
 use SqlParser\Components\OptionsArray;
 use SqlParser\Components\ParameterDefinition;
+<<<<<<< HEAD
+use SqlParser\Statements\SelectStatement;
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
 /**
  * `CREATE` statement.
  *
  * @category   Statements
+<<<<<<< HEAD
+ * @package    SqlParser
+ * @subpackage Statements
+=======
  *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class CreateStatement extends Statement
 {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * Options for `CREATE` statements.
      *
      * @var array
      */
     public static $OPTIONS = array(
+<<<<<<< HEAD
+
+        // CREATE TABLE
+        'TEMPORARY'                     => 1,
+
+        // CREATE VIEW
+        'OR REPLACE'                    => array(2, 'var='),
+        'ALGORITHM'                     => array(3, 'var='),
+        // `DEFINER` is also used for `CREATE FUNCTION / PROCEDURE`
+        'DEFINER'                       => array(4, 'expr='),
+        'SQL SECURITY'                  => array(5, 'var'),
+
+        'DATABASE'                      => 6,
+        'EVENT'                         => 6,
+        'FUNCTION'                      => 6,
+        'INDEX'                         => 6,
+        'UNIQUE INDEX'                  => 6,
+        'FULLTEXT INDEX'                => 6,
+        'SPATIAL INDEX'                 => 6,
+        'PROCEDURE'                     => 6,
+        'SERVER'                        => 6,
+        'TABLE'                         => 6,
+        'TABLESPACE'                    => 6,
+        'TRIGGER'                       => 6,
+        'USER'                          => 6,
+        'VIEW'                          => 6,
+
+        // CREATE TABLE
+        'IF NOT EXISTS'                 => 7,
+=======
         // CREATE TABLE
         'TEMPORARY' => 1,
 
@@ -60,6 +110,7 @@ class CreateStatement extends Statement
 
         // CREATE TABLE
         'IF NOT EXISTS' => 7,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**
@@ -68,12 +119,21 @@ class CreateStatement extends Statement
      * @var array
      */
     public static $DB_OPTIONS = array(
+<<<<<<< HEAD
+        'CHARACTER SET'                 => array(1, 'var='),
+        'CHARSET'                       => array(1, 'var='),
+        'DEFAULT CHARACTER SET'         => array(1, 'var='),
+        'DEFAULT CHARSET'               => array(1, 'var='),
+        'DEFAULT COLLATE'               => array(2, 'var='),
+        'COLLATE'                       => array(2, 'var='),
+=======
         'CHARACTER SET' => array(1, 'var='),
         'CHARSET' => array(1, 'var='),
         'DEFAULT CHARACTER SET' => array(1, 'var='),
         'DEFAULT CHARSET' => array(1, 'var='),
         'DEFAULT COLLATE' => array(2, 'var='),
         'COLLATE' => array(2, 'var='),
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**
@@ -82,6 +142,33 @@ class CreateStatement extends Statement
      * @var array
      */
     public static $TABLE_OPTIONS = array(
+<<<<<<< HEAD
+        'ENGINE'                        => array(1, 'var='),
+        'AUTO_INCREMENT'                => array(2, 'var='),
+        'AVG_ROW_LENGTH'                => array(3, 'var'),
+        'CHARACTER SET'                 => array(4, 'var='),
+        'CHARSET'                       => array(4, 'var='),
+        'DEFAULT CHARACTER SET'         => array(4, 'var='),
+        'DEFAULT CHARSET'               => array(4, 'var='),
+        'CHECKSUM'                      => array(5, 'var'),
+        'DEFAULT COLLATE'               => array(6, 'var='),
+        'COLLATE'                       => array(6, 'var='),
+        'COMMENT'                       => array(7, 'var='),
+        'CONNECTION'                    => array(8, 'var'),
+        'DATA DIRECTORY'                => array(9, 'var'),
+        'DELAY_KEY_WRITE'               => array(10, 'var'),
+        'INDEX DIRECTORY'               => array(11, 'var'),
+        'INSERT_METHOD'                 => array(12, 'var'),
+        'KEY_BLOCK_SIZE'                => array(13, 'var'),
+        'MAX_ROWS'                      => array(14, 'var'),
+        'MIN_ROWS'                      => array(15, 'var'),
+        'PACK_KEYS'                     => array(16, 'var'),
+        'PASSWORD'                      => array(17, 'var'),
+        'ROW_FORMAT'                    => array(18, 'var'),
+        'TABLESPACE'                    => array(19, 'var'),
+        'STORAGE'                       => array(20, 'var'),
+        'UNION'                         => array(21, 'var'),
+=======
         'ENGINE' => array(1, 'var='),
         'AUTO_INCREMENT' => array(2, 'var='),
         'AVG_ROW_LENGTH' => array(3, 'var'),
@@ -107,6 +194,7 @@ class CreateStatement extends Statement
         'TABLESPACE' => array(19, 'var'),
         'STORAGE' => array(20, 'var'),
         'UNION' => array(21, 'var'),
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**
@@ -115,6 +203,17 @@ class CreateStatement extends Statement
      * @var array
      */
     public static $FUNC_OPTIONS = array(
+<<<<<<< HEAD
+        'COMMENT'                       => array(1, 'var='),
+        'LANGUAGE SQL'                  => 2,
+        'DETERMINISTIC'                 => 3,
+        'NOT DETERMINISTIC'             => 3,
+        'CONTAINS SQL'                  => 4,
+        'NO SQL'                        => 4,
+        'READS SQL DATA'                => 4,
+        'MODIFIES SQL DATA'             => 4,
+        'SQL SECURITY DEFINER'          => array(5, 'var'),
+=======
         'COMMENT' => array(1, 'var='),
         'LANGUAGE SQL' => 2,
         'DETERMINISTIC' => 3,
@@ -124,6 +223,7 @@ class CreateStatement extends Statement
         'READS SQL DATA' => 4,
         'MODIFIES SQL DATA' => 4,
         'SQL SECURITY DEFINER' => array(5, 'var'),
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**
@@ -132,11 +232,19 @@ class CreateStatement extends Statement
      * @var array
      */
     public static $TRIGGER_OPTIONS = array(
+<<<<<<< HEAD
+        'BEFORE'                        => 1,
+        'AFTER'                         => 1,
+        'INSERT'                        => 2,
+        'UPDATE'                        => 2,
+        'DELETE'                        => 2,
+=======
         'BEFORE' => 1,
         'AFTER' => 1,
         'INSERT' => 2,
         'UPDATE' => 2,
         'DELETE' => 2,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**
@@ -172,7 +280,11 @@ class CreateStatement extends Statement
     public $fields;
 
     /**
+<<<<<<< HEAD
+     * If `CREATE TABLE ... SELECT`
+=======
      * If `CREATE TABLE ... SELECT`.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * Used by `CREATE TABLE`
      *
@@ -181,7 +293,11 @@ class CreateStatement extends Statement
     public $select;
 
     /**
+<<<<<<< HEAD
+     * If `CREATE TABLE ... LIKE`
+=======
      * If `CREATE TABLE ... LIKE`.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * Used by `CREATE TABLE`
      *
@@ -253,7 +369,11 @@ class CreateStatement extends Statement
 
     /**
      * The body of this function or procedure. For views, it is the select
+<<<<<<< HEAD
+     * statement that gets the
+=======
      * statement that gets the.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * Used by `CREATE FUNCTION`, `CREATE PROCEDURE` and `CREATE VIEW`.
      *
@@ -334,14 +454,20 @@ class CreateStatement extends Statement
             if ($this->options->has('FUNCTION')) {
                 $tmp = 'RETURNS ' . DataType::build($this->return);
             }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             return 'CREATE '
                 . OptionsArray::build($this->options) . ' '
                 . Expression::build($this->name) . ' '
                 . ParameterDefinition::build($this->parameters) . ' '
                 . $tmp . ' ' . TokensList::build($this->body);
         }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return 'CREATE '
             . OptionsArray::build($this->options) . ' '
             . Expression::build($this->name) . ' '
@@ -349,8 +475,15 @@ class CreateStatement extends Statement
     }
 
     /**
+<<<<<<< HEAD
+     * @param Parser     $parser The instance that requests parsing.
+     * @param TokensList $list   The list of tokens to be parsed.
+     *
+     * @return void
+=======
      * @param Parser     $parser the instance that requests parsing
      * @param TokensList $list   the list of tokens to be parsed
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function parse(Parser $parser, TokensList $list)
     {
@@ -382,12 +515,20 @@ class CreateStatement extends Statement
         /**
          * Token parsed at this moment.
          *
+<<<<<<< HEAD
+         * @var Token $token
+=======
          * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $token = $list->tokens[$list->idx];
         $nextidx = $list->idx + 1;
         while ($nextidx < $list->count && $list->tokens[$nextidx]->type == Token::TYPE_WHITESPACE) {
+<<<<<<< HEAD
+            $nextidx++;
+=======
             ++$nextidx;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         }
 
         if ($this->options->has('DATABASE')) {
@@ -451,7 +592,11 @@ class CreateStatement extends Statement
              * The field that is being filled (`partitionBy` or
              * `subpartitionBy`).
              *
+<<<<<<< HEAD
+             * @var string $field
+=======
              * @var string
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $field = null;
 
@@ -460,7 +605,11 @@ class CreateStatement extends Statement
              * previously. At least one bracket is required to validate the
              * expression.
              *
+<<<<<<< HEAD
+             * @var int|bool $brackets
+=======
              * @var int|bool
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $brackets = false;
 
@@ -471,7 +620,11 @@ class CreateStatement extends Statement
                 /**
                  * Token parsed at this moment.
                  *
+<<<<<<< HEAD
+                 * @var Token $token
+=======
                  * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                  */
                 $token = $list->tokens[$list->idx];
 
@@ -531,7 +684,11 @@ class CreateStatement extends Statement
                             $parser,
                             $list,
                             array(
+<<<<<<< HEAD
+                                'type' => 'SqlParser\\Components\\PartitionDefinition'
+=======
                                 'type' => 'SqlParser\\Components\\PartitionDefinition',
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                             )
                         );
                     }

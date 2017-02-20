@@ -317,7 +317,11 @@ if ($server > 0 && $GLOBALS['cfg']['ShowServerInfo']) {
        . ' </div>';
 }
 
+<<<<<<< HEAD
+if ($GLOBALS['cfg']['ShowServerInfo']) {
+=======
 if ($GLOBALS['cfg']['ShowServerInfo'] || $GLOBALS['cfg']['ShowPhpInfo']) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     echo '<div class="group">';
     echo '<h2>' , __('Web server') , '</h2>';
     echo '<ul>';
@@ -357,6 +361,8 @@ if ($GLOBALS['cfg']['ShowServerInfo'] || $GLOBALS['cfg']['ShowPhpInfo']) {
         }
     }
 
+<<<<<<< HEAD
+=======
     if ($cfg['ShowPhpInfo']) {
         PMA_printListItem(
             __('Show PHP information'),
@@ -366,6 +372,7 @@ if ($GLOBALS['cfg']['ShowServerInfo'] || $GLOBALS['cfg']['ShowPhpInfo']) {
             '_blank'
         );
     }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     echo '  </ul>';
     echo ' </div>';
 }

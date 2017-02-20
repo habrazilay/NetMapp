@@ -792,6 +792,11 @@ RTE.ROUTINE = {
         // Process for parameter length
         switch ($type.val()) {
         case 'DATE':
+<<<<<<< HEAD
+        case 'DATETIME':
+        case 'TIME':
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         case 'TINYBLOB':
         case 'TINYTEXT':
         case 'BLOB':

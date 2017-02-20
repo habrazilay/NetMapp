@@ -2,8 +2,15 @@
 
 /**
  * Parses a data type.
+<<<<<<< HEAD
+ *
+ * @package    SqlParser
+ * @subpackage Components
+ */
+=======
  */
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Components;
 
 use SqlParser\Component;
@@ -15,23 +22,41 @@ use SqlParser\TokensList;
  * Parses a data type.
  *
  * @category   Components
+<<<<<<< HEAD
+ * @package    SqlParser
+ * @subpackage Components
+=======
  *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class DataType extends Component
 {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * All data type options.
      *
      * @var array
      */
     public static $DATA_TYPE_OPTIONS = array(
+<<<<<<< HEAD
+        'BINARY'                        => 1,
+        'CHARACTER SET'                 => array(2, 'var'),
+        'CHARSET'                       => array(2, 'var'),
+        'COLLATE'                       => array(3, 'var'),
+        'UNSIGNED'                      => 4,
+        'ZEROFILL'                      => 5,
+=======
         'BINARY' => 1,
         'CHARACTER SET' => array(2, 'var'),
         'CHARSET' => array(2, 'var'),
         'COLLATE' => array(3, 'var'),
         'UNSIGNED' => 4,
         'ZEROFILL' => 5,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**
@@ -66,9 +91,15 @@ class DataType extends Component
     /**
      * Constructor.
      *
+<<<<<<< HEAD
+     * @param string       $name       The name of this data type.
+     * @param array        $parameters The parameters (size or possible values).
+     * @param OptionsArray $options    The options of this data type.
+=======
      * @param string       $name       the name of this data type
      * @param array        $parameters the parameters (size or possible values)
      * @param OptionsArray $options    the options of this data type
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function __construct(
         $name = null,
@@ -81,15 +112,25 @@ class DataType extends Component
     }
 
     /**
+<<<<<<< HEAD
+     * @param Parser     $parser  The parser that serves as context.
+     * @param TokensList $list    The list of tokens that are being parsed.
+     * @param array      $options Parameters for parsing.
+=======
      * @param Parser     $parser  the parser that serves as context
      * @param TokensList $list    the list of tokens that are being parsed
      * @param array      $options parameters for parsing
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return DataType
      */
     public static function parse(Parser $parser, TokensList $list, array $options = array())
     {
+<<<<<<< HEAD
+        $ret = new DataType();
+=======
         $ret = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         /**
          * The state of the parser.
@@ -100,7 +141,11 @@ class DataType extends Component
          *
          *      1 ----------------[ size and options ]----------------> 2
          *
+<<<<<<< HEAD
+         * @var int $state
+=======
          * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $state = 0;
 
@@ -108,7 +153,11 @@ class DataType extends Component
             /**
              * Token parsed at this moment.
              *
+<<<<<<< HEAD
+             * @var Token $token
+=======
              * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 
@@ -134,6 +183,10 @@ class DataType extends Component
                 ++$list->idx;
                 break;
             }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         }
 
         if (empty($ret->name)) {
@@ -141,13 +194,21 @@ class DataType extends Component
         }
 
         --$list->idx;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return $ret;
     }
 
     /**
+<<<<<<< HEAD
+     * @param DataType $component The component to be built.
+     * @param array    $options   Parameters for building.
+=======
      * @param DataType $component the component to be built
      * @param array    $options   parameters for building
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return string
      */

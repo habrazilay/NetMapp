@@ -204,7 +204,11 @@ function PMA_RTN_getRowForList($routine, $rowclass = '')
         . "AND SPECIFIC_NAME='" . $GLOBALS['dbi']->escapeString($routine['name']) . "'"
         . "AND ROUTINE_TYPE='" . $GLOBALS['dbi']->escapeString($routine['type']) . "'";
     $query = "SELECT `DEFINER` FROM INFORMATION_SCHEMA.ROUTINES WHERE $where;";
+<<<<<<< HEAD
+    $routine_definer = $GLOBALS['dbi']->fetchValue($query, 0, 0, $GLOBALS['controllink']);
+=======
     $routine_definer = $GLOBALS['dbi']->fetchValue($query);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
     $curr_user = $GLOBALS['dbi']->getCurrentUser();
 
@@ -240,7 +244,11 @@ function PMA_RTN_getRowForList($routine, $rowclass = '')
     // otherwise we can execute it directly.
 
     $definition = $GLOBALS['dbi']->getDefinition(
+<<<<<<< HEAD
+        $db, $routine['type'], $routine['name'], $GLOBALS['controllink']
+=======
         $db, $routine['type'], $routine['name']
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
     if ($definition !== false) {
         $parser = new SqlParser\Parser($definition);

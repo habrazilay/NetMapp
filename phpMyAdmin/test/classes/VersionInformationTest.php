@@ -60,7 +60,10 @@ class VersionInformationTest extends PMATestCase
      * @return void
      *
      * @group large
+<<<<<<< HEAD
+=======
      * @group network
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function testGetLatestVersion()
     {
@@ -259,4 +262,8 @@ class VersionInformationTest extends PMATestCase
         $this->assertFalse($mockVersionInfo->evaluateVersionCondition('PHP', '>7.0'));
         $this->assertTrue($mockVersionInfo->evaluateVersionCondition('PHP', '!=5.2'));
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584

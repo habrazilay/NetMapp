@@ -51,7 +51,11 @@ copyright = u'2012 - 2016, The phpMyAdmin devel team'
 # built documents.
 #
 # The short X.Y version.
+<<<<<<< HEAD
+version = '4.6.5.2'
+=======
 version = '4.6.6'
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 # The full version, including alpha/beta/rc tags.
 release = version
 

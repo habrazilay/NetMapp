@@ -184,10 +184,17 @@ class PMA_HeaderLocation_Test extends PHPUnit_Framework_TestCase
         $testUri_js = PMA_escapeJsString($testUri);
 
         $header = "<html>\n<head>\n    <title>- - -</title>
+<<<<<<< HEAD
+    <meta http-equiv=\"expires\" content=\"0\">"
+            . "\n    <meta http-equiv=\"Pragma\" content=\"no-cache\">"
+            . "\n    <meta http-equiv=\"Cache-Control\" content=\"no-cache\">"
+            . "\n    <meta http-equiv=\"Refresh\" content=\"0;url=" . $testUri_html . "\">"
+=======
     <meta http-equiv=\"expires\" content=\"0\" />"
             . "\n    <meta http-equiv=\"Pragma\" content=\"no-cache\" />"
             . "\n    <meta http-equiv=\"Cache-Control\" content=\"no-cache\" />"
             . "\n    <meta http-equiv=\"Refresh\" content=\"0;url=" . $testUri_html . "\" />"
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             . "\n    <script type=\"text/javascript\">\n        //<![CDATA[
         setTimeout(\"window.location = decodeURI('" . $testUri_js . "')\", 2000);
         //]]>\n    </script>\n</head>

@@ -2,8 +2,15 @@
 
 /**
  * `UPDATE` statement.
+<<<<<<< HEAD
+ *
+ * @package    SqlParser
+ * @subpackage Statements
+ */
+=======
  */
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Statements;
 
 use SqlParser\Statement;
@@ -29,19 +36,33 @@ use SqlParser\Components\Condition;
  *     [WHERE where_condition]
  *
  * @category   Statements
+<<<<<<< HEAD
+ * @package    SqlParser
+ * @subpackage Statements
+=======
  *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class UpdateStatement extends Statement
 {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * Options for `UPDATE` statements and their slot ID.
      *
      * @var array
      */
     public static $OPTIONS = array(
+<<<<<<< HEAD
+        'LOW_PRIORITY'                  => 1,
+        'IGNORE'                        => 2,
+=======
         'LOW_PRIORITY' => 1,
         'IGNORE' => 2,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**
@@ -52,6 +73,17 @@ class UpdateStatement extends Statement
      * @var array
      */
     public static $CLAUSES = array(
+<<<<<<< HEAD
+        'UPDATE'                        => array('UPDATE',      2),
+        // Used for options.
+        '_OPTIONS'                      => array('_OPTIONS',    1),
+        // Used for updated tables.
+        '_UPDATE'                       => array('UPDATE',      1),
+        'SET'                           => array('SET',         3),
+        'WHERE'                         => array('WHERE',       3),
+        'ORDER BY'                      => array('ORDER BY',    3),
+        'LIMIT'                         => array('LIMIT',       3),
+=======
         'UPDATE' => array('UPDATE',      2),
         // Used for options.
         '_OPTIONS' => array('_OPTIONS',    1),
@@ -61,6 +93,7 @@ class UpdateStatement extends Statement
         'WHERE' => array('WHERE',       3),
         'ORDER BY' => array('ORDER BY',    3),
         'LIMIT' => array('LIMIT',       3),
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**

@@ -67,6 +67,8 @@ class PMA_CleanupPathInfo_Test extends PHPUnit_Framework_TestCase
                 '/phpmyadmin/index.php'
             ),
             array(
+<<<<<<< HEAD
+=======
                 '',
                 '//example.com/../phpmyadmin/index.php',
                 '',
@@ -91,6 +93,7 @@ class PMA_CleanupPathInfo_Test extends PHPUnit_Framework_TestCase
                 '/phpmyadmin/index.php'
             ),
             array(
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 '/phpmyadmin/index.php',
                 '/phpmyadmin/index.php',
                 '',

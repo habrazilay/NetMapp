@@ -483,6 +483,19 @@ class ConfigFile
     }
 
     /**
+<<<<<<< HEAD
+     * Returns config file path, relative to phpMyAdmin's root path
+     *
+     * @return string
+     */
+    public function getFilePath()
+    {
+        return SETUP_CONFIG_FILE;
+    }
+
+    /**
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * Returns configuration array (full, multidimensional format)
      *
      * @return array

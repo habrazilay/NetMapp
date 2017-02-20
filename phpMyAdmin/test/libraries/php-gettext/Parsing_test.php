@@ -5,6 +5,10 @@
  *
  * @package PhpMyAdmin-test
  */
+<<<<<<< HEAD
+require_once 'libraries/php-gettext/gettext.php';
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
 class ParsingTest extends PHPUnit_Framework_TestCase
 {

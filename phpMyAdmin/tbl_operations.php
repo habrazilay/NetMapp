@@ -146,17 +146,24 @@ if (isset($_REQUEST['submitoptions'])) {
         $new_tbl_storage_engine = '';
     }
 
+<<<<<<< HEAD
+=======
     $row_format = (isset($create_options['row_format']))
         ? $create_options['row_format']
         : $pma_table->getStatusInfo('ROW_FORMAT');
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     $table_alters = PMA_getTableAltersArray(
         $is_myisam_or_aria, $is_isam, $create_options['pack_keys'],
         (empty($create_options['checksum']) ? '0' : '1'),
         $is_aria,
         ((isset($create_options['page_checksum'])) ? $create_options['page_checksum'] : ''),
         (empty($create_options['delay_key_write']) ? '0' : '1'),
+<<<<<<< HEAD
+        $is_innodb, $is_pbxt, $create_options['row_format'],
+=======
         $is_innodb, $is_pbxt, $row_format,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         $new_tbl_storage_engine,
         ((isset($create_options['transactional']) && $create_options['transactional'] == '0') ? '0' : '1'),
         $tbl_collation

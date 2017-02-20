@@ -1,6 +1,8 @@
 phpMyAdmin - ChangeLog
 ======================
 
+<<<<<<< HEAD
+=======
 4.6.6 (2017-01-23)
 - issue #12759 Fix Notice regarding 'Undefined index: old_usergroup'
 - issue #12760 Fix Notice regarding 'Undefined index: users'
@@ -48,6 +50,7 @@ phpMyAdmin - ChangeLog
 - issue        [security] SSRF in replication, see PMASA-2017-6.
 - issue        [security] DOS in replication status, see PMASA-2017-7.
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 4.6.5.2 (2016-12-05)
 - issue #12765 Fixed SQL export with newlines
 
@@ -185,6 +188,10 @@ phpMyAdmin - ChangeLog
 - issue        [security] Verify data before unserializing, see PMASA-2016-43
 - issue        [security] Use HTTPS for wiki links
 - issue        Remove Swekey support
+<<<<<<< HEAD
+- issue        [security] SSRF in setup script, see PMASA-2016-44
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 - issue        [security] Denial-of-service attack with $cfg['AllowArbitraryServer'] = true and persistent connections, see PMASA-2016-45
 - issue        [security] Improve SSL certificate handling
 - issue        [security] Fix full path disclosure in debugging code

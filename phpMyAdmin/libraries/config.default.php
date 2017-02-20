@@ -1058,6 +1058,8 @@ $cfg['NavigationTreeShowEvents'] = true;
 $cfg['ShowStats'] = true;
 
 /**
+<<<<<<< HEAD
+=======
  * show PHP info link
  *
  * @global boolean $cfg['ShowPhpInfo']
@@ -1065,6 +1067,7 @@ $cfg['ShowStats'] = true;
 $cfg['ShowPhpInfo'] = false;
 
 /**
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * show MySQL server and web server information
  *
  * @global boolean $cfg['ShowServerInfo']
@@ -2567,7 +2570,11 @@ $cfg['DefaultLang'] = 'en';
  *
  * @global string $cfg['DefaultConnectionCollation']
  */
+<<<<<<< HEAD
+$cfg['DefaultConnectionCollation'] = 'utf8_unicode_ci';
+=======
 $cfg['DefaultConnectionCollation'] = 'utf8mb4_unicode_ci';
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
 /**
  * Force: always use this language, e.g. 'en'

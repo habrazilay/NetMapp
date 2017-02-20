@@ -18,6 +18,13 @@ if (!defined('PHPMYADMIN')) {
 require_once './libraries/config/FormDisplay.tpl.php';
 require_once './setup/lib/index.lib.php';
 
+<<<<<<< HEAD
+$config_readable = false;
+$config_writable = false;
+$config_exists = false;
+PMA_checkConfigRw($config_readable, $config_writable, $config_exists);
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 echo '<h2>' , __('Configuration file') , '</h2>';
 
 echo PMA_displayFormTop('config.php');
@@ -36,6 +43,14 @@ echo '<tr>';
 echo '<td class="lastrow" style="text-align: left">';
 echo '<input type="submit" name="submit_download" value="'
     , __('Download') , '" class="green" />';
+<<<<<<< HEAD
+echo '<input type="submit" name="submit_save" value="' , __('Save') , '"';
+if (!$config_writable) {
+    echo ' disabled="disabled"';
+}
+echo '/>';
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 echo '</td>';
 echo '</tr>';
 

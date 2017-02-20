@@ -9,7 +9,12 @@
 use PMA\libraries\gis\GISMultipolygon;
 
 require_once 'GISGeomTest.php';
+<<<<<<< HEAD
+require_once 'libraries/tcpdf/tcpdf.php';
+
+=======
 require_once TCPDF_INC;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
 /**
  * Tests for PMA\libraries\gis\GISMultipolygon class
@@ -296,9 +301,12 @@ class GISMultipolygonTest extends GISGeomTest
      */
     public function providerForPrepareRowAsPng()
     {
+<<<<<<< HEAD
+=======
         if (! function_exists('imagecreatetruecolor')) {
             $this->markTestSkipped('GD extension missing!');
         }
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return array(
             array(
                 'MULTIPOLYGON(((136 40,147 83,16 75,136 40)),'

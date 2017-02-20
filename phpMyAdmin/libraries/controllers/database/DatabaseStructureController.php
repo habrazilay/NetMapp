@@ -887,7 +887,11 @@ class DatabaseStructureController extends DatabaseController
             if ($this->db == PMA_extractDbOrTable($db_table)
                 && preg_match(
                     "@^" .
+<<<<<<< HEAD
+                    mb_substr(PMA_extractDbOrTable($db_table, 'table'), 0, -1) . "@",
+=======
                     preg_quote(mb_substr(PMA_extractDbOrTable($db_table, 'table'), 0, -1)) . "@",
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     $truename
                 )
             ) {

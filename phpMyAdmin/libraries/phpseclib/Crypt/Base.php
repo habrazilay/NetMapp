@@ -708,6 +708,12 @@ abstract class Base
                     return !defined('OPENSSL_RAW_DATA') ? substr($result, 0, -$this->block_size) : $result;
                 case self::MODE_CBC:
                     $result = openssl_encrypt($plaintext, $this->cipher_name_openssl, $this->key, $this->openssl_options, $this->encryptIV);
+<<<<<<< HEAD
+                    if ($this->continuousBuffer) {
+                        $this->encryptIV = substr($result, -$this->block_size);
+                    }
+                    return !defined('OPENSSL_RAW_DATA') ? substr($result, 0, -$this->block_size) : $result;
+=======
                     if (!defined('OPENSSL_RAW_DATA')) {
                         $result = substr($result, 0, -$this->block_size);
                     }
@@ -715,6 +721,7 @@ abstract class Base
                         $this->encryptIV = substr($result, -$this->block_size);
                     }
                     return $result;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 case self::MODE_CTR:
                     return $this->_openssl_ctr_process($plaintext, $this->encryptIV, $this->enbuffer);
                 case self::MODE_CFB:
@@ -776,7 +783,11 @@ abstract class Base
                 $this->changed = false;
             }
             if ($this->enchanged) {
+<<<<<<< HEAD
+                mcrypt_generic_init($this->enmcrypt, $this->key, $this->encryptIV);
+=======
                 @mcrypt_generic_init($this->enmcrypt, $this->key, $this->encryptIV);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 $this->enchanged = false;
             }
 
@@ -809,15 +820,26 @@ abstract class Base
                 if ($len >= $block_size) {
                     if ($this->enbuffer['enmcrypt_init'] === false || $len > $this->cfb_init_len) {
                         if ($this->enbuffer['enmcrypt_init'] === true) {
+<<<<<<< HEAD
+                            mcrypt_generic_init($this->enmcrypt, $this->key, $iv);
+                            $this->enbuffer['enmcrypt_init'] = false;
+                        }
+                        $ciphertext.= mcrypt_generic($this->enmcrypt, substr($plaintext, $i, $len - $len % $block_size));
+=======
                             @mcrypt_generic_init($this->enmcrypt, $this->key, $iv);
                             $this->enbuffer['enmcrypt_init'] = false;
                         }
                         $ciphertext.= @mcrypt_generic($this->enmcrypt, substr($plaintext, $i, $len - $len % $block_size));
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                         $iv = substr($ciphertext, -$block_size);
                         $len%= $block_size;
                     } else {
                         while ($len >= $block_size) {
+<<<<<<< HEAD
+                            $iv = mcrypt_generic($this->ecb, $iv) ^ substr($plaintext, $i, $block_size);
+=======
                             $iv = @mcrypt_generic($this->ecb, $iv) ^ substr($plaintext, $i, $block_size);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                             $ciphertext.= $iv;
                             $len-= $block_size;
                             $i+= $block_size;
@@ -826,7 +848,11 @@ abstract class Base
                 }
 
                 if ($len) {
+<<<<<<< HEAD
+                    $iv = mcrypt_generic($this->ecb, $iv);
+=======
                     $iv = @mcrypt_generic($this->ecb, $iv);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     $block = $iv ^ substr($plaintext, -$len);
                     $iv = substr_replace($iv, $block, 0, $len);
                     $ciphertext.= $block;
@@ -836,10 +862,17 @@ abstract class Base
                 return $ciphertext;
             }
 
+<<<<<<< HEAD
+            $ciphertext = mcrypt_generic($this->enmcrypt, $plaintext);
+
+            if (!$this->continuousBuffer) {
+                mcrypt_generic_init($this->enmcrypt, $this->key, $this->encryptIV);
+=======
             $ciphertext = @mcrypt_generic($this->enmcrypt, $plaintext);
 
             if (!$this->continuousBuffer) {
                 @mcrypt_generic_init($this->enmcrypt, $this->key, $this->encryptIV);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             }
 
             return $ciphertext;
@@ -1017,6 +1050,12 @@ abstract class Base
                     if (!defined('OPENSSL_RAW_DATA')) {
                         $padding = str_repeat(chr($this->block_size), $this->block_size) ^ substr($ciphertext, -$this->block_size);
                         $ciphertext.= substr(openssl_encrypt($padding, $this->cipher_name_openssl_ecb, $this->key, true), 0, $this->block_size);
+<<<<<<< HEAD
+                    }
+                    $plaintext = openssl_decrypt($ciphertext, $this->cipher_name_openssl, $this->key, $this->openssl_options, $this->decryptIV);
+                    if ($this->continuousBuffer) {
+                        $this->decryptIV = substr($ciphertext, -$this->block_size);
+=======
                         $offset = 2 * $this->block_size;
                     } else {
                         $offset = $this->block_size;
@@ -1024,6 +1063,7 @@ abstract class Base
                     $plaintext = openssl_decrypt($ciphertext, $this->cipher_name_openssl, $this->key, $this->openssl_options, $this->decryptIV);
                     if ($this->continuousBuffer) {
                         $this->decryptIV = substr($ciphertext, -$offset, $this->block_size);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     }
                     break;
                 case self::MODE_CTR:
@@ -1088,7 +1128,11 @@ abstract class Base
                 $this->changed = false;
             }
             if ($this->dechanged) {
+<<<<<<< HEAD
+                mcrypt_generic_init($this->demcrypt, $this->key, $this->decryptIV);
+=======
                 @mcrypt_generic_init($this->demcrypt, $this->key, $this->decryptIV);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 $this->dechanged = false;
             }
 
@@ -1116,12 +1160,20 @@ abstract class Base
                 }
                 if ($len >= $block_size) {
                     $cb = substr($ciphertext, $i, $len - $len % $block_size);
+<<<<<<< HEAD
+                    $plaintext.= mcrypt_generic($this->ecb, $iv . $cb) ^ $cb;
+=======
                     $plaintext.= @mcrypt_generic($this->ecb, $iv . $cb) ^ $cb;
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     $iv = substr($cb, -$block_size);
                     $len%= $block_size;
                 }
                 if ($len) {
+<<<<<<< HEAD
+                    $iv = mcrypt_generic($this->ecb, $iv);
+=======
                     $iv = @mcrypt_generic($this->ecb, $iv);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     $plaintext.= $iv ^ substr($ciphertext, -$len);
                     $iv = substr_replace($iv, substr($ciphertext, -$len), 0, $len);
                     $pos = $len;
@@ -1130,10 +1182,17 @@ abstract class Base
                 return $plaintext;
             }
 
+<<<<<<< HEAD
+            $plaintext = mdecrypt_generic($this->demcrypt, $ciphertext);
+
+            if (!$this->continuousBuffer) {
+                mcrypt_generic_init($this->demcrypt, $this->key, $this->decryptIV);
+=======
             $plaintext = @mdecrypt_generic($this->demcrypt, $ciphertext);
 
             if (!$this->continuousBuffer) {
                 @mcrypt_generic_init($this->demcrypt, $this->key, $this->decryptIV);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             }
 
             return $this->paddable ? $this->_unpad($plaintext) : $plaintext;
@@ -1276,7 +1335,11 @@ abstract class Base
      * PHP's OpenSSL bindings do not operate in continuous mode so we'll wrap around it. Since the keystream
      * for CTR is the same for both encrypting and decrypting this function is re-used by both Base::encrypt()
      * and Base::decrypt(). Also, OpenSSL doesn't implement CTR for all of it's symmetric ciphers so this
+<<<<<<< HEAD
+     * function will emulate CTR with ECB when necesary.
+=======
      * function will emulate CTR with ECB when necessary.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @see self::encrypt()
      * @see self::decrypt()
@@ -1595,7 +1658,11 @@ abstract class Base
             case self::ENGINE_MCRYPT:
                 return $this->cipher_name_mcrypt &&
                        extension_loaded('mcrypt') &&
+<<<<<<< HEAD
+                       in_array($this->cipher_name_mcrypt, mcrypt_list_algorithms());
+=======
                        in_array($this->cipher_name_mcrypt, @mcrypt_list_algorithms());
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             case self::ENGINE_INTERNAL:
                 return true;
         }
@@ -1674,13 +1741,22 @@ abstract class Base
         if ($this->engine != self::ENGINE_MCRYPT && $this->enmcrypt) {
             // Closing the current mcrypt resource(s). _mcryptSetup() will, if needed,
             // (re)open them with the module named in $this->cipher_name_mcrypt
+<<<<<<< HEAD
+            mcrypt_module_close($this->enmcrypt);
+            mcrypt_module_close($this->demcrypt);
+=======
             @mcrypt_module_close($this->enmcrypt);
             @mcrypt_module_close($this->demcrypt);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $this->enmcrypt = null;
             $this->demcrypt = null;
 
             if ($this->ecb) {
+<<<<<<< HEAD
+                mcrypt_module_close($this->ecb);
+=======
                 @mcrypt_module_close($this->ecb);
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 $this->ecb = null;
             }
         }
@@ -1794,19 +1870,32 @@ abstract class Base
                 self::MODE_STREAM => MCRYPT_MODE_STREAM,
             );
 
+<<<<<<< HEAD
+            $this->demcrypt = mcrypt_module_open($this->cipher_name_mcrypt, '', $mcrypt_modes[$this->mode], '');
+            $this->enmcrypt = mcrypt_module_open($this->cipher_name_mcrypt, '', $mcrypt_modes[$this->mode], '');
+=======
             $this->demcrypt = @mcrypt_module_open($this->cipher_name_mcrypt, '', $mcrypt_modes[$this->mode], '');
             $this->enmcrypt = @mcrypt_module_open($this->cipher_name_mcrypt, '', $mcrypt_modes[$this->mode], '');
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
             // we need the $ecb mcrypt resource (only) in MODE_CFB with enableContinuousBuffer()
             // to workaround mcrypt's broken ncfb implementation in buffered mode
             // see: {@link http://phpseclib.sourceforge.net/cfb-demo.phps}
             if ($this->mode == self::MODE_CFB) {
+<<<<<<< HEAD
+                $this->ecb = mcrypt_module_open($this->cipher_name_mcrypt, '', MCRYPT_MODE_ECB, '');
+=======
                 $this->ecb = @mcrypt_module_open($this->cipher_name_mcrypt, '', MCRYPT_MODE_ECB, '');
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             }
         } // else should mcrypt_generic_deinit be called?
 
         if ($this->mode == self::MODE_CFB) {
+<<<<<<< HEAD
+            mcrypt_generic_init($this->ecb, $this->key, str_repeat("\0", $this->block_size));
+=======
             @mcrypt_generic_init($this->ecb, $this->key, str_repeat("\0", $this->block_size));
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         }
     }
 
@@ -2505,7 +2594,11 @@ abstract class Base
      * is stored, classwide (!), here for reusing.
      *
      * The string-based index of $function is a classwide
+<<<<<<< HEAD
+     * uniqe value representing, at least, the $mode of
+=======
      * unique value representing, at least, the $mode of
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      * operation (or more... depends of the optimizing level)
      * for which $mode the lambda function was created.
      *

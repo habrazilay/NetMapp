@@ -3,8 +3,15 @@
 /**
  * Parses a reference to an expression (column, table or database name, function
  * call, mathematical expression, etc.).
+<<<<<<< HEAD
+ *
+ * @package    SqlParser
+ * @subpackage Components
+ */
+=======
  */
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Components;
 
 use SqlParser\Context;
@@ -18,19 +25,32 @@ use SqlParser\TokensList;
  * call, mathematical expression, etc.).
  *
  * @category   Components
+<<<<<<< HEAD
+ * @package    SqlParser
+ * @subpackage Components
+=======
  *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class Expression extends Component
 {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * List of allowed reserved keywords in expressions.
      *
      * @var array
      */
     private static $ALLOWED_KEYWORDS = array(
+<<<<<<< HEAD
+        'AS' => 1, 'DUAL' => 1, 'NULL' => 1, 'REGEXP' => 1, 'CASE' => 1
+=======
         'AS' => 1, 'DUAL' => 1, 'NULL' => 1, 'REGEXP' => 1, 'CASE' => 1,
         'DIV' => 1, 'AND' => 1, 'OR' => 1, 'XOR' => 1, 'NOT' => 1, 'MOD' => 1,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**
@@ -95,11 +115,19 @@ class Expression extends Component
      * string.
      *
      * @param string $database The name of the database or the the expression.
+<<<<<<< HEAD
+     *                          the the expression.
+     * @param string $table    The name of the table or the alias of the expression.
+     *                          the alias of the expression.
+     * @param string $column   The name of the column.
+     * @param string $alias    The name of the alias.
+=======
      *                         the the expression.
      * @param string $table    The name of the table or the alias of the expression.
      *                         the alias of the expression.
      * @param string $column   the name of the column
      * @param string $alias    the name of the alias
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function __construct($database = null, $table = null, $column = null, $alias = null)
     {
@@ -115,7 +143,11 @@ class Expression extends Component
     }
 
     /**
+<<<<<<< HEAD
+     * Possible options:
+=======
      * Possible options:.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      *      `field`
      *
@@ -140,48 +172,78 @@ class Expression extends Component
      *
      *          If not empty, breaks after last parentheses occurred.
      *
+<<<<<<< HEAD
+     * @param Parser     $parser  The parser that serves as context.
+     * @param TokensList $list    The list of tokens that are being parsed.
+     * @param array      $options Parameters for parsing.
+=======
      * @param Parser     $parser  the parser that serves as context
      * @param TokensList $list    the list of tokens that are being parsed
      * @param array      $options parameters for parsing
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return Expression
      */
     public static function parse(Parser $parser, TokensList $list, array $options = array())
     {
+<<<<<<< HEAD
+        $ret = new Expression();
+=======
         $ret = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         /**
          * Whether current tokens make an expression or a table reference.
          *
+<<<<<<< HEAD
+         * @var bool $isExpr
+=======
          * @var bool
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $isExpr = false;
 
         /**
          * Whether a period was previously found.
          *
+<<<<<<< HEAD
+         * @var bool $dot
+=======
          * @var bool
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $dot = false;
 
         /**
          * Whether an alias is expected. Is 2 if `AS` keyword was found.
          *
+<<<<<<< HEAD
+         * @var bool $alias
+=======
          * @var bool
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $alias = false;
 
         /**
          * Counts brackets.
          *
+<<<<<<< HEAD
+         * @var int $brackets
+=======
          * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $brackets = 0;
 
         /**
          * Keeps track of the last two previous tokens.
          *
+<<<<<<< HEAD
+         * @var Token[] $prev
+=======
          * @var Token[]
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $prev = array(null, null);
 
@@ -192,10 +254,18 @@ class Expression extends Component
         }
 
         for (; $list->idx < $list->count; ++$list->idx) {
+<<<<<<< HEAD
+
+            /**
+             * Token parsed at this moment.
+             *
+             * @var Token $token
+=======
             /**
              * Token parsed at this moment.
              *
              * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 
@@ -223,7 +293,11 @@ class Expression extends Component
                     $ret->subquery = $token->value;
                 } elseif (($token->flags & Token::FLAG_KEYWORD_FUNCTION)
                     && (empty($options['parseField'])
+<<<<<<< HEAD
+                    && ! $alias)
+=======
                     && !$alias)
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                 ) {
                     $isExpr = true;
                 } elseif (($token->flags & Token::FLAG_KEYWORD_RESERVED)
@@ -257,7 +331,11 @@ class Expression extends Component
                         continue;
                     }
                     $isExpr = true;
+<<<<<<< HEAD
+                } elseif ($brackets === 0 && count($ret->expr) > 0 && ! $alias) {
+=======
                 } elseif ($brackets === 0 && strlen($ret->expr) > 0 && !$alias) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     /* End of expression */
                     break;
                 }
@@ -404,13 +482,21 @@ class Expression extends Component
         }
 
         --$list->idx;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return $ret;
     }
 
     /**
+<<<<<<< HEAD
+     * @param Expression|Expression[] $component The component to be built.
+     * @param array                   $options   Parameters for building.
+=======
      * @param Expression|Expression[] $component the component to be built
      * @param array                   $options   parameters for building
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return string
      */

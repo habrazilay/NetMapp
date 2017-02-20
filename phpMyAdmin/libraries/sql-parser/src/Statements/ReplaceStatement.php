@@ -2,14 +2,25 @@
 
 /**
  * `REPLACE` statement.
+<<<<<<< HEAD
+ *
+ * @package    SqlParser
+ * @subpackage Statements
+ */
+=======
  */
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Statements;
 
 use SqlParser\Parser;
 use SqlParser\Token;
 use SqlParser\TokensList;
 use SqlParser\Statement;
+<<<<<<< HEAD
+use SqlParser\Statements\SelectStatement;
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 use SqlParser\Components\Array2d;
 use SqlParser\Components\IntoKeyword;
 use SqlParser\Components\OptionsArray;
@@ -37,19 +48,33 @@ use SqlParser\Components\SetOperation;
  *   SELECT ...
  *
  * @category   Statements
+<<<<<<< HEAD
+ * @package    SqlParser
+ * @subpackage Statements
+=======
  *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class ReplaceStatement extends Statement
 {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * Options for `REPLACE` statements and their slot ID.
      *
      * @var array
      */
     public static $OPTIONS = array(
+<<<<<<< HEAD
+        'LOW_PRIORITY'                  => 1,
+        'DELAYED'                       => 1,
+=======
         'LOW_PRIORITY' => 1,
         'DELAYED' => 1,
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     );
 
     /**
@@ -68,7 +93,11 @@ class ReplaceStatement extends Statement
 
     /**
      * If SET clause is present
+<<<<<<< HEAD
+     * holds the SetOperation
+=======
      * holds the SetOperation.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @var SetOperation[]
      */
@@ -76,7 +105,11 @@ class ReplaceStatement extends Statement
 
     /**
      * If SELECT clause is present
+<<<<<<< HEAD
+     * holds the SelectStatement
+=======
      * holds the SelectStatement.
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @var SelectStatement
      */
@@ -90,20 +123,37 @@ class ReplaceStatement extends Statement
         $ret = 'REPLACE ' . $this->options
             . ' INTO ' . $this->into;
 
+<<<<<<< HEAD
+        if ($this->values != NULL && count($this->values) > 0) {
+            $ret .= ' VALUES ' . Array2d::build($this->values);
+        } elseif ($this->set != NULL && count($this->set) > 0) {
+            $ret .= ' SET ' . SetOperation::build($this->set);
+        } elseif ($this->select != NULL && count($this->select) > 0) {
+=======
         if ($this->values != null && count($this->values) > 0) {
             $ret .= ' VALUES ' . Array2d::build($this->values);
         } elseif ($this->set != null && count($this->set) > 0) {
             $ret .= ' SET ' . SetOperation::build($this->set);
         } elseif ($this->select != null && strlen($this->select) > 0) {
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
             $ret .= ' ' . $this->select->build();
         }
 
         return $ret;
     }
 
+<<<<<<< HEAD
+
+    /**
+     * @param Parser     $parser The instance that requests parsing.
+     * @param TokensList $list   The list of tokens to be parsed.
+     *
+     * @return void
+=======
     /**
      * @param Parser     $parser the instance that requests parsing
      * @param TokensList $list   the list of tokens to be parsed
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function parse(Parser $parser, TokensList $list)
     {
@@ -128,7 +178,11 @@ class ReplaceStatement extends Statement
          *
          *      1 -------------------------[ VALUES/VALUE/SET/SELECT ]-----------------------> 2
          *
+<<<<<<< HEAD
+         * @var int $state
+=======
          * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $state = 0;
 
@@ -136,7 +190,11 @@ class ReplaceStatement extends Statement
             /**
              * Token parsed at this moment.
              *
+<<<<<<< HEAD
+             * @var Token $token
+=======
              * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 

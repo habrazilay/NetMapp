@@ -2,8 +2,15 @@
 
 /**
  * `RENAME TABLE` keyword parser.
+<<<<<<< HEAD
+ *
+ * @package    SqlParser
+ * @subpackage Components
+ */
+=======
  */
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Components;
 
 use SqlParser\Component;
@@ -15,11 +22,20 @@ use SqlParser\TokensList;
  * `RENAME TABLE` keyword parser.
  *
  * @category   Keywords
+<<<<<<< HEAD
+ * @package    SqlParser
+ * @subpackage Components
+=======
  *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class RenameOperation extends Component
 {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * The old table name.
      *
@@ -35,9 +51,15 @@ class RenameOperation extends Component
     public $new;
 
     /**
+<<<<<<< HEAD
+     * @param Parser     $parser  The parser that serves as context.
+     * @param TokensList $list    The list of tokens that are being parsed.
+     * @param array      $options Parameters for parsing.
+=======
      * @param Parser     $parser  the parser that serves as context
      * @param TokensList $list    the list of tokens that are being parsed
      * @param array      $options parameters for parsing
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return RenameOperation[]
      */
@@ -45,7 +67,11 @@ class RenameOperation extends Component
     {
         $ret = array();
 
+<<<<<<< HEAD
+        $expr = new RenameOperation();
+=======
         $expr = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 
         /**
          * The state of the parser.
@@ -61,7 +87,11 @@ class RenameOperation extends Component
          *      3 ------------------------[ , ]------------------------> 0
          *      3 -----------------------[ else ]----------------------> (END)
          *
+<<<<<<< HEAD
+         * @var int $state
+=======
          * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $state = 0;
 
@@ -69,7 +99,11 @@ class RenameOperation extends Component
             /**
              * Token parsed at this moment.
              *
+<<<<<<< HEAD
+             * @var Token $token
+=======
              * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 
@@ -128,7 +162,11 @@ class RenameOperation extends Component
             } elseif ($state === 3) {
                 if (($token->type === Token::TYPE_OPERATOR) && ($token->value === ',')) {
                     $ret[] = $expr;
+<<<<<<< HEAD
+                    $expr = new RenameOperation();
+=======
                     $expr = new self();
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
                     $state = 0;
                 } else {
                     break;
@@ -149,13 +187,21 @@ class RenameOperation extends Component
         }
 
         --$list->idx;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
         return $ret;
     }
 
     /**
+<<<<<<< HEAD
+     * @param RenameOperation $component The component to be built.
+     * @param array           $options   Parameters for building.
+=======
      * @param RenameOperation $component the component to be built
      * @param array           $options   parameters for building
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      *
      * @return string
      */

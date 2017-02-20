@@ -2,8 +2,15 @@
 
 /**
  * `ALTER` statement.
+<<<<<<< HEAD
+ *
+ * @package    SqlParser
+ * @subpackage Statements
+ */
+=======
  */
 
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
 namespace SqlParser\Statements;
 
 use SqlParser\Parser;
@@ -18,11 +25,20 @@ use SqlParser\Components\OptionsArray;
  * `ALTER` statement.
  *
  * @category   Statements
+<<<<<<< HEAD
+ * @package    SqlParser
+ * @subpackage Statements
+=======
  *
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL-2.0+
  */
 class AlterStatement extends Statement
 {
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
     /**
      * Table affected.
      *
@@ -43,6 +59,27 @@ class AlterStatement extends Statement
      * @var array
      */
     public static $OPTIONS = array(
+<<<<<<< HEAD
+        'ONLINE'                        => 1,
+        'OFFLINE'                       => 1,
+        'IGNORE'                        => 2,
+
+        'DATABASE'                      => 3,
+        'EVENT'                         => 3,
+        'FUNCTION'                      => 3,
+        'PROCEDURE'                     => 3,
+        'SERVER'                        => 3,
+        'TABLE'                         => 3,
+        'TABLESPACE'                    => 3,
+        'VIEW'                          => 3,
+    );
+
+    /**
+     * @param Parser     $parser The instance that requests parsing.
+     * @param TokensList $list   The list of tokens to be parsed.
+     *
+     * @return void
+=======
         'ONLINE' => 1,
         'OFFLINE' => 1,
         'IGNORE' => 2,
@@ -60,6 +97,7 @@ class AlterStatement extends Statement
     /**
      * @param Parser     $parser the instance that requests parsing
      * @param TokensList $list   the list of tokens to be parsed
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
      */
     public function parse(Parser $parser, TokensList $list)
     {
@@ -91,7 +129,11 @@ class AlterStatement extends Statement
          *
          *      1 -------------------------[ , ]-----------------------> 0
          *
+<<<<<<< HEAD
+         * @var int $state
+=======
          * @var int
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
          */
         $state = 0;
 
@@ -99,7 +141,11 @@ class AlterStatement extends Statement
             /**
              * Token parsed at this moment.
              *
+<<<<<<< HEAD
+             * @var Token $token
+=======
              * @var Token
+>>>>>>> 9860b55650c4c7ee9976fb672b5165317a139584
              */
             $token = $list->tokens[$list->idx];
 
