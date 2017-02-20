@@ -82,6 +82,7 @@
                             </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">  
                           <select name="site" id="site-list" class="form-control" onChange="getroom(this.value);">
+                              <option disabled selected>Please Select...</option>
                             <?php
                             foreach($results as $site) {
                             ?>
