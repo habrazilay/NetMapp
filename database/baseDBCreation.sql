@@ -74,16 +74,16 @@ This table contains details about power plugs and sockets types.
 mostly including the variety of IEC 60320 plugs and sockets.
 
 colums:
-id 		- 	unique row identifier.
-type 	- 	type of the connector. (Ex. C13,C19)
-current - 	current rating of the connector. (Ex. 32A)
-picLoc	-	path location for an image of the connector.
+id 			- 	unique row identifier.
+type 		- 	type of the connector. (Ex. C13,C19)
+maxCurrent	- 	max current rating of the connector. (Ex. 32A)
+picLoc		-	path location for an image of the connector.
 */
 CREATE TABLE base.powerSocketAndPlugTypes
 (
 	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	`type` varchar(20) NOT NULL,
-	`current` smallint DEFAULT NULL,
+	`maxCurrent` varchar(10) DEFAULT NULL,
 	`picLoc` varchar(255)
 );
 
@@ -93,7 +93,6 @@ including fiber optic transceivers such as SFP+,GBIC.
 
 colums:
 id 			- 	unique row identifier.
-brand 		- 	brand/manufacture of the transceiver.
 type 		- 	type of the transceiver. (Ex. SFP+,GBIC)
 model 		- 	model of the transceiver. (Ex. 10GBASE-USR,1000BASE-SX)
 plugTypeid	-	the row id of the matching plug type which connect to this transceiver. (Ex. the identifier of the LC plug type).
@@ -101,7 +100,7 @@ plugTypeid	-	the row id of the matching plug type which connect to this transcei
 CREATE TABLE base.opticalTransceiverTypes
 (
 	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	`brand` varchar(40) NOT NULL,
+	`model` varchar(40) NOT NULL,
 	`type` varchar(40) NOT NULL,
 	`plugTypeid` int NOT NULL,
 	FOREIGN KEY (plugTypeid)

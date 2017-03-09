@@ -10,4 +10,5 @@ CREATE TABLE IF NOT EXISTS `security`.`users` (
   UNIQUE KEY `user_email` (`user_email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='user data';
 
+/* USER FOR TESTING PURPOSES --- TO BE REMOVED */
 INSERT INTO `security`.`users` (`user_name`, `user_password_hash`, `user_email`) VALUES ('newit', '$2y$10$p1r4HKCr1TB/yCYFsk5Ooe9snRIztvNo3gCafPiWsOL38POrQnZbW', 'info@newit.com');

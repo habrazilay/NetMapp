@@ -14,7 +14,7 @@ rid 		- 	room row identifier where the cabinet is placed.
 name 		- 	unique name to easily identify a cabinet by technicians. (Ex. A2,B1)
 clientName 	- 	name to easily identify a cabinet by the client. (Ex. CLOUD STORAGE1)
 uHeight		- 	maximum amount of Units availiable.
-length		- 	cabinets length in centimeters.
+depth		- 	cabinets depth in centimeters.
 width		- 	cabinets width in centimeters.
 height		- 	cabinets height in centimeters.
 description	-	cabinet description.
@@ -29,7 +29,7 @@ CREATE TABLE mapping.cabinets
 	`name` varchar(50) NOT NULL,
 	`clientName` varchar(50) DEFAULT NULL,
 	`uHeight` smallint NOT NULL DEFAULT 42,
-	`length` smallint DEFAULT 80,
+	`depth` smallint DEFAULT 120,
 	`width` smallint DEFAULT 60,
 	`height` smallint DEFAULT 200,
 	`description` varchar(100) DEFAULT NULL,
