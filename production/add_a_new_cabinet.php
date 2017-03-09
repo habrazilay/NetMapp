@@ -23,13 +23,15 @@
         $name = $_POST['cab_name'];
         $clientName = $_POST['cab_client_name'];
         $uHeight = $_POST['cab_uheight'];        
-        $length = $_POST['cab_length'];
+        $depth = $_POST['cab_depth'];
         $width = $_POST['cab_width'];
         $height = $_POST['cab_height'];
         $description = $_POST['cab_description']; 
+ 		
+        //Data Verification required before any sql execution!
         
-        $sql = "INSERT INTO cabinets (rid,name,clientName,uHeight,length,width,height,description) 
-        VALUES('" . $roomid . "','" . $name . "','" . $clientName . "','" . $uHeight . "','" . $length . "','" . $width . "','" . $height . "','" . $description . "')";
+        $sql = "INSERT INTO cabinets (rid,name,clientName,uHeight,depth,width,height,description) 
+        VALUES('" . $roomid . "','" . $name . "','" . $clientName . "','" . $uHeight . "','" . $depth . "','" . $width . "','" . $height . "','" . $description . "')";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully"; //Must to make a popup!
@@ -127,10 +129,10 @@
                           </div>
                           </div>
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Length </span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Depth </span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="cab_length" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" min="1" value="60">
+                              <input name="cab_depth" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" min="1" value="60">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12">Width </span>
                                 </label>
                                 <input name="cab_width" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" min="1" value="200">
