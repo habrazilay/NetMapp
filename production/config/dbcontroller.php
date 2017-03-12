@@ -34,5 +34,42 @@ class DBController {
 		$rowcount = mysqli_num_rows($result);
 		return $rowcount;	
 	}
+	
+	/* This function executes a sql query safely using prepared statements and bind parameterssafe sql execution.
+	 * use: prepareAndRunQuery($Prepared_Query,$db,$format_string,$arg1,$arg2,...);
+	 */
+	function prepareAndRunQuery($query,$db,$formatStr,...$args) {
+		$errors = array();
+		$countArgs = count($args);
+		if ( (substr_count($query, '?') != $countArgs) || (strlen($formatStr) != $countArgs) )
+			$errors[] = "Mismatching number of args: amount of '?' in query, count of format string and count of args must be equal."; 
+		
+		require_once("set_mysql_server.php");
+		$conn = new mysqli(DB_HOST,DB_USER,DB_PASS,$db);
+		if(!$stmt = $conn->prepare($query))
+			$errors[] = "Failed to prepare query.";
+		if(!$stmt->bind_param($formatStr, ...$args))
+			$errors[] = "Failed to bind parameters into query.";
+		if(!$stmt->execute()){
+			$errors[] = "Failed to execute query.";
+			$errors[] = mysqli_stmt_error($stmt);
+		}
+		
+		if(!empty($errors)){
+			echo print_r($errors);
+			return false;
+		}
+			
+		$result = $stmt->get_result();
+		if($result) {
+			while($row=$result->fetch_assoc()) {
+				$resultset[] = $row;
+			}
+		if(!empty($resultset))
+			return $resultset;
+		}
+		
+	}
+			
 }
 ?>
