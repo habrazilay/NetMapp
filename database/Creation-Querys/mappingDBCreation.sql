@@ -33,7 +33,7 @@ CREATE TABLE mapping.cabinets
 	`width` smallint DEFAULT 60,
 	`height` smallint DEFAULT 200,
 	`description` varchar(100) DEFAULT NULL,
-	UNIQUE(name)
+	UNIQUE(`rid`,`name`)
 );
 
 
@@ -46,17 +46,18 @@ cabid 			- 	cabinet row identifier where the device is placed.
 masterid	 	- 	unique id to easily identify the device by technicians. (Ex. A-0192,B-9813)
 uLoc			-	the lowest Unit location of the device inside the cabinet.
 uHeight			- 	the size of the device in Units.
-uLenght			- 	the length of the device in Units. (Ex. 0.5 for half U device).
+uLength			- 	the length of the device in Units. (Ex. 0.5 for half U device).
 name 			- 	name to identify the device by the client.
 typeid			-	referencing device row identifier of the base database, for more details about the device.
 powerFeedType 	-	referencing power socket row identifier matching this device.	
 powerFeedAmount	-	amount of power sockets availiable for this device.
 activePorts		-	indicates how many required to be mapped on this device. (for estimation and status reports)
-intallationType*		-	indicates in which way the device installed to the cabin. (ear/rails/shelf) 
+intallationType*-	indicates in which way the device installed to the cabin. (ear/rails/shelf)
+phase			-	indicates the moving phase of this device. (0 for untransferred devices) 
 arrivalDate		-	date of arrival.
 description		-	device description.
 
-* installationType values: 0-ears, 1-rails, 2-shelf, 3-ear+shelf, 4-on top, 5-next to the cabin.
+* installationType values: 0-ears, 1-rails, 2-shelf, 3-ear+shelf, 4-Uninstalled(placed over another device), 5-on top, 6-next to the cabin.
 */
 CREATE TABLE mapping.devices
 (
@@ -68,7 +69,7 @@ CREATE TABLE mapping.devices
 	`masterid` varchar(20) NOT NULL,
 	`uLoc` tinyint DEFAULT NULL,
 	`uHeight` tinyint DEFAULT 1,
-	`uLenght` DECIMAL(4,3) DEFAULT 1.0,
+	`uLength` DECIMAL(4,3) DEFAULT 1.0,
 	`name` varchar(50) DEFAULT NULL,
 	`typeid` int NOT NULL ,
 	FOREIGN KEY (typeid)
@@ -81,6 +82,7 @@ CREATE TABLE mapping.devices
 	`powerFeedAmount` tinyint DEFAULT 1,
 	`activePorts` smallint DEFAULT NULL,
 	`installationType` tinyint DEFAULT 0,
+	`phase` tinyint DEFAULT 0,
 	`arrivalDate` datetime DEFAULT NULL,
 	`faceFront` boolean DEFAULT TRUE,
 	`description` varchar(100) DEFAULT NULL,
