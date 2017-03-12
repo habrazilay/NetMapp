@@ -155,4 +155,7 @@
         </div>
         <!-- /page content -->
 
+
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
+
 <?php include("./footer.html"); ?>
