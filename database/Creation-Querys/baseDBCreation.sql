@@ -5,15 +5,39 @@ The content of this database is details about well known network related devices
 */
 CREATE SCHEMA `base` DEFAULT CHARACTER SET hebrew ;
 
+
+/*
+This table contains details about power plugs and sockets types.
+mostly including the variety of IEC 60320 plugs and sockets.
+
+colums:
+id 			- 	unique row identifier.
+type 		- 	type of the connector. (Ex. C13,C19)
+maxCurrent	- 	max current rating of the connector. (Ex. 32A)
+picLoc		-	path location for an image of the connector.
+*/
+CREATE TABLE base.powerSocketAndPlugTypes
+(
+	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`type` varchar(20) NOT NULL,
+	`maxCurrent` varchar(10) DEFAULT NULL,
+	`picLoc` varchar(255)
+);
+
+
 /*
 This table contains details about business networking rooms equipment.
 including servers, blade systems, storage, switches, routers, access points, firewall, adapters, and so on.
 
 colums:
-id 		- 	unique row identifier.
-brand 	- 	brand/manufacture of the device.
-type 	- 	purpose of the device. (Ex. switch/server/...)
-model 	- 	specific model of the device. (Ex. 2960/ProLiant 360/...)
+id 						- 	unique row identifier.
+brand 					- 	brand/manufacture of the device.
+type 					- 	purpose of the device. (Ex. switch/server/...)
+model			 		- 	specific model of the device. (Ex. 2960/ProLiant 360/...)
+uHeight					- 	the size of the device in Units.
+uLength					- 	the length of the device in Units. (Ex. 0.5 for half U device).
+builtInPowerFeedType 	-	referencing power socket row identifier matching this device.	
+builtInPowerFeedAmount	-	amount of power sockets built in for this device.
 picLoc 	-	path location for an image of the device.
 */
 CREATE TABLE base.devices
@@ -22,6 +46,13 @@ CREATE TABLE base.devices
 	`brand` varchar(30) DEFAULT "Not Specified",
 	`type` varchar(30) DEFAULT "Not Specified",
 	`model` varchar(100) NOT NULL,
+	`uHeight` tinyint DEFAULT 1,
+	`uLength` DECIMAL(4,3) DEFAULT 1.0,
+	`builtInPowerFeedType` int DEFAULT NULL,
+	FOREIGN KEY (builtInPowerFeedType)
+		REFERENCES base.powerSocketAndPlugTypes(id)
+		ON DELETE RESTRICT,
+	`builtInPowerFeedAmount` tinyint DEFAULT 1,
 	`picLoc` varchar(255) DEFAULT NULL
 );
 
@@ -63,29 +94,12 @@ CREATE TABLE base.powerIndustrialPlugTypes
 	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	`type` varchar(50) NOT NULL,
 	`voltRange` varchar(20) DEFAULT "Not Specified",
-	`current` smallint DEFAULT 0,
+	`current` varchar(20) DEFAULT 0,
 	`phases` varchar(30) DEFAULT "Not Specified",
 	`picLoc` varchar(255)
 );
 
 
-/*
-This table contains details about power plugs and sockets types.
-mostly including the variety of IEC 60320 plugs and sockets.
-
-colums:
-id 			- 	unique row identifier.
-type 		- 	type of the connector. (Ex. C13,C19)
-maxCurrent	- 	max current rating of the connector. (Ex. 32A)
-picLoc		-	path location for an image of the connector.
-*/
-CREATE TABLE base.powerSocketAndPlugTypes
-(
-	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	`type` varchar(20) NOT NULL,
-	`maxCurrent` varchar(10) DEFAULT NULL,
-	`picLoc` varchar(255)
-);
 
 /*
 This table contains details about fiber optic transceivers.
