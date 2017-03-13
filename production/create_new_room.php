@@ -1,9 +1,9 @@
-<?php include("./loginVerify.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php"); ?>
 <!-- post to db -->
       <?php
       
         // include the configs / constants for the database connection and schema
-        require_once("config/set_mysql_server.php");
+        require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
         
         if(isset($_POST['add_room'])) {
         // Create connection
@@ -33,10 +33,10 @@
         $conn->close();}
         ?>
 <!-- /post to db -->
-<?php include("./header.html"); ?>
-<?php include("./sidebar_menu.html"); ?>
-<?php include("./menu_footer.html"); ?>
-<?php include("./top_navigation.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/sidebar_menu.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html"); ?>
  
  <!-- page content -->
         <div class="right_col" role="main">
@@ -63,7 +63,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="form-control" name="site_name">
                             <?php 
-                            require_once("config/set_mysql_server.php");
+                            require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
                             $db_connection = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_SCHEMA_PROJECT);
                             $res = $db_connection->query("SELECT id,name FROM sites");
                             while ($row = $res->fetch_assoc()){
@@ -144,4 +144,4 @@
         <!-- /page content -->
       
         
-<?php include("./footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>

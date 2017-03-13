@@ -1,9 +1,9 @@
-<?php include("./loginVerify.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php"); ?>
 <!-- post to db -->
       <?php
       
         // include the configs / constants for the database connection and schema
-        require_once("config/set_mysql_server.php");
+        require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
         
         if(isset($_POST['add_site'])) {
         // Create connection
@@ -28,10 +28,10 @@
         $conn->close();}
         ?>
 <!-- /post to db -->
-<?php include("./header.html"); ?>
-<?php include("./sidebar_menu.html"); ?>
-<?php include("./menu_footer.html"); ?>
-<?php include("./top_navigation.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/sidebar_menu.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html"); ?>
  
   
  <!-- page content -->
@@ -85,4 +85,4 @@
         <!-- /page content -->
       
         
-<?php include("./footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>

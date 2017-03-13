@@ -1,6 +1,6 @@
 <?php
-require_once("dbcontroller.php");
-require_once("set_mysql_server.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
 $db_handle = new DBController(DB_SCHEMA_PROJECT);
 
 if(!empty($_POST["sid"]) AND is_numeric($_POST["sid"])) {

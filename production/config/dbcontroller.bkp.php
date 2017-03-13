@@ -9,13 +9,13 @@ class DBController {
 	}
 	
 	function connectDB($db) {
-	    require_once("set_mysql_server.php");
+	    require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
 		$conn = new mysqli(DB_HOST,DB_USER,DB_PASS, $db);
 		return $conn;
 	}
 	
 	function selectDB($conn, $db) {
-	    require_once("set_mysql_server.php");
+	    require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
 		mysqli_select_db($conn, $db)or die("cannot select DB");
 	}
 
@@ -44,7 +44,7 @@ class DBController {
 		if ( (substr_count($query, '?') != $countArgs) || (strlen($formatStr) != $countArgs) )
 			$errors[] = "Mismatching number of args: amount of '?' in query, count of format string and count of args must be equal."; 
 		
-		require_once("set_mysql_server.php");
+		require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
 		$conn = new mysqli(DB_HOST,DB_USER,DB_PASS,$db);
 		if(!$stmt = $conn->prepare($query))
 			$errors[] = "Failed to prepare query.";

@@ -1,7 +1,7 @@
 <?php
 
 // include the configs / constants for the database connection and schema
-require_once("config/set_mysql_server.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
 
 /**
  * Class registration

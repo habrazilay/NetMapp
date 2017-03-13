@@ -1,12 +1,12 @@
-<!--<?php include("./loginVerify.php"); ?>-->
+<!--<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php"); ?>-->
 
 <!-- post to db -->
       <?php
       
         // include the configs / constants for the database connection and schema
-        require_once("config/set_mysql_server.php");
+        require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
         
-        require_once("config/dbcontroller.php");
+        require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
         $db_handle = new DBController(DB_SCHEMA_PROJECT);
         $query ="SELECT * FROM sites";
         $results = $db_handle->runQuery($query, DB_SCHEMA_PROJECT);    
@@ -43,10 +43,10 @@
         ?>
 <!-- /post to db -->
 
-<?php include("./header.html"); ?>
-<?php include("./sidebar_menu.html"); ?>
-<?php include("./menu_footer.html"); ?>
-<?php include("./top_navigation.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/sidebar_menu.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html"); ?>
 
 
 <!-- /page content -->
@@ -158,4 +158,4 @@
 
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
 
-<?php include("./footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>
