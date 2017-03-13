@@ -1,82 +1,24 @@
-<!--<?php include("./loginVerify.php"); ?>-->
+
+
+<!--<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php"); ?>-->
+
+
 
 <!-- post to db -->
-<?php
 
-// include the configs / constants for the database connection and schema
-require_once ("config/set_mysql_server.php");
-require_once ("config/dbcontroller.php");
-$db_handle = new DBController ( DB_SCHEMA_PROJECT );
-
-if (isset ( $_POST ['add_new_device'] )) {
-	// Create connection
-	$conn = new mysqli ( DB_HOST, DB_USER, DB_PASS, DB_SCHEMA_MAP );
-	// Check connection
-	if ($conn->connect_error) {
-		die ( "Connection failed: " . $conn->connect_error );
-	}
-	$cabid = $_POST ['cab_name'];
-	$masterid = $_POST ['dev_master_id'];
-	$uLoc = $_POST ['dev_uloc'];
-	$uHeight = $_POST ['dev_uheight'];
-	$uLength = $_POST ['dev_ulength'];
-	$name = $_POST ['dev_client_name'];
-	$typeid = $_POST ['dev_type'];
-	$powerFeedType = $_POST['dev_power_feed_type'];
-	$powerFeedAmount = $_POST['dev_power_feed_amount'];
-	$activePorts = $_POST['dev_ports'];
-	$installationType = $_POST['dev_installation_type'];
-	//$phase = $_POST['dev_phase'];
-	//$arrivalDate = $_POST['dev_arrival_date'];
-	$faceFront = $_POST['dev_facing_front'];
-	$description = $_POST ['dev_description'];
-	$userid = $_SESSION ['user_id'];
-	
-	$errors = array();
-	
-	if(!isset($cabid) || !is_numeric($cabid))
-		$errors[] = "Cabinet selection is required.";
-	if(!isset($masterid))
-		$errors[] = "Master ID selection is required.";
-	if(isset($uLoc) && !is_numeric($uLoc))
-		$errors[] = "Installed U is not a number.";
-	if(isset($uHeight) && !is_numeric($uHeight))
-		$errors[] = "Device Height is not a number.";
-	if(isset($uLength) && 	(!( is_numeric($uLength) || is_float($uLength) ) 
-							|| $uLength>1.0 
-							|| $uLength<0.1 ) )
-		$errors[] = "Device Width ratio is not a valid number between 0.1 to 1.";
-	if(!isset($typeid) || !is_numeric($typeid))
-		$errors[] = "Device model selection is required.";
-	if(!isset($powerFeedType) || !is_numeric($powerFeedType))
-		$errors[] = "Power feed type selection is required.";
-	if(isset($powerFeedAmount) && !is_numeric($powerFeedAmount))
-		$errors[] = "Power feeds available is not a number.";
-	if(isset($activePorts) && !is_numeric($activePorts))
-		$errors[] = "Active ports is not a number.";
-	if(!isset($installationType) || !is_numeric($installationType))
-		$errors[] = "Installation type selection is required.";
-	if(isset($faceFront) && $faceFront!=0 && $faceFront!=1) 	
-		$errors[] = "invalid data on is facing front.";
-	
-	if(!empty($errors)) {
-		 echo'<pre>';
-		 print_r($errors);
-		 echo'</pre>';
-	}
-	else {
-		$query = "INSERT INTO devices (cabid,masterid,uLoc,uHeight,uLength,name,typeid,powerFeedType,powerFeedAmount,activePorts,installationType,faceFront,description) Values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		$db_handle->prepareAndRunQuery($query,DB_SCHEMA_MAP,'isiidsiiiiiis',$cabid,$masterid,$uLoc,$uHeight,$uLength,$name,$typeid,$powerFeedType,$powerFeedAmount,$activePorts,$installationType,$faceFront,$description);  
-	}	
-	$conn->close ();
-}
-?>
 <!-- /post to db -->
 
-<?php include("./header.html"); ?>
-<?php include("./sidebar_menu.html"); ?>
-<?php include("./menu_footer.html"); ?>
-<?php include("./top_navigation.html"); ?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");?>
+
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/sidebar_menu.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html"); ?>
+<!-- PNotify -->
+    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
 
 
 <!-- /page content -->
@@ -94,8 +36,8 @@ if (isset ( $_POST ['add_new_device'] )) {
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 
-					<form class="form-horizontal form-label-left" method="post"
-						action="<?php $_PHP_SELF ?> ">
+					<form id="add-device" class="form-horizontal form-label-left" method="post"
+						action="data/insert_mapping_device.php">
 
 
 						<span class="section">Device details</span>
@@ -105,10 +47,11 @@ if (isset ( $_POST ['add_new_device'] )) {
 								for="room_site">Select a site <span class="required">*</span>
 							</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<select name="site_list" id="site_list" class="form-control"
+								<select required name="site_list" id="site_list" class="form-control"
 									onChange="getroom(this.value);">
 									<option disabled selected>Please Select...</option>
 									<?php
+									$db_handle = new DBController ( DB_SCHEMA_PROJECT );
 									$query = "SELECT * FROM sites";
 									$results = $db_handle->runQuery ( $query, DB_SCHEMA_PROJECT );
 										
@@ -127,22 +70,7 @@ if (isset ( $_POST ['add_new_device'] )) {
 							</label>
 
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<script src="https://code.jquery.com/jquery-2.1.1.min.js"
-									type="text/javascript"></script>
-									<script>
-	                            function getroom(val) {
-	                                $.ajax({
-		                                type: "POST",
-		                                url: "config/get_room.php",
-		                                data:'sid='+val,
-		                                success: function(data){
-		                                    $("#room_name").html(data);
-		                                    $("#room_name").trigger('change');
-		                                }
-	                                });
-	                            }
-	                          </script>
-	                          <select name="room_name" id="room_name" class="form-control"
+	                          <select required name="room_name" id="room_name" class="form-control"
 									onChange="getcabinet(this.value);">
 							  </select>
 							</div>
@@ -152,21 +80,7 @@ if (isset ( $_POST ['add_new_device'] )) {
 								for="cab_name">Select the cabinet <span class="required">*</span>
 							</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<script src="https://code.jquery.com/jquery-2.1.1.min.js"
-									type="text/javascript"></script>
-								<select name="cab_name" id="cab_name" class="form-control">
-								<script>
-                            function getcabinet(val) {
-                                $.ajax({
-                                type: "POST",
-                                url: "config/get_cabinet.php",
-                                data:'rid='+val,
-                                success: function(data){
-                                    $("#cab_name").html(data);
-                                }
-                                });
-                            }
-                            </script>
+								<select required name="cab_name" id="cab_name" class="form-control" >
 								</select>
 							</div>
 						</div>
@@ -184,34 +98,8 @@ if (isset ( $_POST ['add_new_device'] )) {
 								class="control-label col-md-3 col-sm-3 col-xs-12">Device type filter:<span
 								class="required">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="text" name="dev_type_filter" id="dev_type_filter" required="required"
+								<input type="text" name="dev_type_filter" id="dev_type_filter"
 									class="form-control col-md-7 col-xs-12" onChange="getbasedevice(this.value);">
-								<script>
-								
-		                            function getbasedevice(val) {
-		                                $.ajax({
-		                                type: "POST",
-		                                url: "config/get_base_device.php",
-		                                data:'filter='+val,
-		                                dataType: 'json',
-		                                success: function(data){
-			                                		var dropboxElement = $("#dev_type");
-			                                		dropboxElement.html("");
-			                                		$.each(data, function(key, value) {   
-			       								     dropboxElement
-			       								          .append($("<option></option>")
-					       								          .val(value["id"])
-					       								          .text(value["model"])
-					       								          .attr("uHeight", value["uHeight"])
-					       								          .attr("uLength", value["uLength"])
-					       								          .attr("builtInPowerFeedType", value["builtInPowerFeedType"])
-					       								          .attr("builtInPowerFeedAmount", value["builtInPowerFeedAmount"])
-					       								          ); 
-			       									});
-		                               			  }
-                               			 });
-                            		}
-                            	</script>
 							</div>
 						</div>
 						<div class="form-group">
@@ -219,20 +107,8 @@ if (isset ( $_POST ['add_new_device'] )) {
 								for="dev_type">Select the device type<span class="required">*</span>
 							</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<script src="https://code.jquery.com/jquery-2.1.1.min.js"
-									type="text/javascript"></script>
-								<select name="dev_type" id="dev_type" class="form-control" onChange="setDeviceDetails();">
+								<select required name="dev_type" id="dev_type" class="form-control" onChange="setDeviceDetails();">
 								</select>
-								<script>
-								
-		                            function setDeviceDetails() {
-		                            	var option = $("#dev_type option:selected");
-		                            	$("#dev_uheight").val(option.attr("uheight"));
-		                            	$("#dev_ulength").val(option.attr("ulength"));
-		                            	$("#dev_power_feed_type").val(option.attr("builtInPowerFeedType"));
-		                            	$("#dev_power_feed_amount").val(option.attr("builtinpowerfeedamount"));
-                            		}
-                            	</script>
 							</div>
 						</div>
 						<div class="form-group">
@@ -240,7 +116,7 @@ if (isset ( $_POST ['add_new_device'] )) {
 								class="control-label col-md-3 col-sm-3 col-xs-12">Device's
 								client name </label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="text" name="dev_client_name" required="required"
+								<input type="text" name="dev_client_name"
 									class="form-control col-md-7 col-xs-12">
 							</div>
 						</div>
@@ -249,8 +125,8 @@ if (isset ( $_POST ['add_new_device'] )) {
 								for="dev_type">Installed by<span class="required">*</span>
 							</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<select name="dev_installation_type" id="dev_installation_type" class="form-control">
-									<option disabled selected>Please Select...</option>
+								<select required name="dev_installation_type" id="dev_installation_type" class="form-control">
+									<option disabled selected>Please Select...</option>	
 									<option value="0">Ears</option>
 									<option value="1">Rails</option>
 									<option value="2">Shelf</option>
@@ -268,13 +144,13 @@ if (isset ( $_POST ['add_new_device'] )) {
 							 </div>
 							 <label for="dev-u-height" class="control-label col-md-2 col-sm-3 col-xs-3">Device Height</label>
 							 <div class="col-md-2 col-sm-3 col-xs-3">
-							 	<input name="dev_uheight" id="dev_uheight" class="date-picker form-control col-md-3" type="number" style="width: 100px;" value="1">
+							 	<input required="required" name="dev_uheight" id="dev_uheight" class="date-picker form-control col-md-3" type="number" style="width: 100px;" value="1">
 							 </div>
 						</div>
 						<div class="form-group">
 							<label for="dev-u-length" class="control-label col-md-3 col-sm-3 col-xs-3">Device U Width Ratio</label>
 							<div class="col-md-2 col-sm-3 col-xs-3">
-								<input name="dev_ulength" id="dev_ulength" class="date-picker form-control"	type="number" step=0.1 min=0 max=1 style="width: 100px;" value="1">
+								<input required="required" name="dev_ulength" id="dev_ulength" class="date-picker form-control"	type="number" step=0.1 min=0 max=1 style="width: 100px;" value="1">
 							</div>	
 							<label for="dev-facing-front" class="control-label col-md-2 col-sm-3 col-xs-3">Facing front?</label>
 							<div class="col-md-2 col-sm-3 col-xs-3">
@@ -286,7 +162,7 @@ if (isset ( $_POST ['add_new_device'] )) {
 							<label class="control-label col-md-3 col-sm-3 col-xs-3"
 								for="room_name">Power Feed Type</label>
 							<div class="col-md-2 col-sm-2 col-xs-12">
-							  <select name="dev_power_feed_type" id="dev_power_feed_type" class="form-control">
+							  <select required name="dev_power_feed_type" id="dev_power_feed_type" class="form-control">
 								  <?php
 								  	$db_handle = new DBController ( DB_SCHEMA_BASE );
 								  	$query = "SELECT * FROM powersocketandplugtypes";
@@ -303,7 +179,7 @@ if (isset ( $_POST ['add_new_device'] )) {
 							<label class="control-label col-md-2 col-sm-3 col-xs-12">Feeds available</span>
 							</label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
-								<input name="dev_power_feed_amount" id="dev_power_feed_amount"
+								<input required="required" name="dev_power_feed_amount" id="dev_power_feed_amount"
 									class="date-picker form-control col-md-7 col-xs-12"
 									type="number" style="width: 100px;" min="1" value="2">
 							</div>
@@ -320,8 +196,7 @@ if (isset ( $_POST ['add_new_device'] )) {
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="description">Device description </label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
-								<textarea name="dev_description" required="required"
-									name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
+								<textarea name="dev_description" class="form-control col-md-7 col-xs-12"></textarea>
 							</div>
 						</div>
 						<div class="x_title"></div>
@@ -337,5 +212,110 @@ if (isset ( $_POST ['add_new_device'] )) {
 	</div>
 </div>
 <!-- /page content -->
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<script>
+	function getroom(val) {
+		$.ajax({
+			type: "POST",
+			url: "config/get_room.php",
+			data:'sid='+val,
+			success: function(data){
+				$("#room_name").html(data);
+				$("#room_name").trigger('change');
+			}
+		});
+	}
+	
+	function getcabinet(val) {
+		$.ajax({
+		type: "POST",
+		url: "config/get_cabinet.php",
+		data:'rid='+val,
+		success: function(data){
+			$("#cab_name").html(data);
+		}
+		});
+	}
+	
+	function getbasedevice(val) {
+		$.ajax({
+		type: "POST",
+		url: "config/get_base_device.php",
+		data:'filter='+val,
+		dataType: 'json',
+		success: function(data){
+					var dropboxElement = $("#dev_type");
+					dropboxElement.html("");
+					$.each(data, function(key, value) {   
+					 dropboxElement
+						  .append($("<option></option>")
+								  .val(value["id"])
+								  .text(value["model"])
+								  .attr("uHeight", value["uHeight"])
+								  .attr("uLength", value["uLength"])
+								  .attr("builtInPowerFeedType", value["builtInPowerFeedType"])
+								  .attr("builtInPowerFeedAmount", value["builtInPowerFeedAmount"])
+								  ); 
+					});
+				  }
+		 });
+	}
+	
+	function setDeviceDetails() {
+		var option = $("#dev_type option:selected");
+		$("#dev_uheight").val(option.attr("uheight"));
+		$("#dev_ulength").val(option.attr("ulength"));
+		$("#dev_power_feed_type").val(option.attr("builtInPowerFeedType"));
+		$("#dev_power_feed_amount").val(option.attr("builtinpowerfeedamount"));
+	}
+	
+	var frm = $('#add-device');
+	
+	frm.submit(function(e) {
+		$.ajax({
+			   type: frm.attr('method'),
+			   url: frm.attr('action'),
+			   data: frm.serialize() + '&add_new_device=TRUE', // serializes the form's elements.
+			   dataType: 'json',
+			   success: function(data) {
+				   if(data.status == "Success"){
+						new PNotify({
+							title: 'Success',
+							text: data["msg"],
+							type: 'success',
+							styling: 'bootstrap3'
+						});   
+				   } 
+				   else if (data.status == "Failed") {
+					   $.each(data, function(key, value) {   
+							if(key != "status") {							
+								new PNotify({
+								title: 'Error',
+								text: value,
+								type: 'error',
+								styling: 'bootstrap3'
+								}); 	
+							}
+						});
+				   }
+				   else{
+					   alert(data); // show response from the php script.
+				   }
+				},
+				error: function(jqXHR, exception){
+					new PNotify({
+						title: 'error',
+						text: "Status: " + jqXHR.status + " Error: " + exception,
+						type: 'error',
+						styling: 'bootstrap3'
+						}); 
+                }
+			 });
 
-<?php include("./footer.html"); ?>
+		e.preventDefault(); // avoid to execute the actual submit of the form.
+	});
+	</script>
+<script src="../vendors/pnotify/dist/pnotify.js"></script>
+<script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+<script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>
