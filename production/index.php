@@ -10,7 +10,7 @@ $login = new Login();
 // ... ask if we are logged in here:
 if ($login->isUserLoggedIn() == true) {
     // the user is logged in.
-    include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/template.php");
+    include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/dashboard.php");
 
 } else {
     // the user is not logged in.
