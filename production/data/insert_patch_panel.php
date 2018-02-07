@@ -9,35 +9,52 @@ if (isset ( $_POST ['add_new_device'] )) {
 	require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
 	require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
 	
-	$cabid = (isset($_POST ['cab_name']) ? $_POST ['cab_name'] : "Empty");
-	$masterid = $_POST ['dev_master_id'];
-	$uLoc = $_POST ['dev_uloc'];
-	$uHeight = $_POST ['dev_uheight'];
-	$uLength = (isset($_POST ['dev_ulength']) ? $_POST ['dev_ulength'] : 1.0);
-	$name = (isset($_POST ['dev_client_name']) ? $_POST ['dev_client_name'] : NULL);
-	$typeid = $_POST ['dev_type'];
-	$powerFeedType = $_POST['dev_power_feed_type'];
-	$powerFeedAmount = $_POST['dev_power_feed_amount'];
-	$activePorts = (isset($_POST['dev_ports']) ? $_POST['dev_ports'] : NULL);
-	$installationType = (isset($_POST['dev_installation_type']) ? $_POST['dev_installation_type'] : "Empty");
-	//$phase = $_POST['dev_phase'];
-	//$arrivalDate = $_POST['dev_arrival_date'];
-	$faceFront = $_POST['dev_facing_front'];
-	$description = (isset($_POST ['dev_description']) ? $_POST ['dev_description'] : NULL);
+	$cabAid = (isset($_POST ['cab_name_A']) ? $_POST ['cab_name_A'] : "Empty");
+	$cabBid = (isset($_POST ['cab_name_B']) ? $_POST ['cab_name_B'] : "Empty");
+	$uLocA = $_POST ['pp_uloc_A'];
+	$uLocB = $_POST ['pp_uloc_B'];
+	$uHeightA = $_POST ['pp_uheight_A'];
+	$uHeightB = $_POST ['pp_uheight_B'];
+	$uLengthA = (isset($_POST ['pp_ulength_A']) ? $_POST ['pp_ulength_A'] : 1.0);
+	$uLengthB = (isset($_POST ['pp_ulength_B']) ? $_POST ['pp_ulength_B'] : 1.0);
+	
+	$portTypeid = (isset($_POST ['port_type']) ? $_POST ['port_type'] : "Empty");
+	$amount = (isset($_POST ['pp_ports_amount']) ? $_POST ['pp_ports_amount'] : "Empty");
+	$name = (isset($_POST ['pp_name']) ? $_POST ['pp_name'] : NULL);
+	$pattern = (isset($_POST ['pp_pattern']) ? $_POST ['pp_pattern'] : NULL);
+	$patternFirst = (isset($_POST ['pp_pattern_first']) ? $_POST ['pp_pattern_first'] : NULL);
+	$skip = (isset($_POST ['pp_skip']) ? $_POST ['pp_skip'] : "Empty");
+	
 	$userid = $_SESSION ['user_id'];
 	
-	if(!is_numeric($cabid))
+	if(!is_numeric($cabAid) || !is_numeric($cabBid))
 		$errors[] = "Invalid Cabinet selection.";
-	if(!is_numeric($uLoc))
+	if(!is_numeric($uLocA) || !is_numeric($uLocB))
 		$errors[] = "Installed U is not a number.";
-	if(!is_numeric($uHeight))
-		$errors[] = "Device Height is not a number.";
-	if((!( is_numeric($uLength) || is_float($uLength) ) 
-		|| $uLength>1.0 
-		|| $uLength<0.1 ) )
+	if(!is_numeric($uHeightA) || !is_numeric($uHeightB))
+		$errors[] = "PP Height is not a number.";
+	if(    (	!( is_numeric($uLengthA) || is_float($uLengthA) ) 
+			|| 	$uLengthA>1.0 
+			|| 	$uLengthA<0.1 )
+		|| (	!( is_numeric($uLengthB) || is_float($uLengthB) ) 
+			|| 	$uLengthB>1.0 
+			|| 	$uLengthB<0.1 )
+		)
 		$errors[] = "Device Width ratio is not a valid number between 0.1 to 1.";
-	if(!is_numeric($typeid))
-		$errors[] = "Invalid device model selection.";
+	if(!is_numeric($portTypeid))
+		$errors[] = "Invalid port type selection.";
+	if($name == NULL)
+		$errors[] = "PP name is empty.";
+	if( $pattern == NULL || $wildcardIndex === false)
+		$erros[] = "Pattern is empty.";
+	else{
+		$wildcardIndex = strpos($pattern,"*");
+		if($wildcardIndex === false)
+			$erros[] = "Invalid pattern supplied.\n please use * for pattern location.";
+	}
+		
+	
+	
 	if(!is_numeric($powerFeedType))
 		$errors[] = "Invalid power feed type selection.";
 	if(!is_numeric($powerFeedAmount))
