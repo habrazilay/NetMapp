@@ -114,7 +114,7 @@
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="dev_type">Installed by<span class="required">*</span>
+								for="dev_type">Held by<span class="required">*</span>
 							</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<select required name="dev_installation_type" id="dev_installation_type" class="form-control">
@@ -130,7 +130,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							 <label for="dev-u-location" class="control-label col-md-3 col-sm-3 col-xs-3">Device installed at U</label>
+							 <label for="dev-u-location" class="control-label col-md-3 col-sm-3 col-xs-3">Device held at U</label>
 							 <div class="col-md-2 col-sm-3 col-xs-3">
 							 	<input name="dev_uloc" id="dev_uloc" class="date-picker form-control col-md-3" type="number" style="width: 100px;" value="1">
 							 </div>
@@ -177,7 +177,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12">Active ports</label> 
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Total available ports</label> 
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input name="dev_ports"
 										class="date-picker form-control col-md-7 col-xs-12"
