@@ -1,13 +1,29 @@
-<!--<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php"); ?>-->
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html"); ?>
+<?php
+// load the login class
+require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/classes/Login.php");
 
-<!-- /page content -->
+// create a login object. when this object is created, it will do all login/logout stuff automatically
+// so this single line handles the entire login process. in consequence, you can simply ...
+$login = new Login();
 
-  <div class="right_col" role="main">
+// ... ask if we are logged in here:
+if ($login->isUserLoggedIn() != true) {
+    // the user is not logged in.
+    header("Location: index.php");
+    die();
+//confirm if the user already selected a project.
+}
+
+include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html");
+include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html");
+?>
+
+<!-- page content -->
+        <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-              <div class="title_center">
-                <h3>Project selection</h3>
+              <div class="title_left">
+                <h3>Create a new room</h3>
               </div>
 
             </div>
@@ -20,12 +36,12 @@
                     <form class="form-horizontal form-label-left" method = "post" action = "<?php $_PHP_SELF ?>">
 
                       
-                   <!--    <span class="section">Please select a project</span> -->
+                      <span class="section">Room Details</span>
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-site">Select a site <span class="required">*</span>
                             </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" name="project_name">
+                          <select class="form-control" name="site_name">
                             <?php 
                             require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
                             $db_connection = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_SCHEMA_PROJECT);
@@ -105,7 +121,6 @@
             </div>
           </div>
         </div>
-        
-<!-- /page content -->
+        <!-- /page content -->
 
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>
