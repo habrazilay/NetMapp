@@ -13,7 +13,7 @@ name	 	- 	name of the project.
 createdBy	-	referencing user identifier who created this project.
 dateCreated	-	the date this project has been created.
 */
-CREATE TABLE project.projectInfo
+CREATE TABLE project.projects
 (
 	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	`name` varchar(50) NOT NULL,
@@ -36,6 +36,7 @@ dateCreated	-	the date this project has been created.
 CREATE TABLE project.sites
 (
 	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	`pid` int NOT NULL REFERENCES projects(id),
 	`name` varchar(100) NOT NULL,
 	`city` varchar(100) DEFAULT NULL,
 	`address` varchar(100) DEFAULT NULL,

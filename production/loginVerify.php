@@ -11,4 +11,8 @@ if ($login->isUserLoggedIn() != true) {
     // the user is not logged in.
     header("Location: index.php");
     die();
-} 
+//confirm if the user already selected a project.
+} elseif(!isset($_SESSION['current_project'])) {
+	header("Location: select_project.php");
+	die();
+}
