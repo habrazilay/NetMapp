@@ -1,12 +1,4 @@
-
-
 <!--<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php"); ?>-->
-
-
-
-<!-- post to db -->
-
-<!-- /post to db -->
 
 <?php require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");?>
 <?php require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");?>
