@@ -1,9 +1,14 @@
-INSERT INTO `project`.`sites` (`id`,`name`,`city`,`address`,`createdBy`,`dateCreated`) VALUES 
-(1,'Haifa','Haifa','Zabutinski 2',1,'2016-11-08 21:46:37'),
-(2,'Data Replication','Tel Aviv','Ben Gurion 85',1,'2016-11-08 22:05:29'),
-(3,'Main','Netanya','Habarzel 99',1,'2016-11-08 22:05:52'),
-(4,'Data Center','Raanana','Hertzel 23',1,'2017-03-07 13:39:11'),
-(5,'New Data Center - GDC','Hertzelia','Aba Even 12',1,'2017-03-07 13:49:11')
+INSERT INTO `project`.`projects` (`id`,`name`,`createdBy`,`dateCreated`) VALUES 
+(1,'Vlabs',1,'2016-11-08 21:46:37'),
+(2,'Elbit',1,'2016-11-08 21:46:38')
+;
+
+INSERT INTO `project`.`sites` (`id`,`pid`,`name`,`city`,`address`,`createdBy`,`dateCreated`) VALUES 
+(1,2,'Haifa','Haifa','Zabutinski 2',1,'2016-11-08 21:46:37'),
+(2,1,'Data Replication','Tel Aviv','Ben Gurion 85',1,'2016-11-08 22:05:29'),
+(3,2,'Main','Netanya','Habarzel 99',1,'2016-11-08 22:05:52'),
+(4,1,'Data Center','Raanana','Hertzel 23',1,'2017-03-07 13:39:11'),
+(5,1,'New Data Center - GDC','Hertzelia','Aba Even 12',1,'2017-03-07 13:49:11')
 ;
 
 INSERT INTO `project`.`rooms` (`id`,`sid`,`name`,`floor`,`location`,`length`,`width`,`description`,`createdBy`,`dateCreated`,`cabAmount`) VALUES 
