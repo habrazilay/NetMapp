@@ -23,7 +23,7 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html");
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Create a new room</h3>
+                <h3>Project selection</h3>
               </div>
 
             </div>
@@ -35,10 +35,8 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html");
 
                     <form class="form-horizontal form-label-left" method = "post" action = "<?php $_PHP_SELF ?>">
 
-                      
-                      <span class="section">Room Details</span>
                         <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-site">Select a site <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-site">Select the project<span class="required">*</span>
                             </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="form-control" name="site_name">
@@ -55,66 +53,7 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html");
                           </select>
                         </div>
                         </div>
-                      <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-name">Room name <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="room_name" class="form-control col-md-7 col-xs-12">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-location">Room location <span></span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="room_location" required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="room-floor" class="control-label col-md-3 col-sm-3 col-xs-12">Room floor</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="room_floor" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" value="0">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Measure units <span class="required">*</span></label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                          <div class="radio">
-                            <label>
-                              <input type="radio" class="flat" checked name="iCheck"> Tiles
-                            </label>
-                          </div>
-                          <div class="radio">
-                            <label>
-                              <input type="radio" class="flat" name="iCheck"> Meters
-                            </label>
-                          </div>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Length <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="room_length" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" min="1" value="10">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Width <span class="required">*</span>
-                                </label>
-                                <input name="room_width" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" min="1" value="10">
-                            </div>
-                          </div>
-                            <div class="form-group">
-                            <label for="cabinets-quantity" class="control-label col-md-3 col-sm-3 col-xs-12">Cabinets quantity</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="cabinets_quantity" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" value="1">
-                            </div>
-                          </div>
-                        <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Room Description </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea name="room_description" required="required" name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
-                        </div>
-                      </div>
-                      <div class="x_title"></div>
-                          <button type="submit" class="btn btn-primary" name = "add_room" style="float:right">Submit</button>
-                          <button type="button" class="btn btn-danger" name = "cancel" style="float:right">Cancel</button>                         
+                          <button type="submit" class="btn btn-primary" name = "add_room" style="float:right">Submit</button>                         
                         </div>
                       </div>
                     </form>             

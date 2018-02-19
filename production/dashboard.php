@@ -50,9 +50,16 @@
               </div>
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
+                  <div class="icon"><i class="glyphicon glyphicon-wrench"></i></div>
+                  <div class="count">4</div>
+                  <h3>Technicians</h3>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
                   <div class="icon"><i class="glyphicon glyphicon-user"></i></div>
                   <div class="count">1</div>
-                  <h3>Users</h3>
+                  <h3>Online users</h3>
                 </div>
               </div>
               </div>           

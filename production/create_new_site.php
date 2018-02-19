@@ -12,12 +12,13 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
+        $pid = $_SESSION['project_id'];
         $userid = $_SESSION['user_id'];
         $name = $_POST['site_name'];
         $city = $_POST['site_location'];
         $address = $_POST['site_address']; 
         
-        $sql = "INSERT INTO sites (name,city,address,createdBy) VALUES('" . $name . "','" . $city . "','" . $address . "','" . $userid . "' )";
+        $sql = "INSERT INTO sites (pid,name,city,address,createdBy) VALUES('" . $pid . "','" . $name . "','" . $city . "','" . $address . "','" . $userid . "' )";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
