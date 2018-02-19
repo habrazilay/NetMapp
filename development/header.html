@@ -30,7 +30,7 @@
         <div class="col-md-3 left_col menu_fixed">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-sitemap"></i> <span>NetMapp </span></a>
+              <a href="index.php" class="site_title"><i class="fa fa-sitemap"></i> <span>NetMapp </span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -41,8 +41,7 @@
                 <img src="images/profilepic.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2><?php echo $_SESSION["user_name"]; ?></h2>
+                <h2>Welcome <?php echo $_SESSION["user_name"]; ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->

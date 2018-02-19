@@ -1,12 +1,12 @@
-<!--<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php"); ?>-->
+<!--<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/loginVerify.php"); ?>-->
 
-<?php require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");?>
-<?php require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/config/set_mysql_server.php");?>
+<?php require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/config/dbcontroller.php");?>
 
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/sidebar_menu.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/header.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/sidebar_menu.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/menu_footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/top_navigation.html"); ?>
 <!-- PNotify -->
     <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
     <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
@@ -310,4 +310,4 @@
 <script src="../vendors/pnotify/dist/pnotify.js"></script>
 <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
 <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/footer.html"); ?>

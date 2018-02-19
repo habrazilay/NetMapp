@@ -1,8 +1,8 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/sidebar_menu.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/loginVerify.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/header.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/sidebar_menu.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/menu_footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/top_navigation.html"); ?>
 
 <!-- page content -->
         <div class="right_col" role="main">
@@ -50,9 +50,16 @@
               </div>
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
+                  <div class="icon"><i class="glyphicon glyphicon-wrench"></i></div>
+                  <div class="count">4</div>
+                  <h3>Technicians</h3>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
                   <div class="icon"><i class="glyphicon glyphicon-user"></i></div>
                   <div class="count">1</div>
-                  <h3>Users</h3>
+                  <h3>Online users</h3>
                 </div>
               </div>
               </div>           
@@ -61,4 +68,4 @@
         </div>
         <!-- /page content -->
 
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/footer.html"); ?>

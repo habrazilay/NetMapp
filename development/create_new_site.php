@@ -1,9 +1,9 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/loginVerify.php"); ?>
 <!-- post to db -->
       <?php
       
         // include the configs / constants for the database connection and schema
-        require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
+        require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/config/set_mysql_server.php");
         
         if(isset($_POST['add_site'])) {
         // Create connection
@@ -12,12 +12,13 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
+        $pid = $_SESSION['project_id'];
         $userid = $_SESSION['user_id'];
         $name = $_POST['site_name'];
         $city = $_POST['site_location'];
         $address = $_POST['site_address']; 
         
-        $sql = "INSERT INTO sites (name,city,address,createdBy) VALUES('" . $name . "','" . $city . "','" . $address . "','" . $userid . "' )";
+        $sql = "INSERT INTO sites (pid,name,city,address,createdBy) VALUES('" . $pid . "','" . $name . "','" . $city . "','" . $address . "','" . $userid . "' )";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
@@ -28,10 +29,10 @@
         $conn->close();}
         ?>
 <!-- /post to db -->
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/sidebar_menu.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/header.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/sidebar_menu.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/menu_footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/top_navigation.html"); ?>
  
   
  <!-- page content -->
@@ -85,4 +86,4 @@
         <!-- /page content -->
       
         
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/footer.html"); ?>

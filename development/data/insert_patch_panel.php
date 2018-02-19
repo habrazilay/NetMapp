@@ -1,13 +1,13 @@
 <?php
 
-include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php");
+include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/loginVerify.php");
 
 $errors = array();
 
-if (isset ( $_POST ['add_new_patch_panel'] )) {
+if (isset ( $_POST ['add_new_device'] )) {
 	// include the configs / constants for the database connection and schema
-	require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
-	require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
+	require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/config/set_mysql_server.php");
+	require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/config/dbcontroller.php");
 	
 	$cabAid = (isset($_POST ['cab_name_A']) ? $_POST ['cab_name_A'] : "Empty");
 	$cabBid = (isset($_POST ['cab_name_B']) ? $_POST ['cab_name_B'] : "Empty");
@@ -71,18 +71,7 @@ if (isset ( $_POST ['add_new_patch_panel'] )) {
 		mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 		try {
 			$db_handle = new DBController ( DB_SCHEMA_MAP );
-			$query = "SELECT AUTO_INCREMENT ".
-					 "FROM information_schema.tables ". 
-					 "WHERE table_name = 'patchPanels' AND table_schema = DATABASE();";
-			$result = mysql_query($query);
-			$data = mysql_fetch_assoc($result);
-			$sideA_id = $data['Auto_increment'];
-			$sideB_id = +1;
-			
-			
-			$query = "INSERT INTO patchPanels ".
-					 "(cabAid,cabBid,ppName,uLoc,uHeight,plugTypeid,amount,firstPortPattern,isNumeric,Description) ".
-					 "Values (?,?,?,?,?,?,?,?,?,?)";
+			$query = "INSERT INTO devices (cabid,masterid,uLoc,uHeight,uLength,name,typeid,powerFeedType,powerFeedAmount,activePorts,installationType,faceFront,description) Values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			$db_handle->prepareAndRunQuery($query,DB_SCHEMA_MAP,'isiidsiiiiiis',$cabid,$masterid,$uLoc,$uHeight,$uLength,$name,$typeid,$powerFeedType,$powerFeedAmount,$activePorts,$installationType,$faceFront,$description);
 			
 			if($db_handle->affectedRows() < 1)
@@ -94,7 +83,7 @@ if (isset ( $_POST ['add_new_patch_panel'] )) {
 	}
 }
 else
-	$errors[]="Failed to submit data.";
+	$errors[]="add_new_device is not set.";
 
 if (empty($errors)){
 	$errors["status"] = "Success";

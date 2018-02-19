@@ -1,7 +1,7 @@
 <?php
 
 // include the configs / constants for the database connection and schema
-require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/config/set_mysql_server.php");
 
 /**
  * Class login
@@ -29,7 +29,10 @@ class Login
     public function __construct()
     {
         // create/read session, absolutely necessary
-        session_start();
+        if(!isset($_SESSION))
+        {
+            session_start();
+        }
 
         // check the possible login actions:
         // if user tried to log out (happen when user clicks logout button)

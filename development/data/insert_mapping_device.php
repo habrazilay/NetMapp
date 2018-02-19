@@ -1,13 +1,13 @@
 <?php
 
-include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php");
+include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/loginVerify.php");
 
 $errors = array();
 
 if (isset ( $_POST ['add_new_device'] )) {
 	// include the configs / constants for the database connection and schema
-	require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
-	require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
+	require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/config/set_mysql_server.php");
+	require_once ($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/config/dbcontroller.php");
 	
 	$cabid = (isset($_POST ['cab_name']) ? $_POST ['cab_name'] : "Empty");
 	$masterid = $_POST ['dev_master_id'];

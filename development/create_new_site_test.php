@@ -3,7 +3,7 @@
       <?php
       
         // include the configs / constants for the database connection and schema
-        require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
+        require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/config/set_mysql_server.php");
         
         if(isset($_POST['add_room'])) {
         // Create connection
@@ -31,10 +31,10 @@
         $conn->close();}
         ?>
 <!-- /post to db -->
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/sidebar_menu.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/header.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/sidebar_menu.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/menu_footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/top_navigation.html"); ?>
 
 <!-- page content -->
         <div class="right_col" role="main">
@@ -132,4 +132,4 @@
         </div>
 <!-- /page content -->
 
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/footer.html"); ?>
