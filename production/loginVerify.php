@@ -7,13 +7,13 @@ require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/classes/Login.php");
 $login = new Login();
 
 // ... ask if we are logged in here:
-if ($login->isUserLoggedIn() != true) {
+if ($login->isUserLoggedIn() != true){
     // the user is not logged in.
     header("Location: index.php");
     die();
 }
 //confirm if the user already selected a project.
-/* } elseif(!isset($_SESSION['current_project'])) {
+elseif(!isset($_SESSION['project_name']) && $_SERVER['PHP_SELF']!="/NetMapp/production/select_project.php") {
 	header("Location: select_project.php");
 	die();
-} */
+}
