@@ -33,10 +33,12 @@
         $conn->close();}
         ?>
 <!-- /post to db -->
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/sidebar_menu.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html"); ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html"); ?>
+<?php 
+include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/header.html");
+include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/sidebar_menu.html");
+include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html");
+include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
+?>
  
  <!-- page content -->
         <div class="right_col" role="main">
@@ -63,12 +65,14 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <select class="form-control" name="site_name">
                             <?php 
+                            require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
                             require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
-                            $db_connection = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_SCHEMA_PROJECT);
-                            $res = $db_connection->query("SELECT id,name FROM sites");
-                            while ($row = $res->fetch_assoc()){
-                            echo "\n\t\t\t\t\t\t\t";
-                            echo "<option value=\"" . $row['id'] . "\">" . $row['name'] . "</option>";
+                            $db_handle = new DBController(DB_SCHEMA_PROJECT);
+                            $query = "SELECT id,name FROM sites WHERE pid=?";
+                            $res = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,'i',$_SESSION['project_id']);
+                            foreach($res as $site) {
+                                echo "\n\t\t\t\t\t\t\t";
+                                echo "<option value=\"" . $site['id'] . "\">" . $site['name'] . "</option>";
                             }
                             echo "\n";
                             ?>
