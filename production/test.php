@@ -3,7 +3,7 @@
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/sidebar_menu.html"); ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html"); ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html"); ?>
-
+<?php print_r($_SERVER);?>
 <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
