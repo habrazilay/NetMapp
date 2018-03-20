@@ -21,6 +21,7 @@ CREATE TABLE base.powerSocketAndPlugTypes
 	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	`type` varchar(20) NOT NULL,
 	`maxCurrent` varchar(10) DEFAULT NULL,
+	`isBasic` boolean NOT NULL DEFAULT FALSE,
 	`picLoc` varchar(255)
 );
 
@@ -96,6 +97,7 @@ CREATE TABLE base.powerIndustrialPlugTypes
 	`voltRange` varchar(20) DEFAULT "Not Specified",
 	`current` varchar(20) DEFAULT 0,
 	`phases` varchar(30) DEFAULT "Not Specified",
+	`isBasic` boolean NOT NULL DEFAULT FALSE,
 	`picLoc` varchar(255)
 );
 
