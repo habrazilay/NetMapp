@@ -9,6 +9,6 @@ $db_handle = new DBController(DB_SCHEMA_BASE);
 
 if(isset($_POST["filter"]) AND !empty($_POST["filter"])) {
 	$query ="SELECT * FROM devices WHERE model LIKE CONCAT('%',?,'%')";
-	$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_BASE,'s',$_POST["filter"]);
+	$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_BASE,"SELECT",'s',$_POST["filter"]);
 	echo json_encode($results);
 }

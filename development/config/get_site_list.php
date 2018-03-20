@@ -16,5 +16,5 @@ if(isset($_POST["filter"]) AND !empty($_POST["filter"])) {
 */
 
 $query ="SELECT * FROM sites WHERE name LIKE CONCAT('%',?,'%')";
-$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,'s',$_POST["filter"]);
+$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'s',$_POST["filter"]);
 echo json_encode($results);

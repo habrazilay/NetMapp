@@ -19,7 +19,7 @@
         $db_handle = new DBController(DB_SCHEMA_PROJECT);
         $db_connection = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_SCHEMA_PROJECT);
         $query = "SELECT id,name FROM projects WHERE id=?";
-        $results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,'i',$id);
+        $results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'i',$id);
         
         if(empty($results)) die("Invalid id selected");
         foreach($results as $project) {

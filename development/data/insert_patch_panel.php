@@ -72,7 +72,7 @@ if (isset ( $_POST ['add_new_device'] )) {
 		try {
 			$db_handle = new DBController ( DB_SCHEMA_MAP );
 			$query = "INSERT INTO devices (cabid,masterid,uLoc,uHeight,uLength,name,typeid,powerFeedType,powerFeedAmount,activePorts,installationType,faceFront,description) Values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			$db_handle->prepareAndRunQuery($query,DB_SCHEMA_MAP,'isiidsiiiiiis',$cabid,$masterid,$uLoc,$uHeight,$uLength,$name,$typeid,$powerFeedType,$powerFeedAmount,$activePorts,$installationType,$faceFront,$description);
+			$db_handle->prepareAndRunQuery($query,DB_SCHEMA_MAP,"INSERT",'isiidsiiiiiis',$cabid,$masterid,$uLoc,$uHeight,$uLength,$name,$typeid,$powerFeedType,$powerFeedAmount,$activePorts,$installationType,$faceFront,$description);
 			
 			if($db_handle->affectedRows() < 1)
 				$errors[] = "Error failed to insert into the DB.";

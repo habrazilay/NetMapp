@@ -10,7 +10,7 @@ function getData($action, $object_name, $table_name, $condition_parameter, $cond
     $db_handle = new DBController(DB_SCHEMA_PROJECT);
     
     $query ="$action $object_name FROM $table_name $condition $condition_parameter LIKE CONCAT('%',?,'%')";
-    $results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,'s',$_POST["filter"]);
+    $results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,$action,'s',$_POST["filter"]);
     echo json_encode($results);
     
 }
