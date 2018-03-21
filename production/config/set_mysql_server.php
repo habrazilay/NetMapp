@@ -15,7 +15,7 @@
  
 define("DB_HOST", "localhost");
 define("DB_USER", "root");
-define("DB_PASS", "");
+define("DB_PASS", "N3tm@pp@SQLr00tpw");
 define("DB_SCHEMA_BASE", "base");
 define("DB_SCHEMA_MAP", "mapping");
 define("DB_SCHEMA_PROJECT", "project");
