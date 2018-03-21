@@ -5,7 +5,7 @@ $db_handle = new DBController(DB_SCHEMA_MAP);
 var_dump($_POST);
 if(!empty($_POST["rid"])) {
 	$query ="SELECT * FROM cabinets WHERE rid = ?";
-	$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_MAP,'i',$_POST["rid"]);
+	$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_MAP,"SELECT",'i',$_POST["rid"]);
 ?>
 <?php
 	if(empty($results)) return;

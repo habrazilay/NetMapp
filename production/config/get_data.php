@@ -5,8 +5,8 @@
  */
 function getData($action, $object_name, $table_name, $condition_parameter, $condition){
     
-    require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/config/dbcontroller.php");
-    require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/development/config/set_mysql_server.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
+    require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
     $db_handle = new DBController(DB_SCHEMA_PROJECT);
     
     $query ="$action $object_name FROM $table_name $condition $condition_parameter LIKE CONCAT('%',?,'%')";

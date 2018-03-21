@@ -21,8 +21,8 @@
         $width = $_POST['room_width'];
         $description = $_POST['room_description']; 
         
-        $sql = "INSERT INTO rooms (sid,name,location,floor,length,width,description,createdBy) 
-        VALUES('" . $siteid . "','" . $name . "','" . $location . "','" . $floor . "','" . $length . "','" . $width . "','" . $description . "','" . $userid . "')";
+        $sql = 	"INSERT INTO rooms (sid,name,location,floor,length,width,description,createdBy) " 
+        		."VALUES('" . $siteid . "','" . $name . "','" . $location . "','" . $floor . "','" . $length . "','" . $width . "','" . $description . "','" . $userid . "')";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
@@ -69,7 +69,7 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
                             require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
                             $db_handle = new DBController(DB_SCHEMA_PROJECT);
                             $query = "SELECT id,name FROM sites WHERE pid=?";
-                            $res = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,'i',$_SESSION['project_id']);
+                            $res = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'i',$_SESSION['project_id']);
                             foreach($res as $site) {
                                 echo "\n\t\t\t\t\t\t\t";
                                 echo "<option value=\"" . $site['id'] . "\">" . $site['name'] . "</option>";

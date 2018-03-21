@@ -53,8 +53,10 @@ class Login
         // check login form contents
         if (empty($_POST['user_name'])) {
             $this->errors[] = "Username field was empty.";
+            error_log("Login Error: login attempt failed from: ".$_SERVER['REMOTE_ADDR']." (Error: Empty Username)");
         } elseif (empty($_POST['user_password'])) {
             $this->errors[] = "Password field was empty.";
+            error_log("Login Error: login attempt failed for user ".$_POST['user_name']." from: ".$_SERVER['REMOTE_ADDR']." (Error: Empty Password)");
         } elseif (!empty($_POST['user_name']) && !empty($_POST['user_password'])) {
 
             // create a database connection, using the constants from config/set_mysql_server.php,set_db_security.php (which we loaded in index.php)
@@ -93,15 +95,19 @@ class Login
                         $_SESSION['user_email'] = $result_row->user_email;
                         $_SESSION['user_login_status'] = 1;
                         $_SESSION['user_id'] = $result_row->id;
+                        error_log("Login Info: The user '".$_SESSION['user_name']."' has logged in successfully from: ".$_SERVER['REMOTE_ADDR'].".");
 
                     } else {
                         $this->errors[] = "Wrong password. Try again.";
+                        error_log("Login Error: login attempt failed for user ".$_POST['user_name']." from: ".$_SERVER['REMOTE_ADDR']." (Error: Wrong Password)");
                     }
                 } else {
                     $this->errors[] = "This user does not exist.";
+                    error_log("Login Error: login attempt failed for user ".$_POST['user_name']." from: ".$_SERVER['REMOTE_ADDR']." (Error: User does not exist)");
                 }
             } else {
                 $this->errors[] = "Database connection problem.";
+                error_log("Login Error: Database connection problem");
             }
         }
     }
@@ -116,7 +122,7 @@ class Login
         session_destroy();
         // return a little feeedback message
         $this->messages[] = "You have been logged out.";
-
+        error_log("Login Info: The user '".$_SESSION['user_name']."' has logged out successfully from: ".$_SERVER['REMOTE_ADDR'].".");
     }
 
     /**
