@@ -9,9 +9,11 @@
         // include the database controller
         require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
         $db_handle = new DBController(DB_SCHEMA_PROJECT);
-        $query ="SELECT * FROM sites";
+        $query ="SELECT * FROM sites WHERE pid=?";
+        
         //TODO: Edit dropbox to sync from ajax/php json instead of php echo.
-        $results_sites = $db_handle->runQuery($query, DB_SCHEMA_PROJECT);    
+        $results_sites = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'i',$_SESSION['project_id']);
+        /* $results_sites = $db_handle->runQuery($query, DB_SCHEMA_PROJECT); */    
         
         
         if(isset($_POST['add_cabinet'])) {
@@ -32,11 +34,15 @@
 	        ."VALUES('" . $roomid . "','" . $name . "','" . $clientName . "','" . $uHeight . "','" . $depth . "','" . $width . "','" . $height . "','" . $description . "')";
 	        
 	        if($db_handle->runQuery($sql, DB_SCHEMA_MAP,"INSERT")){
-	            echo "New record created successfully to cabinets"; //TODO: Use pnotify!
-	            echo "query executed: " . $sql;
+	            echo '<script type="text/javascript">',
+	            'var queryFlag="yes"',
+	            '</script>';
 	            $newCabId = $db_handle->insert_id();
 	        } else {
 	        	$db_handle->write_log_sql("Error executing query: " . $sql . "<br>" . $db_handle->getLastError() . "site id:" . $siteid);
+	        	echo    '<script type="text/javascript">',
+	        	'var queryFlag="no"',
+	        	'</script>';
 	        	echo "Error executing query: " . $sql . "<br>" . $db_handle->getLastError() . "site id:" . $siteid;
 	            die();
 	        }
@@ -147,7 +153,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_site">Select the site <span class="required">*</span>
                             </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">  
-                          <select name="site" id="site-list" class="form-control" onChange="getroom(this.value);">
+                          <select name="site" id="site-list" required="required" class="form-control" onChange="getroom(this.value);">
                               <option disabled selected>Please Select...</option>
                             <?php
                             foreach($results_sites as $site) {
@@ -176,7 +182,7 @@
 	                                });
 	                            }
                             </script>
-                          <select name="room_name" id="room_name" class="form-control">
+                          <select name="room_name" id="room_name" required="required" class="form-control">
                           </select>
                             </div>
                           </div>         
@@ -189,7 +195,7 @@
                           <div class="form-group">
                             <label for="cabinet-client-name" class="control-label col-md-3 col-sm-3 col-xs-12">Cabinet's client name </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="cab_client_name" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="cab_client_name" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
@@ -215,7 +221,7 @@
                           <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Cabinet description </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea name="cab_description" required="required" name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
+                          <textarea name="cab_description" name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
                         </div>
                       </div>
                       
@@ -299,5 +305,30 @@
 		
 	}
 </script>
+
+	<script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- validator -->
+	<script src="../vendors/validator/validator.js"></script>
+	<!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script type="text/javascript">
+    function notifyUser(title,message,type) {
+            new PNotify({
+            	title: title,
+				text: message,
+				type: type,
+				styling: 'bootstrap3'
+            });
+    }
+	</script>
+<script type="text/javascript">
+if (queryFlag==="yes")
+	 notifyUser("New cabinet added" , "A new cabinet was created successfuly" , "success");
+else notifyUser("Error" , "The new room was NOT added!" , "error");
+</script>   
 
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>

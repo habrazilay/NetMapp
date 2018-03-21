@@ -21,8 +21,13 @@
         $sql = "INSERT INTO sites (pid,name,city,address,createdBy) VALUES('" . $pid . "','" . $name . "','" . $city . "','" . $address . "','" . $userid . "' )";
         
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo '<script type="text/javascript">',
+            'var queryFlag="yes"',
+            '</script>';
         } else {
+            echo    '<script type="text/javascript">',
+            'var queryFlag="no"',
+            '</script>';
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
         
@@ -84,6 +89,31 @@
           </div>
         </div>
         <!-- /page content -->
+        
+	<script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- validator -->
+	<script src="../vendors/validator/validator.js"></script>
+	<!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script type="text/javascript">
+    function notifyUser(title,message,type) {
+            new PNotify({
+            	title: title,
+				text: message,
+				type: type,
+				styling: 'bootstrap3'
+            });
+    }
+	</script>
+<script type="text/javascript">
+if (queryFlag==="yes")
+	 notifyUser("New site added" , "A new site was created successfuly" , "success");
+else notifyUser("Error" , "The new site was NOT added!" , "error");
+</script>        
       
         
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>

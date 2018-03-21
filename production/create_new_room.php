@@ -25,8 +25,13 @@
         		."VALUES('" . $siteid . "','" . $name . "','" . $location . "','" . $floor . "','" . $length . "','" . $width . "','" . $description . "','" . $userid . "')";
         
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo '<script type="text/javascript">',
+            'var queryFlag="yes"',
+            '</script>';
         } else {
+            echo    '<script type="text/javascript">',
+            'var queryFlag="no"',
+            '</script>';
             echo "Error: " . $sql . "<br>" . $conn->error . "site id:" . $siteid;
         }
         
@@ -83,20 +88,20 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-name">Room name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="room_name" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="room_name" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-location">Room location <span></span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="room_location" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="room_location" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="room-floor" class="control-label col-md-3 col-sm-3 col-xs-12">Room floor</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="room_floor" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" value="0">
+                              <input name="room_floor" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" value="0">
                             </div>
                           </div>
                           <div class="form-group">
@@ -127,13 +132,13 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
                             <div class="form-group">
                             <label for="cabinets-quantity" class="control-label col-md-3 col-sm-3 col-xs-12">Cabinets quantity</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="cabinets_quantity" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" value="1">
+                              <input name="cabinets_quantity" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" value="1">
                             </div>
                           </div>
                         <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Room Description </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea name="room_description" required="required" name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
+                          <textarea name="room_description" name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
                         </div>
                       </div>
                       <div class="x_title"></div>
@@ -146,6 +151,31 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
           </div>
         </div>
         <!-- /page content -->
+        
+	<script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- validator -->
+	<script src="../vendors/validator/validator.js"></script>
+	<!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script type="text/javascript">
+    function notifyUser(title,message,type) {
+            new PNotify({
+            	title: title,
+				text: message,
+				type: type,
+				styling: 'bootstrap3'
+            });
+    }
+	</script>
+<script type="text/javascript">
+if (queryFlag==="yes")
+	 notifyUser("New room added" , "A new room was created successfuly" , "success");
+else notifyUser("Error" , "The new room was NOT added!" , "error");
+</script>      
       
         
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>
