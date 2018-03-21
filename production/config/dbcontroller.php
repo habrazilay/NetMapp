@@ -15,7 +15,7 @@ class DBController {
 		}
 		// set logger path
 		$this->sqlLogPath = "/";
-		$pathsToTest = array("/var/log","/tmp","C:/Apache24/logs","C:/Apache/logs","C:/Windows/Temp");
+		$pathsToTest = array("/var/log","/tmp","C:/Apache24/logs","C:/Apache/logs","C:/xampp/apache/logs","C:/Windows/Temp");
 		foreach ($pathsToTest as $path) {
 			if(is_writable($path)) {
 				$this->sqlLogPath = $path;
