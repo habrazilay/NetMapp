@@ -83,20 +83,20 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-name">Room name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="room_name" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="room_name" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-location">Room location <span></span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="room_location" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="room_location" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
                             <label for="room-floor" class="control-label col-md-3 col-sm-3 col-xs-12">Room floor</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="room_floor" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" value="0">
+                              <input name="room_floor" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" value="0">
                             </div>
                           </div>
                           <div class="form-group">
@@ -127,13 +127,13 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
                             <div class="form-group">
                             <label for="cabinets-quantity" class="control-label col-md-3 col-sm-3 col-xs-12">Cabinets quantity</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input name="cabinets_quantity" class="date-picker form-control col-md-7 col-xs-12" required="required" type="number" style="width: 70px;" value="1">
+                              <input name="cabinets_quantity" class="date-picker form-control col-md-7 col-xs-12" type="number" style="width: 70px;" value="1">
                             </div>
                           </div>
                         <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Room Description </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea name="room_description" required="required" name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
+                          <textarea name="room_description" name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
                         </div>
                       </div>
                       <div class="x_title"></div>
