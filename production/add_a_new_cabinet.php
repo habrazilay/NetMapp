@@ -9,9 +9,11 @@
         // include the database controller
         require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
         $db_handle = new DBController(DB_SCHEMA_PROJECT);
-        $query ="SELECT * FROM sites";
+        $query ="SELECT * FROM sites WHERE pid=?";
+        
         //TODO: Edit dropbox to sync from ajax/php json instead of php echo.
-        $results_sites = $db_handle->runQuery($query, DB_SCHEMA_PROJECT);    
+        $results_sites = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'i',$_SESSION['project_id']);
+        /* $results_sites = $db_handle->runQuery($query, DB_SCHEMA_PROJECT); */    
         
         
         if(isset($_POST['add_cabinet'])) {
@@ -215,7 +217,7 @@
                           <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Cabinet description </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea name="cab_description" required="required" name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
+                          <textarea name="cab_description" name="room-description" class="form-control col-md-7 col-xs-12"></textarea>
                         </div>
                       </div>
                       
