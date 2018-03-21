@@ -119,10 +119,11 @@ class Login
     {
         // delete the session of the user
         $_SESSION = array();
-        session_destroy();
+        
         // return a little feeedback message
         $this->messages[] = "You have been logged out.";
         error_log("Login Info: The user '".$_SESSION['user_name']."' has logged out successfully from: ".$_SERVER['REMOTE_ADDR'].".");
+        session_destroy();
     }
 
     /**
