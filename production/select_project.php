@@ -87,10 +87,10 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html");
                     <form id="project_selection" class="form-horizontal form-label-left" method="post" action="<?php $_PHP_SELF ?>">
 
                         <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-name">Select the project<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" required="required" for="project-name">Select the project<span class="required"> *</span>
                             </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" name="project_id">
+                          <select class="form-control" name="project_id" required="required">
                             <?php 
                             require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
                             $db_connection = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_SCHEMA_PROJECT);
