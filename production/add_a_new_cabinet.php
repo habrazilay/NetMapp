@@ -34,11 +34,15 @@
 	        ."VALUES('" . $roomid . "','" . $name . "','" . $clientName . "','" . $uHeight . "','" . $depth . "','" . $width . "','" . $height . "','" . $description . "')";
 	        
 	        if($db_handle->runQuery($sql, DB_SCHEMA_MAP,"INSERT")){
-	            echo "New record created successfully to cabinets"; //TODO: Use pnotify!
-	            echo "query executed: " . $sql;
+	            echo '<script type="text/javascript">',
+	            'var queryFlag="yes"',
+	            '</script>';
 	            $newCabId = $db_handle->insert_id();
 	        } else {
 	        	$db_handle->write_log_sql("Error executing query: " . $sql . "<br>" . $db_handle->getLastError() . "site id:" . $siteid);
+	        	echo    '<script type="text/javascript">',
+	        	'var queryFlag="no"',
+	        	'</script>';
 	        	echo "Error executing query: " . $sql . "<br>" . $db_handle->getLastError() . "site id:" . $siteid;
 	            die();
 	        }
@@ -301,5 +305,30 @@
 		
 	}
 </script>
+
+	<script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- validator -->
+	<script src="../vendors/validator/validator.js"></script>
+	<!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script type="text/javascript">
+    function notifyUser(title,message,type) {
+            new PNotify({
+            	title: title,
+				text: message,
+				type: type,
+				styling: 'bootstrap3'
+            });
+    }
+	</script>
+<script type="text/javascript">
+if (queryFlag==="yes")
+	 notifyUser("New cabinet added" , "A new cabinet was created successfuly" , "success");
+else notifyUser("Error" , "The new room was NOT added!" , "error");
+</script>   
 
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>

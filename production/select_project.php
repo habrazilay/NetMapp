@@ -1,4 +1,5 @@
-<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php"); ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/loginVerify.php"); ?> 
+
 <!-- post to db -->
       <?php
       
@@ -45,8 +46,13 @@
             $sql = "INSERT INTO projects (name,createdBy) VALUES('" . $name . "','" . $userid . "' )";
             
             if ($conn->query($sql) === TRUE) {
-                echo "New record created successfully";
+                echo    '<script type="text/javascript">',
+                        'var queryFlag="yes"',
+                        '</script>';
             } else {
+                echo    '<script type="text/javascript">',
+                        'var queryFlag="no"',
+                        '</script>';
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
             
@@ -153,5 +159,31 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/menu_footer.html");
         </div>
 
         <!-- /page content -->
-<script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script>
+	<script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- validator -->
+	<script src="../vendors/validator/validator.js"></script>
+	<!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script type="text/javascript">
+    function notifyUser(title,message,type) {
+            new PNotify({
+            	title: title,
+				text: message,
+				type: type,
+				styling: 'bootstrap3'
+            });
+    }
+	</script>
+<script type="text/javascript">
+if (queryFlag==="yes")
+	 notifyUser("New project added" , "A new project was created successfuly" , "success");
+else notifyUser("Error" , "The new project was NOT created!" , "error");
+</script>
+
+
+
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>

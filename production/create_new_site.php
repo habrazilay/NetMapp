@@ -12,16 +12,22 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
+        $pid = $_SESSION['project_id'];
         $userid = $_SESSION['user_id'];
         $name = $_POST['site_name'];
         $city = $_POST['site_location'];
         $address = $_POST['site_address']; 
         
-        $sql = "INSERT INTO sites (name,city,address,createdBy) VALUES('" . $name . "','" . $city . "','" . $address . "','" . $userid . "' )";
+        $sql = "INSERT INTO sites (pid,name,city,address,createdBy) VALUES('" . $pid . "','" . $name . "','" . $city . "','" . $address . "','" . $userid . "' )";
         
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo '<script type="text/javascript">',
+            'var queryFlag="yes"',
+            '</script>';
         } else {
+            echo    '<script type="text/javascript">',
+            'var queryFlag="no"',
+            '</script>';
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
         
@@ -58,7 +64,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="site-name">Site name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="site_name" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="site_name" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
@@ -71,7 +77,7 @@
                           <div class="form-group">
                             <label for="room-floor" class="control-label col-md-3 col-sm-3 col-xs-12">Site address</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="site_address" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="site_address" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                       <div class="x_title"></div>
@@ -83,6 +89,31 @@
           </div>
         </div>
         <!-- /page content -->
+        
+	<script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- validator -->
+	<script src="../vendors/validator/validator.js"></script>
+	<!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script type="text/javascript">
+    function notifyUser(title,message,type) {
+            new PNotify({
+            	title: title,
+				text: message,
+				type: type,
+				styling: 'bootstrap3'
+            });
+    }
+	</script>
+<script type="text/javascript">
+if (queryFlag==="yes")
+	 notifyUser("New site added" , "A new site was created successfuly" , "success");
+else notifyUser("Error" , "The new site was NOT added!" , "error");
+</script>        
       
         
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>
