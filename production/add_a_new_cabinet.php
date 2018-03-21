@@ -147,7 +147,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room_site">Select the site <span class="required">*</span>
                             </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">  
-                          <select name="site" id="site-list" class="form-control" onChange="getroom(this.value);">
+                          <select name="site" id="site-list" required="required" class="form-control" onChange="getroom(this.value);">
                               <option disabled selected>Please Select...</option>
                             <?php
                             foreach($results_sites as $site) {
@@ -176,7 +176,7 @@
 	                                });
 	                            }
                             </script>
-                          <select name="room_name" id="room_name" class="form-control">
+                          <select name="room_name" id="room_name" required="required" class="form-control">
                           </select>
                             </div>
                           </div>         
@@ -189,7 +189,7 @@
                           <div class="form-group">
                             <label for="cabinet-client-name" class="control-label col-md-3 col-sm-3 col-xs-12">Cabinet's client name </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="cab_client_name" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="cab_client_name" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">

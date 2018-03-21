@@ -12,13 +12,12 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        $pid = $_SESSION['project_id'];
         $userid = $_SESSION['user_id'];
         $name = $_POST['site_name'];
         $city = $_POST['site_location'];
         $address = $_POST['site_address']; 
         
-        $sql = "INSERT INTO sites (pid,name,city,address,createdBy) VALUES('" . $pid . "','" . $name . "','" . $city . "','" . $address . "','" . $userid . "' )";
+        $sql = "INSERT INTO sites (name,city,address,createdBy) VALUES('" . $name . "','" . $city . "','" . $address . "','" . $userid . "' )";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
@@ -59,7 +58,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="site-name">Site name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="site_name" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="site_name" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                           <div class="form-group">
@@ -72,7 +71,7 @@
                           <div class="form-group">
                             <label for="room-floor" class="control-label col-md-3 col-sm-3 col-xs-12">Site address</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" name="site_address" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" name="site_address" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
                       <div class="x_title"></div>
