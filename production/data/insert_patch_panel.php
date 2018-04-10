@@ -46,7 +46,7 @@ if (isset ( $_POST ['add_new_device'] )) {
 	if($name == NULL)
 		$errors[] = "PP name is empty.";
 	if( $pattern == NULL || $wildcardIndex === false)
-		$erros[] = "Pattern is empty.";
+		$errors[] = "Pattern is empty.";
 	else{
 		$wildcardIndex = strpos($pattern,"*");
 		if($wildcardIndex === false)

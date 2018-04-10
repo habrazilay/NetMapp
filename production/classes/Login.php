@@ -117,9 +117,10 @@ class Login
      */
     public function doLogout()
     {
-    	// return a little feeedback message
+    	// return a feedback message
     	$this->messages[] = "You have been logged out.";
-    	error_log("Login Info: The user '".$_SESSION['user_name']."' has logged out successfully from: ".$_SERVER['REMOTE_ADDR'].".");
+    	if (isset($_SESSION['user_name']))
+    		error_log("Login Info: The user '".$_SESSION['user_name']."' has logged out successfully from: ".$_SERVER['REMOTE_ADDR'].".");
     	
     	// delete the session of the user
         $_SESSION = array();

@@ -148,6 +148,7 @@
     <script src="../vendors/pnotify/dist/pnotify.js"></script>
     <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
     <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.custom.js"></script>
 	<script>
 		$('form')
 			.on('blur', 'input[required], input.optional, select.required', validator.checkField)
@@ -179,15 +180,6 @@
 		loginMessages.forEach(function(msg) {popNotify('Login info', msg ,'success');});
 		registerErrors.forEach(function(error) {popNotify('Registration Error', error ,'error');});
 		registerMessages.forEach(function(msg) {popNotify('Registration info', msg ,'success');});
-		
-		function popNotify(title,message,type){
-			new PNotify({
-				title: title,
-				text: message,
-				type: type,
-				styling: 'bootstrap3'
-			});
-		}	
 		
 	</script>
   </body>
