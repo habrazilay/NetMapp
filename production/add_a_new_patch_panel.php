@@ -38,7 +38,7 @@
 							</label>
 								<div class="col-md-3 col-sm-3 col-xs-6">
 								<select required name="site_list_A" id="site_list_A" class="form-control"
-									onChange="getroom($('#room_name_A'),this.value);selectValue($('#site_list_B'),this.value);">
+									onChange='getRoomsToSelect("room_name_A",this.value);selectValue($("#site_list_B"),this.value);'>
 									<option disabled selected>Please Select...</option>									
                             </select>
 							</div>
@@ -50,7 +50,7 @@
 
 							<div class="col-md-3 col-sm-3 col-xs-6">
 	                          <select required name="room_name_A" id="room_name_A" class="form-control"
-									onChange="	getcabinet($('#cab_name_A'),this.value);selectValue($('#room_name_B'),this.value);">
+									onChange='getCabinetsToSelect("cab_name_A",this.value);selectValue($("#room_name_B"),this.value);'>
 							  </select>
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 							</label>
 							<div class="col-md-3 col-sm-3 col-xs-6">
 								<select required name="site_list_B" id="site_list_B" class="form-control"
-									onChange="getroom($('#room_name_B'),this.value);">
+									onChange='getRoomsToSelect("room_name_B",this.value);'>
 									<option disabled selected>Please Select...</option>
                             </select>
 							</div>
@@ -100,7 +100,7 @@
 
 							<div class="col-md-3 col-sm-3 col-xs-6">
 	                          <select required name="room_name_B" id="room_name_B" class="form-control"
-									onChange="getcabinet($('#cab_name_B'),this.value);">
+									onChange='getCabinetsToSelect("cab_name_B",this.value);'>
 							  </select>
 							</div>
 						</div>
@@ -202,37 +202,14 @@
 </div>
 <!-- /page content -->
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
+<script src="./js/get_data/get_sites.js"></script>
+<script src="./js/get_data/get_rooms.js"></script>
+<script src="./js/get_data/get_cabinets.js"></script>
 <script>
 
 	window.onload = function (){
-		getsites("").success(function(data){
-			$.each(data, function(key, value) {   
-				 $("#site_list_A")
-					  .append($("<option></option>")
-							  .val(value["id"])
-							  .text(value["name"])
-							  ); 
-				$("#site_list_B")
-				  .append($("<option></option>")
-						  .val(value["id"])
-						  .text(value["name"])
-						  ); 
-				});
-		});
-	}
-
-	function getroom(roomElement,val) {
-		$.ajax({
-			type: "POST",
-			url: "config/get_room.php",
-			data:'sid='+val,
-			success: function(data){
-				//$("#room_name").html(data);
-				//$("#room_name").trigger('change');
-				roomElement.html(data);
-				roomElement.trigger('change');
-			}
-		});
+		getSitesToSelect("site_list_B","");
+		getSitesToSelect("site_list_A","");
 	}
 	
 	function getcabinet(cabElement,val) {
@@ -270,15 +247,6 @@
 					});
 				  }
 		 });
-	}
-
-	function getsites(filter) {
-		return $.ajax({
-			type:"POST",
-			url: "config/get_site_list.php",
-			data:'filter='+filter,
-			dataType: 'json',
-		});
 	}
 
 	function selectValue(selectObj,val) {

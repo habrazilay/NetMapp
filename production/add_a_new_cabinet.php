@@ -149,7 +149,7 @@ if (isset ( $_POST ['add_cabinet'] )) {
 									</label>
 									<div class="col-md-6 col-sm-6 col-xs-12">
 										<select name="site" id="site-list" required="required"
-											class="form-control" onChange="getroom(this.value);">
+											class="form-control" onChange='getRoomsToSelect("room_name",this.value);'>
 											<option disabled selected>Please Select...</option>
 		                            </select>
 									</div>
@@ -159,19 +159,6 @@ if (isset ( $_POST ['add_cabinet'] )) {
 										for="room_name">Select the room <span class="required">*</span>
 									</label>
 									<div class="col-md-6 col-sm-6 col-xs-12">
-										<!--script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script-->
-										<script>
-			                            function getroom(val) {
-			                                $.ajax({
-			                                type: "POST",
-			                                url: "config/get_room.php",
-			                                data:'sid='+val,
-			                                success: function(data){
-			                                    $("#room_name").html(data);
-			                                }
-			                                });
-			                            }
-		                            </script>
 										<select name="room_name" id="room_name" required="required"
 											class="form-control">
 										</select>
@@ -264,6 +251,7 @@ if (isset ( $_POST ['add_cabinet'] )) {
 <script src="./js/get_data/get_industrial_plug_types.js"></script>
 <script src="./js/get_data/get_power_plug_types.js"></script>
 <script src="./js/get_data/get_sites.js"></script>
+<script src="./js/get_data/get_rooms.js"></script>
 
 <script>
 	powerFeedCounter=0;	
@@ -302,15 +290,7 @@ if (isset ( $_POST ['add_cabinet'] )) {
 	}
 
 	window.onload = function (){
-		getsites("").success(function(data){
-			$.each(data, function(key, value) {   
-				 $("#site-list")
-					  .append($("<option></option>")
-							  .val(value["id"])
-							  .text(value["name"])
-							  ); 
-				});
-		});
+		getSitesToSelect("site-list","");
 	}
 </script>
 

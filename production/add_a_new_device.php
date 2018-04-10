@@ -40,7 +40,7 @@
 							</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<select required name="site_list" id="site_list" class="form-control"
-									onChange="getroom('room_name',this.value);">
+									onChange='getRoomsToSelect("room_name",this.value);'>
 									<option disabled selected>Please Select...</option>
                             </select>
 							</div>
@@ -52,7 +52,7 @@
 
 							<div class="col-md-6 col-sm-6 col-xs-12">
 	                          <select required name="room_name" id="room_name" class="form-control"
-									onChange="getcabinet('cab_name',this.value);">
+									onChange='getCabinetsToSelect("cab_name",this.value);'>
 							  </select>
 							</div>
 						</div>
@@ -188,27 +188,10 @@
 <!-- /page content -->
 <script src="./js/get_data/get_power_plug_types.js"></script>
 <script src="./js/get_data/get_sites.js"></script>
+<script src="./js/get_data/get_rooms.js"></script>
+<script src="./js/get_data/get_cabinets.js"></script>
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
 <script>
-
-	/* 	This function imports room list to  a select element, filtered by room id.
-	
-	Parameters:
-		selectElementID - select element id to import items.
-		val - room id filter.
-	*/
-	function getroom(selectElementID,val) {
-		$.ajax({
-			type: "POST",
-			url: "config/get_room.php",
-			data:'sid='+val,
-			success: function(data){
-				var dropboxElement = $('#'+selectElementID);
-				dropboxElement.html(data);
-				dropboxElement.change();
-			}
-		});
-	}
 
 	/* 	This function imports cabinet list to  a select element, filtered by room id.
 		
@@ -342,15 +325,7 @@
 	});
 	
 	window.onload = function (){
-		getsites("").success(function(data){
-			$.each(data, function(key, value) {   
-				 $("#site_list")
-					  .append($("<option></option>")
-							  .val(value["id"])
-							  .text(value["name"])
-							  ); 
-				});
-		});
+		getSitesToSelect("site_list","");
 		getPowerPlugTypes($("#dev_power_feed_type"), "less");
 	}
 	</script>
