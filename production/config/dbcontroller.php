@@ -131,6 +131,11 @@ class DBController {
 		error_log(date('Y-m-d H:i:sO')." ".$string.PHP_EOL."\tLogged User: ".(isset($_SESSION['user_name']) ? $_SESSION['user_name'] : "<Not logged/Unknown>").PHP_EOL,3,$this->sqlLogPath."/NM-sql.log"); //$_SESSION['user_name']
 	}
 	
+	function close()
+	{
+		return mysqli_close($this->conn);
+	}
+	
 			
 }
 
