@@ -30,12 +30,15 @@ if (isset ( $_POST ['add_cabinet'] )) {
 	$sql = "INSERT INTO cabinets (rid,name,clientName,uHeight,depth,width,height,description) " . "VALUES('" . $roomid . "','" . $name . "','" . $clientName . "','" . $uHeight . "','" . $depth . "','" . $width . "','" . $height . "','" . $description . "')";
 	
 	if ($db_handle->runQuery ( $sql, DB_SCHEMA_MAP, "INSERT" )) {
-		echo "New record created successfully to cabinets"; // TODO: Use pnotify!
-		echo "query executed: " . $sql;
+		echo '<script type="text/javascript">',
+		'var queryFlag="yes"',
+		'</script>';
 		$newCabId = $db_handle->insert_id ();
 	} else {
 		$db_handle->write_log_sql ( "Error executing query: " . $sql . "<br>" . $db_handle->getLastError () . "site id:" . $siteid );
-		echo "Error executing query: " . $sql . "<br>" . $db_handle->getLastError () . "site id:" . $siteid;
+		echo    '<script type="text/javascript">',
+		'var queryFlag="no"',
+		'</script>';
 		die ();
 	}
 	
@@ -86,12 +89,12 @@ if (isset ( $_POST ['add_cabinet'] )) {
 							$sql = "INSERT INTO cabinetPowerPlugs (cabid,typeid,description) " . "VALUES('" . $newCabId . "','" . $feedTypeId . "','')";
 							
 							if ($db_handle->runQuery ( $sql, DB_SCHEMA_MAP, "INSERT" )) {
-								echo "New record created successfully to powerFeeds"; // TODO: Use pnotify!
-								echo "query executed: " . $sql;
+								//echo "New record created successfully to powerFeeds"; // TODO: Use pnotify!
+								//echo "query executed: " . $sql;
 								$newFeedId = $db_handle->insert_id ();
 							} else {
 								$db_handle->write_log_sql ( "Error executing query: " . $sql . PHP_EOL . "\t SQL Error: " . $db_handle->getLastError () );
-								echo "Error executing query: " . $sql . "<br>" . $db_handle->getLastError ();
+								//echo "Error executing query: " . $sql . "<br>" . $db_handle->getLastError ();
 								die ();
 							}
 						}
@@ -100,11 +103,11 @@ if (isset ( $_POST ['add_cabinet'] )) {
 						$sql = "INSERT INTO cabinetPowerOutlets (cabid,outTypeid,amount,plugid,description) " . "VALUES('" . $newCabId . "','" . $socketTypeId . "','" . $amount . "','" . $newFeedId . "','')";
 						
 						if ($db_handle->runQuery ( $sql, DB_SCHEMA_MAP, "INSERT" )) {
-							echo "New record created successfully to cabinetPowerOutlets"; // TODO: Use pnotify!
-							echo "query executed: " . $sql;
+							//echo "New record created successfully to cabinetPowerOutlets"; // TODO: Use pnotify!
+							//echo "query executed: " . $sql;
 						} else {
 							$db_handle->write_log_sql ( "Error executing query: " . $sql . PHP_EOL . "\t SQL Error: " . $db_handle->getLastError () );
-							echo "Error executing query: " . $sql . "<br>" . $db_handle->getLastError ();
+							//echo "Error executing query: " . $sql . "<br>" . $db_handle->getLastError ();
 							die ();
 						}
 					}
@@ -148,13 +151,6 @@ if (isset ( $_POST ['add_cabinet'] )) {
 										<select name="site" id="site-list" required="required"
 											class="form-control" onChange="getroom(this.value);">
 											<option disabled selected>Please Select...</option>
-		                            <?php
-																														foreach ( $results_sites as $site ) {
-																															?>
-		                            <option value="<?php echo $site["id"]; ?>"><?php echo $site["name"]; ?></option>
-		                            <?php
-																														}
-																														?>
 		                            </select>
 									</div>
 								</div>
@@ -267,9 +263,7 @@ if (isset ( $_POST ['add_cabinet'] )) {
 
 <script src="./js/get_data/get_industrial_plug_types.js"></script>
 <script src="./js/get_data/get_power_plug_types.js"></script>
-
-
-
+<script src="./js/get_data/get_sites.js"></script>
 
 <script>
 	powerFeedCounter=0;	
@@ -306,6 +300,35 @@ if (isset ( $_POST ['add_cabinet'] )) {
 		getPowerPlugTypes($("#"+feedId+socketId), "less");
 		
 	}
+
+	window.onload = function (){
+		getsites("").success(function(data){
+			$.each(data, function(key, value) {   
+				 $("#site-list")
+					  .append($("<option></option>")
+							  .val(value["id"])
+							  .text(value["name"])
+							  ); 
+				});
+		});
+	}
 </script>
+
+	<script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- validator -->
+	<script src="../vendors/validator/validator.js"></script>
+	<!-- PNotify -->
+    <script src="../vendors/pnotify/dist/pnotify.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.custom.js"></script>
+	</script>
+<script type="text/javascript">
+if (queryFlag==="yes")
+	 notifyUser("New cabinet added" , "A new cabinet was created successfuly" , "success");
+else notifyUser("Error" , "The new room was NOT added!" , "error");
+</script>   
 
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>
