@@ -212,19 +212,6 @@
 		getSitesToSelect("site_list_A","");
 	}
 	
-	function getcabinet(cabElement,val) {
-		$.ajax({
-		type: "POST",
-		url: "config/get_cabinet.php",
-		data:'rid='+val,
-		success: function(data){
-			//$("#cab_name").html(data);
-			cabElement.html(data);
-			cabElement.trigger('change');
-		}
-		});
-	}
-	
 	function getbasedevice(val) {
 		$.ajax({
 		type: "POST",

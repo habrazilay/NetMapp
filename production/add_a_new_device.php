@@ -193,25 +193,6 @@
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
 <script>
 
-	/* 	This function imports cabinet list to  a select element, filtered by room id.
-		
-		Parameters:
-			selectElementID - select element id to import items.
-			val - room id filter.
-	*/
-	function getcabinet(selectElementID,val) {
-		$.ajax({
-			type: "POST",
-			url: "config/get_cabinet.php",
-			data:'rid='+val,
-			success: function(data){
-				var dropboxElement = $('#'+selectElementID);
-				dropboxElement.html(data);
-				dropboxElement.change();
-			}
-		});
-	}
-
 	function preventSpecialKeys(){
 		
 		var DELETE = 8;
