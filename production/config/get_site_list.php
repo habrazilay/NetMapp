@@ -14,7 +14,10 @@ if(isset($_POST["filter"]) AND !empty($_POST["filter"])) {
 	echo json_encode($results);
 }
 */
-
-$query ="SELECT * FROM sites WHERE name LIKE CONCAT('%',?,'%')";
-$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'s',$_POST["filter"]);
+if(!isset($_SESSION))
+{
+	session_start();
+}
+$query ="SELECT * FROM sites WHERE pid = ? AND name LIKE CONCAT('%',?,'%')";
+$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'is',$_SESSION["project_id"],$_POST["filter"]);
 echo json_encode($results);
