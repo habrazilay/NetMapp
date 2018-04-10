@@ -21,4 +21,6 @@ define("DB_SCHEMA_MAP", "mapping");
 define("DB_SCHEMA_PROJECT", "project");
 define("DB_SCHEMA_PROJECT_SETTINGS", "projectSettings");
 define("DB_SCHEMA_SECURITY", "security");
+define("DB_MULTI_SCHEMA", "DB_MULTI_SCHEMA");
 
+?>

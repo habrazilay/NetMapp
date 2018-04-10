@@ -22,8 +22,15 @@
                     <form class="form-horizontal form-label-left">
                     <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                 <div class="tile-stats">
-                  <div class="icon"><i class="glyphicon glyphicon-th-large"></i></div>
+                  <div class="icon"><i class="glyphicon glyphicon-home"></i></div>
                   <div class="count">1</div>
+                  <h3>Sites</h3>
+                </div>
+              </div>
+                    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="glyphicon glyphicon-th-large"></i></div>
+                  <div class="count">2</div>
                   <h3>Rooms</h3>
                 </div>
               </div>
@@ -46,6 +53,13 @@
                   <div class="icon"><i class="glyphicon glyphicon-align-justify"></i></div>
                   <div class="count">17</div>
                   <h3>Patch Panels</h3>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="glyphicon glyphicon-resize-small"></i></div>
+                  <div class="count">17</div>
+                  <h3>Cables connections</h3>
                 </div>
               </div>
               <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">

@@ -26,12 +26,14 @@ class DBController {
 	
 	function connectDB() {
 	    require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
-		$this->conn = new mysqli(DB_HOST,DB_USER,DB_PASS, $this->db);
+	    $this->conn = new mysqli(DB_HOST,DB_USER,DB_PASS);
+		//$this->conn = new mysqli(DB_HOST,DB_USER,DB_PASS, $this->db);
 	}
 	
 	function selectDB($db) {
 	    require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
-		mysqli_select_db($this->conn, $db)or die("cannot select DB");
+	    if(strcmp($db,DB_MULTI_SCHEMA) !== 0)
+	       mysqli_select_db($this->conn, $db)or die("cannot select DB");
 	}
 
 	function runQuery($query,$db,$type="SELECT") {
