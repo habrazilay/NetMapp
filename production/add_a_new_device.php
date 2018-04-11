@@ -269,23 +269,11 @@
 			   dataType: 'json',
 			   success: function(data) {
 				   if(data.status == "Success"){
-						new PNotify({
-							title: 'Success',
-							text: data["msg"],
-							type: 'success',
-							styling: 'bootstrap3'
-						});   
-				   } 
-				   else if (data.status == "Failed") {
+					   popNotify('Success',data["msg"],'success');
+				   } else if (data.status == "Failed") {
 					   $.each(data, function(key, value) {   
-							if(key != "status") {							
-								new PNotify({
-								title: 'Error',
-								text: value,
-								type: 'error',
-								styling: 'bootstrap3'
-								}); 	
-							}
+							if(key != "status")
+								popNotify ('Error',value,'error');								
 						});
 				   }
 				   else{
@@ -293,12 +281,7 @@
 				   }
 				},
 				error: function(jqXHR, exception){
-					new PNotify({
-						title: 'error',
-						text: "Status: " + jqXHR.status + " Error: " + exception,
-						type: 'error',
-						styling: 'bootstrap3'
-						}); 
+					popNotifty('error', ("Status: " + jqXHR.status + " Error: " + exception) ,'error');
                 }
 			 });
 
@@ -313,4 +296,5 @@
 <script src="../vendors/pnotify/dist/pnotify.js"></script>
 <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
 <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+<script src="../vendors/pnotify/dist/pnotify.custom.js"></script>
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>

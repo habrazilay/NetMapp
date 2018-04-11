@@ -294,7 +294,7 @@ if (isset ( $_POST ['add_cabinet'] )) {
 	}
 </script>
 
-	<script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script>
+	<!--script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script-->
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- validator -->
@@ -306,9 +306,11 @@ if (isset ( $_POST ['add_cabinet'] )) {
     <script src="../vendors/pnotify/dist/pnotify.custom.js"></script>
 	</script>
 <script type="text/javascript">
-if (queryFlag==="yes")
-	 notifyUser("New cabinet added" , "A new cabinet was created successfuly" , "success");
-else notifyUser("Error" , "The new room was NOT added!" , "error");
+if (typeof queryFlag !== 'undefined') {
+	if (queryFlag==="yes")
+		 popNotify("New cabinet added" , "A new cabinet was created successfuly" , "success");
+	else popNotify("Error" , "The new room was NOT added!" , "error");
+}
 </script>   
 
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>

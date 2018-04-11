@@ -68,19 +68,7 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="room-site">Select a site <span class="required">*</span>
                             </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control" name="site_name">
-                            <?php 
-                            require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
-                            require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
-                            $db_handle = new DBController(DB_SCHEMA_PROJECT);
-                            $query = "SELECT id,name FROM sites WHERE pid=?";
-                            $res = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'i',$_SESSION['project_id']);
-                            foreach($res as $site) {
-                                echo "\n\t\t\t\t\t\t\t";
-                                echo "<option value=\"" . $site['id'] . "\">" . $site['name'] . "</option>";
-                            }
-                            echo "\n";
-                            ?>
+                          <select class="form-control" name="site_name" id="site_name">
                           </select>
                         </div>
                         </div>
@@ -152,7 +140,7 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
         </div>
         <!-- /page content -->
         
-	<script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script>
+	<!--script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script-->
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- validator -->
@@ -161,20 +149,22 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
     <script src="../vendors/pnotify/dist/pnotify.js"></script>
     <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
     <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+    <script src="../vendors/pnotify/dist/pnotify.custom.js"></script>
+    
+    <script src="./js/get_data/get_sites.js"></script>
     <script type="text/javascript">
-    function notifyUser(title,message,type) {
-            new PNotify({
-            	title: title,
-				text: message,
-				type: type,
-				styling: 'bootstrap3'
-            });
-    }
+	    window.onload = function (){
+			getSitesToSelect("site_name","");
+		}
 	</script>
 <script type="text/javascript">
-if (queryFlag==="yes")
-	 notifyUser("New room added" , "A new room was created successfuly" , "success");
-else notifyUser("Error" , "The new room was NOT added!" , "error");
+if (typeof queryFlag !== 'undefined') {
+	if (queryFlag==="yes")
+		 popNotify("New room added" , "A new room was created successfuly" , "success");
+	else 
+		popNotify("Error" , "The new room was NOT added!" , "error");
+}
+
 </script>      
       
         
