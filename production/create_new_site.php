@@ -90,7 +90,7 @@
         </div>
         <!-- /page content -->
         
-	<script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script>
+	<!--script src="http://demos.inspirationalpixels.com/popup-modal/jquery.popup.js"></script-->
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- validator -->

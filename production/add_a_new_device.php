@@ -40,20 +40,8 @@
 							</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<select required name="site_list" id="site_list" class="form-control"
-									onChange="getroom(this.value);">
+									onChange='getRoomsToSelect("room_name",this.value);'>
 									<option disabled selected>Please Select...</option>
-									<?php
-									$db_handle = new DBController ( DB_SCHEMA_PROJECT );
-									$query = "SELECT * FROM sites WHERE pid=?";
-									$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'i',$_SESSION['project_id']);
-									/* $results = $db_handle->runQuery ( $query, DB_SCHEMA_PROJECT ); */
-										
-									foreach ( $results as $site ) {
-									?>
-									<option value="<?php echo $site["id"]; ?>"><?php echo $site["name"]; ?></option>
-									<?php
-									}
-									?>
                             </select>
 							</div>
 						</div>
@@ -64,7 +52,7 @@
 
 							<div class="col-md-6 col-sm-6 col-xs-12">
 	                          <select required name="room_name" id="room_name" class="form-control"
-									onChange="getcabinet(this.value);">
+									onChange='getCabinetsToSelect("cab_name",this.value);'>
 							  </select>
 							</div>
 						</div>
@@ -92,7 +80,7 @@
 								class="required">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input type="text" name="dev_type_filter" id="dev_type_filter"
-									class="form-control col-md-7 col-xs-12" onChange="getbasedevice(this.value);">
+									class="form-control col-md-7 col-xs-12" onkeydown="getbasedevice.filterLastVal = this.value; preventSpecialKeys();" onkeyup="getbasedevice('dev_type',this.value);" autocomplete="off"	>
 							</div>
 						</div>
 						<div class="form-group">
@@ -152,32 +140,6 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-3"
-								for="room_name">Power Feed Type</label>
-							<div class="col-md-2 col-sm-2 col-xs-12">
-							  <select required name="dev_power_feed_type" id="dev_power_feed_type" class="form-control">
-								  <?php
-								  	$db_handle = new DBController ( DB_SCHEMA_BASE );
-								  	$query = "SELECT * FROM powersocketandplugtypes";
-								  	$results = $db_handle->runQuery ( $query, DB_SCHEMA_BASE );
-								  	foreach ( $results as $plugType ) {
-									?>
-										<option value="<?php echo $plugType["id"]; ?>" maxCurrent="<?php echo $plugType["maxCurrent"]; ?>"><?php echo $plugType["type"]; ?></option>
-									<?php
-									}
-									?>
-								  	
-							  </select>
-							</div>
-							<label class="control-label col-md-2 col-sm-3 col-xs-12">Feeds available</span>
-							</label>
-							<div class="col-md-3 col-sm-3 col-xs-12">
-								<input required="required" name="dev_power_feed_amount" id="dev_power_feed_amount"
-									class="date-picker form-control col-md-7 col-xs-12"
-									type="number" style="width: 100px;" min="1" value="2">
-							</div>
-						</div>
-						<div class="form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12">Total available ports</label> 
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input name="dev_ports"
@@ -185,6 +147,24 @@
 										type="number" style="width: 100px;" min="1" value="24">
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-3"
+								for="room_name">Power Feed Type</label>
+							<div class="col-md-3 col-sm-3 col-xs-12">
+								<select name='dev_power_feed_type' id='dev_power_feed_type' class='form-control col-md-4 col-sm-4 col-xs-12' onChange='editedSocket(this);'></select>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-md-3 col-sm-3 col-xs-12">Feeds available</label> 
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input required="required" name="dev_power_feed_amount" id="dev_power_feed_amount"
+									class="date-picker form-control col-md-7 col-xs-12"
+									type="number" style="width: 100px;" min="1" value="2">
+							</div>
+						</div>
+						
+						
 						<div class="item form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="description">Device description </label>
@@ -204,61 +184,78 @@
 		</div>
 	</div>
 </div>
+
 <!-- /page content -->
+<script src="./js/get_data/get_power_plug_types.js"></script>
+<script src="./js/get_data/get_sites.js"></script>
+<script src="./js/get_data/get_rooms.js"></script>
+<script src="./js/get_data/get_cabinets.js"></script>
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
 <script>
-	function getroom(val) {
+
+	function preventSpecialKeys(){
+		
+		var DELETE = 8;
+		var BACKSPACE = 46;
+		var pressedKey = event.key;
+		var keyString = String.fromCharCode(pressedKey);
+		
+		// checks if pressed key was NOT one of DELETE BACKSPACE space AlphaNumeric _ - *
+		if ( (pressedKey !== 'Delete') && (pressedKey !== 'Backspace') &&  (!/[a-zA-Z0-9-_ \*]/.test(pressedKey)) ) {
+			event.preventDefault();
+			return;
+		}
+
+	}
+
+	
+	/* 	This function imports devices list to a select element, filtered by device name.
+	
+	Parameters:
+		selectElementID - select element id to import items.
+		val - device name filter.
+		minimumLength- minimal length for filter.
+	*/
+	function getbasedevice(selectElementID, val, minLength = 3) {
+
+		// checks if the filter value has not changed or is too short.
+		if( (val == getbasedevice.filterLastVal) || (val.length < minLength) )
+			return;
+		
 		$.ajax({
 			type: "POST",
-			url: "config/get_room.php",
-			data:'sid='+val,
+			url: "config/get_base_device.php",
+			data:'filter='+val,
+			dataType: 'json',
 			success: function(data){
-				$("#room_name").html(data);
-				$("#room_name").trigger('change');
-			}
-		});
-	}
-	
-	function getcabinet(val) {
-		$.ajax({
-		type: "POST",
-		url: "config/get_cabinet.php",
-		data:'rid='+val,
-		success: function(data){
-			$("#cab_name").html(data);
-		}
-		});
-	}
-	
-	function getbasedevice(val) {
-		$.ajax({
-		type: "POST",
-		url: "config/get_base_device.php",
-		data:'filter='+val,
-		dataType: 'json',
-		success: function(data){
-					var dropboxElement = $("#dev_type");
-					dropboxElement.html("");
-					$.each(data, function(key, value) {   
-					 dropboxElement
-						  .append($("<option></option>")
-								  .val(value["id"])
-								  .text(value["model"])
-								  .attr("uHeight", value["uHeight"])
-								  .attr("uLength", value["uLength"])
-								  .attr("builtInPowerFeedType", value["builtInPowerFeedType"])
-								  .attr("builtInPowerFeedAmount", value["builtInPowerFeedAmount"])
-								  ); 
-					});
-				  }
+				var dropboxElement = $('#'+selectElementID);
+				dropboxElement.html("");
+				$.each(data, function(key, value) {   
+				 dropboxElement
+					  .append($("<option></option>")
+							  .val(value["id"])
+							  .text(value["model"])
+							  .attr("uHeight", value["uHeight"])
+							  .attr("uLength", value["uLength"])
+							  .attr("builtInPowerFeedType", value["builtInPowerFeedType"])
+							  .attr("builtInPowerFeedAmount", value["builtInPowerFeedAmount"])
+							  ); 
+				});
+				dropboxElement.change();
+		  	}
+		  
 		 });
-	}
-	
+	}	
+	getbasedevice.filterLastVal = "";
+
+	//edit fields according to selected device.
 	function setDeviceDetails() {
 		var option = $("#dev_type option:selected");
 		$("#dev_uheight").val(option.attr("uheight"));
 		$("#dev_ulength").val(option.attr("ulength"));
-		$("#dev_power_feed_type").val(option.attr("builtInPowerFeedType"));
+		var oDropdown = $("#dev_power_feed_type").msDropdown().data("dd");
+		oDropdown.setIndexByValue(option.attr("builtInPowerFeedType"));
+		//$("#dev_power_feed_type").val(option.attr("builtInPowerFeedType"));
 		$("#dev_power_feed_amount").val(option.attr("builtinpowerfeedamount"));
 	}
 	
@@ -272,23 +269,11 @@
 			   dataType: 'json',
 			   success: function(data) {
 				   if(data.status == "Success"){
-						new PNotify({
-							title: 'Success',
-							text: data["msg"],
-							type: 'success',
-							styling: 'bootstrap3'
-						});   
-				   } 
-				   else if (data.status == "Failed") {
+					   popNotify('Success',data["msg"],'success');
+				   } else if (data.status == "Failed") {
 					   $.each(data, function(key, value) {   
-							if(key != "status") {							
-								new PNotify({
-								title: 'Error',
-								text: value,
-								type: 'error',
-								styling: 'bootstrap3'
-								}); 	
-							}
+							if(key != "status")
+								popNotify ('Error',value,'error');								
 						});
 				   }
 				   else{
@@ -296,19 +281,20 @@
 				   }
 				},
 				error: function(jqXHR, exception){
-					new PNotify({
-						title: 'error',
-						text: "Status: " + jqXHR.status + " Error: " + exception,
-						type: 'error',
-						styling: 'bootstrap3'
-						}); 
+					popNotifty('error', ("Status: " + jqXHR.status + " Error: " + exception) ,'error');
                 }
 			 });
 
 		e.preventDefault(); // avoid to execute the actual submit of the form.
 	});
+	
+	window.onload = function (){
+		getSitesToSelect("site_list","");
+		getPowerPlugTypes($("#dev_power_feed_type"), "less");
+	}
 	</script>
 <script src="../vendors/pnotify/dist/pnotify.js"></script>
 <script src="../vendors/pnotify/dist/pnotify.buttons.js"></script>
 <script src="../vendors/pnotify/dist/pnotify.nonblock.js"></script>
+<script src="../vendors/pnotify/dist/pnotify.custom.js"></script>
 <?php include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/footer.html"); ?>

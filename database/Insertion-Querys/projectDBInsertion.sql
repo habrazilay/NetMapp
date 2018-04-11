@@ -28,3 +28,11 @@ INSERT INTO `mapping`.`cabinets` (`id`,`rid`,`name`,`clientName`,`uHeight`,`dept
 (6,5,'A2','A2-WAN',42,120,60,220,'WAN'),
 (7,5,'A3','A3-LAN',42,120,60,220,'LAN')
 ;
+
+INSERT INTO `mapping`.`devices` (`id`,`cabid`,`masterid`,`uLoc`,`uHeight`,`uLength`,`name`,`typeid`,`powerFeedType`,`powerFeedAmount`,`activePorts`,`installationType`,`phase`,`arrivalDate`,`faceFront`,`description`) VALUES 
+(1,1,'876',1,2,1.000,'esx2',1,2,1,24,1,0,NULL,1,''),
+(3,1,'123',3,3,1.000,'td123',1,2,1,24,0,0,NULL,1,''),
+(4,1,'127',14,1,1.000,'td127',1,2,1,24,0,0,NULL,1,''),
+(5,1,'128',8,2,1.000,'td128',40,2,2,24,0,0,NULL,1,'')
+;
+

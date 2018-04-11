@@ -46,6 +46,7 @@ cabid 			- 	cabinet row identifier where the device is placed.
 masterid	 	- 	unique id to easily identify the device by technicians. (Ex. A-0192,B-9813)
 uLoc			-	the lowest Unit location of the device inside the cabinet.
 uHeight			- 	the size of the device in Units.
+uEnd			-	the highest U for this device.
 uLength			- 	the length of the device in Units. (Ex. 0.5 for half U device).
 name 			- 	name to identify the device by the client.
 typeid			-	referencing device row identifier of the base database, for more details about the device.
@@ -69,6 +70,7 @@ CREATE TABLE mapping.devices
 	`masterid` varchar(20) NOT NULL,
 	`uLoc` tinyint DEFAULT NULL,
 	`uHeight` tinyint DEFAULT 1,
+	`uEnd` tinyint as (`uLoc`+`uHeight`-1),
 	`uLength` DECIMAL(4,3) DEFAULT 1.0,
 	`name` varchar(50) DEFAULT NULL,
 	`typeid` int NOT NULL ,

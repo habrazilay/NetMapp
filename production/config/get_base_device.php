@@ -8,7 +8,8 @@ require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_ser
 $db_handle = new DBController(DB_SCHEMA_BASE);
 
 if(isset($_POST["filter"]) AND !empty($_POST["filter"])) {
+	$filter = str_replace('*', '%', $_POST["filter"]);
 	$query ="SELECT * FROM devices WHERE model LIKE CONCAT('%',?,'%')";
-	$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_BASE,"SELECT",'s',$_POST["filter"]);
+	$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_BASE,"SELECT",'s',$filter);
 	echo json_encode($results);
 }
