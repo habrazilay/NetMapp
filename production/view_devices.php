@@ -21,7 +21,9 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Devices list</h2>
+                    
                     <ul class="nav navbar-right panel_toolbox">
+                    
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
@@ -40,7 +42,7 @@
                   </div>
                   <div class="x_content">
                     
-                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                       <thead>
                         <tr>
                           <th>CAB</th>
@@ -60,8 +62,8 @@
                             $db_handle = new DBController(DB_MULTI_SCHEMA);
                             $query = "SELECT devCab.name as cabName, devMap.masterid, devBase.model, devMap.name, devBase.type, devMap.uLoc, devMap.uHeight, devMap.description FROM mapping.devices as devMap LEFT JOIN base.devices as devBase ON devMap.typeid = devBase.id LEFT JOIN mapping.cabinets as devCab ON devMap.cabid = devCab.id";
                                                       
-                            $result = $db_handle->runQuery($query,DB_MULTI_SCHEMA,"SELECT");
-                                foreach($result as $row) {
+                            $results = $db_handle->runQuery($query,DB_MULTI_SCHEMA,"SELECT");
+                                foreach($results as $row) {
                                     echo "\n\t\t\t\t\t\t\t";
                                     echo "<tr>";
                                     echo "<td>" . $row['cabName'] . "</td>";
@@ -76,6 +78,7 @@
                                     }
                                     echo "\n";
                          ?>
+                         
                       </tbody>
                     </table>
 
@@ -112,7 +115,7 @@
                   className: "btn-sm"
                 },
                 {
-                  extend: "pdfHtml5",
+                  extend: "pdf",
                   className: "btn-sm"
                 },
                 {
@@ -121,6 +124,7 @@
                 },
               ],
               responsive: true
+              
             });
           }
         };
