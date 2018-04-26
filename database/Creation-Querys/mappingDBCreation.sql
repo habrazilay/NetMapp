@@ -56,6 +56,7 @@ activePorts		-	indicates how many required to be mapped on this device. (for est
 intallationType*-	indicates in which way the device installed to the cabin. (ear/rails/shelf)
 phase			-	indicates the moving phase of this device. (0 for untransferred devices) 
 arrivalDate		-	date of arrival.
+faceFront		-	indicates whether or not this slot is facing the front side of the device. (otherwise facing rear side)
 description		-	device description.
 
 * installationType values: 0-ears, 1-rails, 2-shelf, 3-ear+shelf, 4-Uninstalled(placed over another device), 5-on top, 6-next to the cabin.
@@ -147,51 +148,33 @@ CREATE TABLE mapping.cabinetPowerOutlets
 );
 
 /*
-This table contains information about patch panels extenders between cabinets.
+This table lists all the slots of the devices.
 
 colums:
-id 					- 	unique row identifier.
-cabidA*				- 	cabinet row identifier of the patch panel first side.
-cabidB*				- 	cabinet row identifier of the patch panel second side.
-ppName		 		- 	name of  the patch panel. (Ex. A4 to B2)
-uLoc				-	the Unit location of the patch panel inside the cabinet.
-uHeight				- 	the size of the patch panel in Units.
-plugTypeid			-	referencing plug type row identifier of the base database, for more details about the patch panel output connectors.
-amount				- 	amount of ports availiable in this patch panel.
-firstPortPattern**	- 	pattern for naming the ports of this patch panel.
-isNumeric**			-	indicates whether or not the port name logical increasement is numeric or alphabet.
-description			- 	patch panel description.
+id 			- 	unique row identifier.
+devid		-	referencing device identifier that owns this slot.
+name		-	the name or number of this slot.
+faceFront		-	indicates whether or not this slot is facing the front side of the device. (otherwise facing rear side)
+topLeftX	-	the X location of the starting point of this slot.
+topLeftY	-	the Y location of the starting point of this slot.
+bottomRightX-	the X location of the ending point of this slot.
+bottomRightY-	the Y location of the ending point of this slot. 
 
-*	first and second will be determined by lowest cabinet identifier first.
-
-**	for example, if firstPortPattern is set to "RJ***", isNumeric set to TRUE and amount set to 48,
-	then the ports for this patch panel will be created with the names: RJ001, RJ002, ... , RJ047, RJ048.
-	
 */
-CREATE TABLE mapping.patchPanels
+CREATE TABLE mapping.slots
 (
 	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	`cabAid` int NOT NULL,
-	FOREIGN KEY (cabAid)
-		REFERENCES mapping.cabinets(id)
+	`devid` int NOT NULL ,
+	FOREIGN KEY (devid)
+		REFERENCES mapping.devices(id)
 		ON DELETE CASCADE,
-	`cabBid` int NOT NULL ,
-	FOREIGN KEY (cabBid)
-		REFERENCES mapping.cabinets(id)
-		ON DELETE CASCADE,
-	`ppName` varchar(15) DEFAULT NULL,
-	`uLoc` tinyint DEFAULT NULL,
-	`uHeight` tinyint DEFAULT 1,
-	`plugTypeid` int,
-	FOREIGN KEY (plugTypeid)
-		REFERENCES base.plugTypes(id)
-		ON DELETE RESTRICT,
-	`amount` smallint NOT NULL,
-	`firstPortPattern` varchar(20) NOT NULL DEFAULT "**",
-	`isNumeric` boolean NOT NULL DEFAULT TRUE,
-	`Description` varchar(50) DEFAULT NULL,
-	INDEX(cabAid),
-	INDEX(cabBid)
+	`name` varchar(20) NOT NULL DEFAULT "0",
+	`faceFront` boolean DEFAULT TRUE,
+	`topLeftX` int DEFAULT NULL,
+	`topLeftY` int DEFAULT NULL,
+	`bottomRightX` int DEFAULT NULL,
+	`bottomRightY` int DEFAULT NULL,
+	INDEX(devid)
 );
 
 /*
@@ -200,214 +183,68 @@ This table lists all the ports of the devices.
 colums:
 id 			- 	unique row identifier.
 devid		-	referencing device identifier that owns this port.
-slot 		-	the device's slot where this port is located.
+slot 		-	referencing slot identifier that owns this port.
 port		-	the name of this port.
 plugTypeid	-	referencing plug type identifier of this port, for more details about the connector type.
+portType*	-	indicates the type of this port.
+topLeftX	-	the X location of the starting point of this port.
+topLeftY	-	the Y location of the starting point of this port.
+bottomRightX-	the X location of the ending point of this port.
+bottomRightY-	the Y location of the ending point of this port. 
 
+*portType values:	0-device port, 1-patch panel port. (might be expended later for transparent ports)
 */
-CREATE TABLE mapping.devicePorts
+CREATE TABLE mapping.ports
 (
 	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	`devid` int NOT NULL ,
 	FOREIGN KEY (devid)
 		REFERENCES mapping.devices(id)
 		ON DELETE CASCADE,
-	`slot` varchar(20) DEFAULT NULL,
+	`slotid` int DEFAULT NULL,
+	FOREIGN KEY (slotid)
+		REFERENCES mapping.slots(id)
+		ON DELETE CASCADE,
 	`port` varchar(20) NOT NULL,
 	`plugTypeid` int,
 	FOREIGN KEY (plugTypeid)
 		REFERENCES base.plugTypes(id)
 		ON DELETE SET NULL,
-	INDEX(devid)
-);
-
-
-/*
-This table lists all the ports of the patch panels.
-
-colums:
-id 		- 	unique row identifier.
-ppid	-	referencing patch panel identifier that owns this port.
-port	-	the name of this port.
-
-*/
-CREATE TABLE mapping.patchPanelPorts
-(
-	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	`ppid` int NOT NULL ,
-	FOREIGN KEY (ppid)
-		REFERENCES mapping.patchPanels(id)
-		ON DELETE CASCADE,
-	`port` varchar(20) NOT NULL,
-	INDEX(ppid)
-);
-
-
-/*
-This table lists all the ports availiable.
-its a helper table for the mapping.connectionsPath table.
-
-colums:
-id 			- 	unique row identifier.
-portType*	-	indicates the type of this port.
-ppPortid	-	referencing patch panel port identifier of this port. (nullable only if the port is not a device port)
-ppPortid	-	referencing patch panel port identifier of this port. (nullable only if the port is not a patch panel port)
-
-*portType values:	0-device port, 1-patch panel port. (might be expended later for transparent ports)
-
-chk_portid_not_null - this check verifys that the relevant identifier of the port is not NULL.
-
-*/
-CREATE TABLE mapping.ports
-(
-	`id`int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	`portType` tinyint NOT NULL,
-	`devPortid` int,
-	FOREIGN KEY (devPortid)
-		REFERENCES mapping.devicePorts(id)
-		ON DELETE CASCADE,
-	`ppPortid` int ,
-	FOREIGN KEY (ppPortid)
-		REFERENCES mapping.patchPanelPorts(id)
-		ON DELETE CASCADE,
-	INDEX(devPortid),
-	INDEX(ppPortid),
-	CONSTRAINT chk_portid_not_null CHECK ( (portType=0 AND devPortid!=NULL) OR (portType=1 AND ppPortid!=NULL) )
+	`topLeftX` int DEFAULT NULL,
+	`topLeftY` int DEFAULT NULL,
+	`bottomRightX` int DEFAULT NULL,
+	`bottomRightY` int DEFAULT NULL,
+	
+	INDEX(devid)
 );
 
 /*
 This table lists all of the connections between ports.
-each row will act as a doubly linked list, where each port has prev and next pointing to the matching port id.
+each row will define a physical cable connection between two ports. 
+
+Note: 	connections will be stored without any duplicates 
+		(if a row from port id 1 to 20 exists, row from 20 to 1 must not be listed as well)
 
 colums:
-prevPortid 	-	referencing the prior port identifier.
-portid		-	referencing this port identifier, will also be the unique identifier for this table.
-nextPortid	-	referencing the following port identifier.
+portIdA 	-	port identifier of one of this connection's sides.
+portIdZ 	-	port identifier of the other side of this connection.
+color		-	the color of the cable that connects port A to port Z.
+tag 		-	the number or text listed on a sticker over the cable.
 
 */
-CREATE TABLE mapping.connectionsPath
+CREATE TABLE mapping.connections
 (
-	`prevPortid` int DEFAULT NULL ,
-	FOREIGN KEY (prevPortid)
+	`portIdA` int DEFAULT NULL ,
+	FOREIGN KEY (portIdA)
 		REFERENCES mapping.ports(id)
 		ON DELETE SET NULL,
-	`portid` int PRIMARY KEY NOT NULL,
-	FOREIGN KEY (portid)
+	`portIdZ` int PRIMARY KEY NOT NULL,
+	FOREIGN KEY (portIdZ)
 		REFERENCES mapping.ports(id)
 		ON DELETE CASCADE,
 	`color` VARCHAR(6) DEFAULT "D3D3D3",
-	`nextPortid` int DEFAULT NULL,
-	FOREIGN KEY (nextPortid)
-		REFERENCES mapping.ports(id)
-		ON DELETE SET NULL,
-	INDEX(prevPortid),
-	INDEX(nextPortid)
-);
-
-
-
-
-/*
-This is contains the patch panels path between two active device ports.
-This table contains the all of the end to end connections between device ports, the path across the patch panel is stored in a different helper table.
-
-colums:
-id 			- 	unique row identifier.
-portAid* 	-	referencing the fisrt side port identifier.
-cableNumAPP	-	the number of the cable from port A to the 1st PP in his path to port B.
-colorAPP	-	the color of the cable from port A to the 1st PP in his path to port B.
-ppPortid<X>	-	referencing the X-th patch panel port identifier in the path.
-cableNum<XY>-	the number of the cable from the X-th PP to the (X+1)-th PP in the path from A to B.
-colorPP<XY>	-	the color of the cable from the X-th PP to the (X+1)-th PP in the path from A to B.
-cableNumBPP	-	the number of the cable from the last PP to port B.
-colorBPP	-	the color of the cable from the last PP to port B.
-cableNumAB	-	the number of the cable from port A to Port B (in case of direct connection).
-colorAB		-	the color of the cable from port A to Port B (in case of direct connection).
-portBid* 	-	referencing the second side port identifier.
-
-*portA will be the port with lower device port id.
-*/
-CREATE TABLE mapping.connectionsFullPath
-(
-	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	`portAid` int NOT NULL,
-	`cableNumAPP` VARCHAR(20) DEFAULT NULL,
-	`colorAPP` VARCHAR(6) DEFAULT "D3D3D3",
-	FOREIGN KEY (portAid)
-		REFERENCES mapping.devicePorts(id)
-		ON DELETE CASCADE,
-	`ppPortid1` int DEFAULT NULL,
-	`cableNum12` VARCHAR(20) DEFAULT NULL,
-	`colorPP12` VARCHAR(6) DEFAULT "D3D3D3",
-	FOREIGN KEY (ppPortid1)
-		REFERENCES mapping.patchPanelPorts(id)
-		ON DELETE CASCADE,
-	`ppPortid2` int DEFAULT NULL,
-	`cableNum23` VARCHAR(20) DEFAULT NULL,
-	`colorPP23` VARCHAR(6) DEFAULT "D3D3D3",
-	FOREIGN KEY (ppPortid2)
-		REFERENCES mapping.patchPanelPorts(id)
-		ON DELETE CASCADE,	
-	`ppPortid3` int DEFAULT NULL,
-	`cableNum34` VARCHAR(20) DEFAULT NULL,
-	`colorPP34` VARCHAR(6) DEFAULT "D3D3D3",
-	FOREIGN KEY (ppPortid3)
-		REFERENCES mapping.patchPanelPorts(id)
-		ON DELETE CASCADE,
-	`ppPortid4` int DEFAULT NULL,
-	`cableNum45` VARCHAR(20) DEFAULT NULL,
-	`colorPP45` VARCHAR(6) DEFAULT "D3D3D3",
-	FOREIGN KEY (ppPortid4)
-		REFERENCES mapping.patchPanelPorts(id)
-		ON DELETE CASCADE,
-	`ppPortid5` int DEFAULT NULL,
-	`cableNumBPP` VARCHAR(20) DEFAULT NULL,
-	`colorBPP` VARCHAR(6) DEFAULT "D3D3D3",
-	FOREIGN KEY (ppPortid5)
-		REFERENCES mapping.patchPanelPorts(id)
-		ON DELETE CASCADE,
-	`portBid` int DEFAULT NULL,
-	`cableNumAB` VARCHAR(20) DEFAULT NULL,
-	`colorAB` VARCHAR(6) DEFAULT "D3D3D3",
-	FOREIGN KEY (portBid)
-		REFERENCES mapping.devicePorts(id)
-		ON DELETE CASCADE,
-	INDEX(portAid),
-	INDEX(portBid)
-);
-
-
-/*
-This is a different approch for storing the connections in the database.
-This table contains the all of the end to end connections between device ports, the path across the patch panel is stored in a different helper table.
-
-colums:
-id 			- 	unique row identifier.
-portAid* 	-	referencing the fisrt side port identifier.
-portBid* 	-	referencing the second side port identifier.
-status**		- 	determining the status of this connection.
-pathid		-	referencing the path row identifier, which contains the full path details between port A to port B.
-
-*portA will be the port with lower device port id.
-**status values: 0-confirmed, 1-waiting for confirmation(for connection autofilled by cable number), 2-confirmed by the client.
-*/
-CREATE TABLE mapping.fullConnections
-(
-	`id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	`status` tinyint NOT NULL DEFAULT 0,
-	`portAid` int NOT NULL,
-	FOREIGN KEY (portAid)
-		REFERENCES mapping.devicePorts(id)
-		ON DELETE CASCADE,
-	`portBid` int NOT NULL ,
-	FOREIGN KEY (portBid)
-		REFERENCES mapping.devicePorts(id)
-		ON DELETE CASCADE,
-	`pathid` int,
-	FOREIGN KEY (pathid)
-		REFERENCES mapping.connectionsFullPath(id)
-		ON DELETE CASCADE,
-	INDEX(portAid),
-	INDEX(portBid),
-	INDEX(pathid)
+	`tag` VARCHAR(20) DEFAULT NULL,
+	INDEX(portIdA),
+	INDEX(portIdZ)
 );
