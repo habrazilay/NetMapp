@@ -60,8 +60,7 @@
                             require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
                             require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
                             $db_handle = new DBController(DB_MULTI_SCHEMA);
-                            $query = "SELECT devCab.name as cabName, devMap.masterid, devBase.model, devMap.name, devBase.type, devMap.uLoc, devMap.uHeight, devMap.description FROM mapping.devices as devMap LEFT JOIN base.devices as devBase ON devMap.typeid = devBase.id LEFT JOIN mapping.cabinets as devCab ON devMap.cabid = devCab.id";
-                                                      
+                            $query = "SELECT devCab.name as cabName, devMap.masterid, devBase.model, devMap.name, devBase.type, devMap.uLoc, devMap.uHeight, devMap.description FROM mapping.devices as devMap LEFT JOIN base.devices as devBase ON devMap.typeid = devBase.id LEFT JOIN mapping.cabinets as devCab ON devMap.cabid = devCab.id";                                                      
                             $results = $db_handle->runQuery($query,DB_MULTI_SCHEMA,"SELECT");
                                 foreach($results as $row) {
                                     echo "\n\t\t\t\t\t\t\t";
