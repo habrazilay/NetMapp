@@ -21,6 +21,10 @@ Parameters:
 function getRoomsToSelect(elementId, siteId) {
 	getrooms(siteId).success(function(data){
 		$("#"+elementId).empty();
+		if (!data || data.length === 0)
+			$("#"+elementId).append("<option disabled selected>No rooms found</option>");
+		else
+			$("#"+elementId).append("<option disabled selected>Please Select...</option>");
 		$.each(data, function(key, value) {   
 			 $("#"+elementId)
 				  .append($("<option></option>")

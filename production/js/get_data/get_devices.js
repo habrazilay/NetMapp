@@ -21,6 +21,10 @@ Parameters:
 function getDevicesToSelect(elementId, cabId) {
 	getdevices(cabId).success(function(data){
 		$("#"+elementId).empty();
+		if (!data || data.length === 0)
+			$("#"+elementId).append("<option disabled selected>No devices found</option>");
+		else
+			$("#"+elementId).append("<option disabled selected>Please Select...</option>");
 		$.each(data, function(key, value) {   
 			 $("#"+elementId)
 				  .append($("<option></option>")

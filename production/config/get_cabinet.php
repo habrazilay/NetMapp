@@ -9,7 +9,7 @@ $db_handle = new DBController(DB_SCHEMA_MAP);
 if(!empty($_POST["rid"]) AND  is_numeric($_POST["rid"])) {
 	$query ="SELECT * FROM cabinets WHERE rid = ?";
 	$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_MAP,"SELECT",'i',$_POST["rid"]);
-} else {
+} elseif (empty($_POST["rid"])) {
 	if(!isset($_SESSION))
 	{
 		session_start();

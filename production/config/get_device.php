@@ -9,7 +9,7 @@ $db_handle = new DBController(DB_SCHEMA_MAP);
 if(!empty($_POST["cabid"]) AND  is_numeric($_POST["cabid"])) {
 	$query ="SELECT * FROM devices WHERE cabid = ?";
 	$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_MAP,"SELECT",'i',$_POST["cabid"]);
-} else {
+} elseif (empty($_POST["cabid"])){
 	if(!isset($_SESSION))
 	{
 		session_start();
