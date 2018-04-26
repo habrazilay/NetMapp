@@ -31,6 +31,7 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
                             $db_handle = new DBController(DB_SCHEMA_PROJECT);
                             $query = "SELECT name,city FROM sites WHERE pid=?";
                             $res = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'i',$_SESSION['project_id']);
+                            if(!empty($res)){
                             foreach($res as $site) {
                                 echo "\n\t\t\t\t\t\t\t";
                                 echo "<form class=\"form-horizontal form-label-left\">";
@@ -41,7 +42,7 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
 								echo "<h3>" . $site['city'] . "</h3>";
 								echo "</div>";
 								echo "</div>";
-                            }
+                            }}
                             echo "\n";
                   ?>
                   
