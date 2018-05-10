@@ -10,7 +10,7 @@ $db_handle = new DBController(DB_SCHEMA_PROJECT);
 if(!empty($_POST["sid"]) AND is_numeric($_POST["sid"])) {
 	$query ="SELECT * FROM rooms WHERE sid = ?";
 	$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'i',$_POST["sid"]);
-} else { //get all rooms in current project.
+} elseif (empty($_POST["sid"])) { //get all rooms in current project.
 	if(!isset($_SESSION))
 	{
 		session_start();

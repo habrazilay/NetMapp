@@ -9,14 +9,13 @@ $db_handle = new DBController(DB_SCHEMA_MAP);
 if(!empty($_POST["cabid"]) AND  is_numeric($_POST["cabid"])) {
 	$query ="SELECT * FROM devices WHERE cabid = ?";
 	$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_MAP,"SELECT",'i',$_POST["cabid"]);
-} else {
+} elseif (empty($_POST["cabid"])){
 	if(!isset($_SESSION))
 	{
 		session_start();
 	}
-	$db_handle = new DBController(DB_MULTI_SCHEMA);
-	$query = "SELECT devCab.name as cabName, devMap.masterid, devBase.model, devMap.name, devBase.type, devMap.uLoc, devMap.uHeight, devMap.description FROM mapping.devices as devMap LEFT JOIN base.devices as devBase ON devMap.typeid = devBase.id LEFT JOIN mapping.cabinets as devCab ON devMap.cabid = devCab.id";
-	$results = $db_handle->runQuery($query,DB_MULTI_SCHEMA,"SELECT",'i',$_SESSION["project_id"]);
+	$query = "SELECT devCab.name as cabName, devMap.masterid, devBase.model, devMap.name, devBase.type, devMap.uLoc, devMap.uHeight, devMap.description FROM mapping.devices as devMap LEFT JOIN base.devices as devBase ON devMap.typeid = devBase.id LEFT JOIN mapping.cabinets as devCab ON devMap.cabid = devCab.id LEFT JOIN project.rooms as cabRoom ON devCab.rid = cabRoom.id LEFT JOIN project.sites as siteRoom ON cabRoom.sid = siteRoom.id WHERE siteRoom.pid =?";
+	$results = $db_handle->prepareAndRunQuery($query,DB_MULTI_SCHEMA,"SELECT",'i',$_SESSION["project_id"]);
 	//$results = $db_handle->prepareAndRunQuery($query,DB_SCHEMA_PROJECT,"SELECT",'i',$_SESSION["project_id"]);
 }
 echo json_encode($results);

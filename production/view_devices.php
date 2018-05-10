@@ -55,30 +55,8 @@
                           <th>Description</th>
                         </tr>
                       </thead>
-                      <tbody>
-						<?php 
-                            require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
-                            require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
-                            $db_handle = new DBController(DB_MULTI_SCHEMA);
-                            $query = "SELECT devCab.name as cabName, devMap.masterid, devBase.model, devMap.name, devBase.type, devMap.uLoc, devMap.uHeight, devMap.description FROM mapping.devices as devMap LEFT JOIN base.devices as devBase ON devMap.typeid = devBase.id LEFT JOIN mapping.cabinets as devCab ON devMap.cabid = devCab.id";
-                                                      
-                            $results = $db_handle->runQuery($query,DB_MULTI_SCHEMA,"SELECT");
-                                foreach($results as $row) {
-                                    echo "\n\t\t\t\t\t\t\t";
-                                    echo "<tr>";
-                                    echo "<td>" . $row['cabName'] . "</td>";
-                                    echo "<td>" . $row['masterid'] . "</td>";
-                                    echo "<td>" . $row['type'] . "</td>";
-                                    echo "<td>" . $row['model'] . "</td>";
-                                    echo "<td>" . $row['name'] . "</td>";
-                                    echo "<td>" . $row['uLoc'] . "</td>";
-                                    echo "<td>" . $row['uHeight'] . "</td>";
-                                    echo "<td>" . $row['description'] . "</td>";
-                                    echo "</tr>";
-                                    }
-                                    echo "\n";
-                         ?>
-                         
+                      <tbody>                     
+               		     <script src="./js/get_data/get_devices.js"></script>
                       </tbody>
                     </table>
 
@@ -173,6 +151,13 @@
         });
 
         TableManageButtons.init();
+
+        getdevices("").success(function(data){
+    		var table = $('#datatable-buttons').DataTable();
+        	$.each(data, function(key, value) {
+        		table.row.add([value["cabName"],value["masterid"],value["type"],value["model"],value["name"],value["uLoc"],value["uHeight"],value["description"]]).draw(true);
+   			});
+        });
       });
     </script>
     <!-- /Datatables -->

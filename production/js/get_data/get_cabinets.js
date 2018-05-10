@@ -10,7 +10,7 @@ function getcabinets(roomId) {
 		data:'rid='+roomId,
 		dataType: 'json',
 	});
-}
+}	
 
 /* 	This function imports cabinet list to  a select element, filtered by room id.
 
@@ -21,6 +21,10 @@ Parameters:
 function getCabinetsToSelect(elementId, roomId) {
 	getcabinets(roomId).success(function(data){
 		$("#"+elementId).empty();
+		if (!data || data.length === 0)
+			$("#"+elementId).append("<option disabled selected>No cabinets found</option>");
+		else
+			$("#"+elementId).append("<option disabled selected>Please Select...</option>");
 		$.each(data, function(key, value) {   
 			 $("#"+elementId)
 				  .append($("<option></option>")

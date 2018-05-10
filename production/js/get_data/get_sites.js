@@ -21,6 +21,10 @@ Parameters:
 function getSitesToSelect(elementId, filter) {
 	getsites(filter).success(function(data){
 		$("#"+elementId).empty();
+		if (!data || data.length === 0)
+			$("#"+elementId).append("<option disabled selected>No sites found</option>");
+		else
+			$("#"+elementId).append("<option disabled selected>Please Select...</option>");
 		$.each(data, function(key, value) {   
 			 $("#"+elementId)
 				  .append($("<option></option>")
