@@ -30,33 +30,46 @@ include ($_SERVER['DOCUMENT_ROOT'] . "/NetMapp/production/top_navigation.html");
 					<div class="col-md-3 col-sm-4 col-xs-8">
 						<div class="x_panel">
 							<div class="x_title">
-								<h2>CAB A1</h2>
+							
+				    <?php                 	
+                	/* require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/dbcontroller.php");
+                	require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
+                	$db_handle = new DBController(DB_SCHEMA_PROJECT);
+                	$query = "SELECT devCab.name as cabName, devMap.masterid, devBase.model, devMap.name, devBase.type, devMap.uLoc, devMap.uHeight, devMap.description FROM mapping.devices as devMap LEFT JOIN base.devices as devBase ON devMap.typeid = devBase.id LEFT JOIN mapping.cabinets as devCab ON devMap.cabid = devCab.id LEFT JOIN project.rooms as cabRoom ON devCab.rid = cabRoom.id LEFT JOIN project.sites as siteRoom ON cabRoom.sid = siteRoom.id WHERE siteRoom.pid =?";
+                	$results = $db_handle->prepareAndRunQuery($query,DB_MULTI_SCHEMA,"SELECT",'i',$_SESSION["project_id"]);
+                	
+                	if(!empty($results)){
+                	    foreach($results as $cab) {
+                	        echo "\n\t\t\t\t\t\t\t";
+                	        echo "<h2>" . $cab['cabName'] . "</h2>";
+                	        echo "<div class=\"clearfix\"></div>";
+                	        echo "</div>";
+                	        echo "<div class=\"x_content\">";
+                	        echo "<table id=\"cabstable\" class=\"table table-bordered\">";
+                	        echo "<thead>";
+                	        echo "<tr>";
+                	        echo "<th>U</th>";
+                	        echo "<th>HP ID</th>";
+                	        echo "<th>Name</th>";
+                	        echo "<th>Type</th>";
+                	        echo "</tr>";
+                	        echo "</thead>";
+                	        echo "<tbody>";
+                	        for ($i = 42; $i >= 1; $i --) {
+                	            echo "<tr>";
+                	            echo "<th>" . $i . "</th>";
+                	            if($i=$cab['uLoc']){
+                	               // $i--;
+                	               echo "<th>" . $cab['masterid'] . "</th>";
+                	               echo "<th>" . $cab['name'] . "</th>";
+                	               echo "<th>" . $cab['type'] . "</th>";                	            
+                	            } elseif($i!=$cab['uLoc']){$i--;}
+                	        }
+                	        echo "</tr>";
+                	    }}
+                	    echo "\n"; */
+                  ?>
 
-								<div class="clearfix"></div>
-							</div>
-							<div class="x_content">
-
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>U</th>
-											<th>HP ID</th>
-											<th>Name</th>
-											<th>Type</th>
-										</tr>
-									</thead>
-									<tbody>
-                     <?php
-                    $sum = 0;
-                    for ($i = 42; $i >= 1; $i --) {
-                        echo "<tr>";
-                        echo "<th>" . $i . "</th>";
-                        echo "<th></th>";
-                        echo "<th></th>";
-                        echo "<th></th>";
-                    }
-                    echo "</tr>";
-                    echo "\n";?>
 
 									</tbody>
 								</table>
@@ -87,7 +100,6 @@ include ($_SERVER['DOCUMENT_ROOT'] . "/NetMapp/production/top_navigation.html");
 									</thead>
 									<tbody>
                      <?php
-                    $sum = 0;
                     for ($i = 42; $i >= 1; $i --) {
                         echo "<tr>";
                         echo "<th>" . $i . "</th>";

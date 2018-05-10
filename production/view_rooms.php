@@ -30,7 +30,6 @@ include($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/top_navigation.html");
                 	require_once($_SERVER['DOCUMENT_ROOT']."/NetMapp/production/config/set_mysql_server.php");
                 	$db_handle = new DBController(DB_SCHEMA_PROJECT);
                 	$query = "SELECT sites.name as sname, rooms.name FROM project.rooms as rooms LEFT JOIN project.sites as sites ON rooms.sid = sites.id WHERE sites.pid = ?";
-                	//$query ="SELECT * FROM project.rooms as rooms WHERE sid = ?";
                 	$res = $db_handle->prepareAndRunQuery($query,DB_MULTI_SCHEMA,"SELECT",'i',$_SESSION['project_id']);
                 	if(!empty($res)){
                 	    foreach($res as $room) {
